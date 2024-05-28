@@ -1,1 +1,233 @@
-TODO: Add notes
+Task:
+-----
+Enable CloudSQL for SSO TAP service.
+
+Below the process of enabling CloudSQL for CADC TAP services is described.
+
+- Step 1: Create a Postgres SQL database in CloudSQL
+
+This involved firstly getting access to the Google Cloud Platform, familiarising myself with the dashboard and what is available. After consulting with the team, it looks like the resources on GCP are provisioned automatically via Terraform, and specifically triggered via a workflow that deploys the required resources via configuration available here: https://github.com/lsst/idf_deploy
+
+Enabling a new Postgres Database required altering: environment/deployments/science-platform/cloudsql/main.tf &   environment/deployments/science-platform/env/dev-cloudsql.tfvars
+To trigger a Terraform rebuild process we update the Serial number of the according env/ file. 
+The changes to main.tf can be found here:
+https://github.com/lsst/idf_deploy/pull/523/files#diff-f085534f4ad16de3a7a849e963426a1d28096939b760c32eaf6493d7a15759d6 which create various resources (database, serviceaccount, IAM member etc..)
+
+
+- Step 2: Create password for CloudSQL SSO Database
+
+This was not an obvious one, (perhaps should have been?) but after advice from @rra what was required for access to the database was to first generate a password for it, which was done via the GCP dashboard.
+Once the password was set, the following steps were also required:
+
+  Add secret to 1password (Under Squre)
+  Sync secrets (Described in https://phalanx.lsst.io/admin/sync-secrets.html):
+  Add secret under ssotap/secrets-idfdev.yaml
+    
+
+- Step 3: Setup TAP chart to use Cloud SQL Proxy & setup serviceAccount
+
+Instructions for setting up Cloud SQL Proxy so that the TAP service can access the CloudSQL Database were available here: https://phalanx.lsst.io/developers/helm-chart/cloud-sql.html 
+I did not run the "Set up workload identity for Cloud SQL" seems like it is not required for this?
+Essentially the changes required boil down to adding the described snippet to create the CloudSQL container in the tap-deployment.yaml & modifying the values.yaml file to allow defining how to enable cloudSQL for the deployment.
+
+Following the previous process we should be able to grab a instanceConnectionName & serviceAccount from the GCP, which in the case of the SSO database were:
+
+    instanceConnectionName: "science-platform-dev-7696:us-central1:science-platform-dev-e9e11de2"
+    serviceAccount: "ssotap@science-platform-dev-7696.iam.gserviceaccount.com"
+
+In addition to the above I had to create a serviceaccount.yaml file with the following content:
+
+{{- if or .Values.serviceAccount.create .Values.cloudsql.enabled -}}
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: {{ .Values.serviceAccount.name }}
+  labels:
+    {{- include "cadc-tap.labels" . | nindent 4 }}
+  annotations:
+    {{- if .Values.cloudsql.enabled }}
+    iam.gke.io/gcp-service-account: {{ required "cloudsql.serviceAccount must be set to a valid Google service account" .Values.cloudsql.serviceAccount | quote }}
+    {{- end }}
+    {{- with .Values.serviceAccount.annotations }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+{{- end }}
+
+
+Note: Something that confused me here (probably missing context or Helm experience) is that when I tried to use cadc-tap as the metadata.name of the serviceaccount, it did not work. It worked when it was set to "ssotap" for the SSO TAP service. There may be a better way to pass in the name of the chart that is using the dependent (i.e. ssotap), but I couldn't find a better way, so I've used the approach of allowing user to define a serviceAccount and and it's name in the values, i.e.:
+
+
+serviceAccount:
+  # -- Specifies whether a service account should be created.
+  create: false
+
+  # -- Annotations to add to the service account
+  annotations: {}
+
+  # The name of the service account to use.
+  # @default -- Generated using the fullname template
+  name: "cadc-tap"
+  
+This approach seemed to be used elsewhere in phalanx (e.g. timesquare) so perhaps it is the right way?
+Note: 
+However as a user seeing the expected values for the chart, it may be confusing initially why I have to specify a cloudsql.serviceAccount, and then a separate serviceAccount name here.
+
+
+- Step 4: Make UWS optional
+
+The base cadc-tap Chart deploys by default along with the tap-deployment a uws database, so now that we want to allow connecting to an alternative UWS database, this needs to be optional. To do this I added a chech "uws: enabled" which can be passed in to the chart values.yaml (enabled by default) which when disabled does not create the UWS database and according resources.
+
+
+- Step 5: Enable UWS database configuration to be defined in cadc TAP chart.
+
+Note: These steps were a bit tricky initially because I was trying to make the changes to just ssotap which uses cadc-tap as a dependency, i.e. I decoupled initially and created separate templates for ssotap. However this ended-up being complicating and requiring multiple search-replaces, so ultimately I went the path of just making the changes to the cadc-tap chart, and enabling anything specific that the ssotap service needs to configure to be done via the chart values.yaml file.
+
+The proposed changes I went with:
+
+tap-deployment.yaml:
+
+    Environment vars:
+
+               {{- if .Values.cloudsql.enabled }}
+                -Duws.password=$uwspassword
+                -Duws.username={{ .Values.config.uwsDatabaseUsername }}
+                -Duws.url=jdbc:{{ .Values.config.uwsDatabaseUrl }}
+                {{- else }}
+                -Duws.username=postgres
+                -Duws.url=jdbc:postgresql://{{ template "cadc-tap.fullname" . }}-uws-db/
+                {{- end }}
+
+This allows us to pass in a username and database URL which get picked up if cloudSQL is enabled. 
+uwsDatabaseUsername & uwsDatabaseUrl can be passed in via config.
+
+A couple of considerations here: 
+  What if user wants to use an external UWS service, but not using cloudSQL. Not possible with this approach, needs some modifications to the config struture & logic.
+  reading the uwspassword is also tied to the use of cloudsql, it only get's triggered when it is enabled
+  What if cloudsql is enabled, but uwsDatabaseUsername & uwsDatabaseUrl are not? Should we make those required if cloudsql is enabled?
+  
+  
+- Step 6: Enable Auto-initialisation of the UWS database
+
+As we don't want to have to manually create the uws schema and tables when creating a new UWS db, but also to be able to do migrations an automated process would be good to have.
+I went through a few different approaches here, using an init container, using a K8s batch job pre-hook (similar to gafaelfawr, perhaps enabled or disabled via config) and finally via the application.
+Settled on the third, after navigating through various codebases (opencadc, lsst-tap-service, tap-postgres, dal-siav2) and noting that there is code / sql files to create the tables in the OpenCADC tap service. 
+I created a Java class (similar to what is done in siav2) which uses the opencadc - InitDatabaseUWS class to initialise the tables. This can be set in the context.xml file of the project to run on initialisation of the Java app. This way we aren't maintaining and keeping up-to-date our own version of the .sql files which create the tables, but rely and OpenCADC to do so. One change I had to make was to add a check to verify whether the uws schema already exists, and if so skip the creation of the tables. Otherwise the app tries to create tables and we get exceptions in the logs, altough it won't actually replace anything in the database itself. There is some logging added to show when a uws is encountered and when it isn't.
+
+The changes were made to a branch in the tap-postgres codebase here:
+
+   https://github.com/lsst-sqre/tap-postgres
+
+Something similar could be done for the main lsst-tap-service if we want it there as well.
+
+Note: No Junit tests were added, we probably should as new code has been added. Not really sure how to use Java mocking, could figure it out but may take some additional effort. Worth it or no?
+
+How were the changes tested?
+
+  Clone repo & build Docker image on local machine / Push to DockerHub repo and then replace tap-postgres image used in values-idfdev.yaml, push changes to branch.
+  Point ArgoCD to branch and synchronize.
+
+Note: Build failed for gradle/java version on my machine, ended up using a Docker container with Gradle version 7.6. This took way more time than it should, I don't like java :(
+ Perhaps the right versions are defined somewhere and I missed them?
+
+For the build to work I ran:
+
+    docker run -it -v /home/stelios/projects/tap-postgres:/app gradle:7.6 bash
+
+And then run:
+  
+    (cd tap && gradle clean assemble javadoc build test)
+    cp tap/build/libs/tap-1.1.war docker/tap/tap.war
+    
+    on local machine:
+      (cd docker/tap && docker build . -t stvoutsin/tap-postgres-service:1.16.0)
+      docker push stvoutsin/tap-postgres-service:1.16.0
+      
+Note: The build produces a number of warnings. Most of them are of type:
+
+/app/tap/src/main/java/ca/nrc/cadc/sample/SampleWebService.java:93: warning: no comment
+    public SampleWebService()
+
+Worth fixing these or not?
+
+
+
+Other considerations / thoughts:
+
+
+# What would be required to get UWS Database enabled for the main TAP service?
+
+Steps 1, 2 & changes to values to enable it. Also modifying and rebuilding lsst-tap-service for auto-initialisation
+
+# How was this tested?
+
+Helm Unit tests for cadc-tap, to check the resource definitions are what we expect:
+
+helm unittest cadc-tap
+
+### Chart [ cadc-tap ] cadc-tap
+
+ PASS  MockDB Deployment	cadc-tap/tests/mockdb-deployment_test.yaml
+ PASS  ServiceAccount	cadc-tap/tests/serviceaccount_test.yaml
+ PASS  TAP deployment	cadc-tap/tests/tap-deployment_test.yaml
+ PASS  UWS Deployment	cadc-tap/tests/uws-deployment_test.yaml
+
+Charts:      1 passed, 1 total
+Test Suites: 4 passed, 4 total
+Tests:       16 passed, 16 total
+Snapshot:    0 passed, 0 total
+Time:        54.01416ms
+
+
+Manual test of sso-tap on idfdev:
+
+ - Run on empty SSOTAP CloudSQL database
+         - Check tables created
+             Success: Schema & Tables created when app initialised in CloudSQL UWS db
+	 - Run an async query to dp03:
+	     Success
+ 
+ - Run on already initialized SSOTAP CloudSQL database
+         - Check tables not modified
+             Success: Schema & Tables not modified in CloudSQL UWS db
+	 - Run an async query to dp03:
+	     Success
+
+
+# Questions:
+
+# tap-server or tap-service ?
+
+In some places the TAP Service is named tap-server and in others tap-service. This may be a source of confusion?
+
+Examples where it is tap-server:
+ - https://github.com/lsst-sqre/phalanx/blob/main/charts/cadc-tap/templates/tap-deployment.yaml#L25 (phalanx)
+ - https://github.com/lsst-sqre/tap-postgres/blob/242407d54ea6d2b455b84487b480b252636d1177/build.sh#L6 (tap-postgres - Appears as tap-postgres-server)
+
+Examples where it is tap-service:
+- https://github.com/lsst-sqre/lsst-tap-service/blob/06a2c1c2ae7162e9f4212c46204901336ab40478/build.sh#L11 (lsst-tap-service repo)
+- https://github.com/lsst-sqre/phalanx/blob/b93f06f5fd9b666f05e72ed7a52340a58b521105/charts/cadc-tap/values.yaml#L83 (phalanx)
+
+It looks like "tap-service" is used for the images, so for now in the changes to tap-postgres I'm using service instead of server. Although the Github workflow does not use these scripts so the change doesn't really matter, but just for consistency.
+
+
+	
+# Helm Unit tests:
+
+Helm charts contain some logic, are there test available, and if not should there be? For this task I've added some unittests using the plugin:
+
+https://github.com/helm-unittest/helm-unittest/
+
+This can be installed as:
+  helm plugin install https://github.com/quintush/helm-unittest --version 0.5.1
+
+Should this be added to the workflows? Could use alternatives like pytests to test output. Is this type of testing not needed?
+
+
+# Is UWS coupled with the use of Postgres? 
+
+A lot of the code / configuration may be coupled to using Postgres as the Database technology, perhaps due to the use of the CADC software which was designed with PG as as the target, though this may be different nowadays, as I'm not familiary with whether they are designing their software to be Database agnostic.
+
+If we wanted to another DB server would it be possible, what would have to be changed / configured?
+
+
+# What should be in config and what shouldn't in the values file for TAP?
