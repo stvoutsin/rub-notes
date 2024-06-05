@@ -1,0 +1,88 @@
+Questions 
+----------
+
+
+- Do we want to merge ssotap & tap codebases?
+
+
+
+- Do we want to show user's their queries and if so:
+    - Can we use UWS database? Is it missing any columns? If so do we just
+        add those cols to it? Or do we need a separate database, 
+          i.e. some denormalization?
+      Is a MyQueries Database more write-heavy, where UWS is more read?
+        Does it matter?
+      if UWS do we index on owner col?
+    - Do we retain a full history? Is there a replay query option, or do we link to query results?
+
+
+
+- Has scalability been spec'd out? 
+    - Do we know:
+         - Expected max number of concurrent users
+         - Expected max requests p/m
+         - Average, min & max query execution duration?
+         - Queries per month
+    - Can we run multiple replicas of the TAP server pod? 
+
+
+
+- Do we store the VOTable results long-term? Is there a specified lifetime?
+     - What is the garbage collection strategy?
+
+
+
+- What does CADC-TAP do with long running jobs? Is there a queue? What if a job runs for too long
+
+
+
+- Is the long term plan to host the results on Google Cloud? 
+      - Is there an estimate or concern regarding cost?
+      - Are there any concerns with results being publicly accessible?
+
+
+
+- Will ADQL Geometry & Intersects function be available for DR1 on Qserv / CloudSQL PG databases / .. ?
+   - If not what will not work? (i.e. SIAv2, any TAP examples or tests?)
+ 
+
+
+Potential and/or Known Issues
+------------------------------
+
+- Is there an issue with querying the UWS database via TAP? 
+    - Should this be solved if so & how?
+    - Does CADC-TAP expect UWS to sit next to the Data?
+    - Has this worked previously?
+
+
+
+- ADQL Geometry support
+    - CADC-TAP SIAv2 version requires INTERSECTS, which is not available on CloudSQL & QServ. 
+
+
+
+- Issue with pyvo & async. (async queries using pyvo fail, do to auth header propagation)
+   - Potential Fixes:
+       - Redirect 
+           Extra phalanx service or extra handler in CADC TAP service?
+           Should be straighforward implementation & not required by non Google facilities
+       - Proxy
+           Result Data has to make an extra jump through RSP before reaching user
+       - Google cloud function (lambda style?) to remove auth header
+           What about non google storage facilities
+       - Propose workaround to pyvo
+           More complicated
+       - Use different storage option
+       - IVOA change
+            - Unless I've misunderstood the standard, we can define a securityMethod for aync
+                but cannot do separately for subpaths of /async.
+              How can I tell clients that /async is secured, but the /job/results/result is public
+
+
+Other:
+-------
+RE: the pyvo async issue:
+I think redirect is the solution for this, will look into it a bit more
+
+            
