@@ -85,4 +85,14 @@ Other:
 RE: the pyvo async issue:
 I think redirect is the solution for this, will look into it a bit more
 
+
+Tasks:
+------
+Fix PyVO async issue (Redirect)
+Fix Capabilities endpoint
+Look into mering tap-postgres and lsst-tap-service
+Investigate what the upstream changes enable
+Long term plan: MyQueries functionality
+
+
             
