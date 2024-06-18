@@ -131,7 +131,7 @@ Note: Build failed for gradle/java version on my machine, ended up using a Docke
 
 For the build to work I ran:
 
-    docker run -it -v /home/stelios/projects/tap-postgres:/app gradle:7.6 bash
+    docker run -it -v /home/stelios/projects/tap-postgres:/app -w /app gradle:7.6 bash
 
 And then run:
   
