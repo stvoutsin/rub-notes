@@ -1,0 +1,363 @@
+Taplint validation
+
+How to run:
+Download latest version of stilts
+Setup stilts.sh as per instructions
+Run:
+              ./stilts.sh taplint tapurl=https://data-dev.lsst.cloud/api/tap
+Pass in x-oauth-basic as username, and token as password when asked
+
+RSP used: 
+https://data-dev.lsst.ac.uk/api/tap
+
+Results:
+Totals: Errors: 103; Warnings: 691; Infos: 151; Summaries: 20; Failures: 3
+
+Breakdown of issues
+
+# 1
+Section TMS: Check content of tables metadata from TAP_SCHEMA
+(Metadata issue)
+
+E-TMS-TSSZ-1 Size does not match arraysize for vector: dp01_dc2_catalogs.object.patch: arraysize=3; size=null
+E-TMS-TSSZ-2 Size does not match arraysize for vector: dp01_dc2_catalogs.truth_match.id: arraysize=20; size=null
+E-TMS-TSSZ-3 Size does not match arraysize for vector: dp01_dc2_catalogs.truth_match.patch: arraysize=3; size=null
+E-TMS-TSSZ-4 Size does not match arraysize for vector: dp02_dc2_catalogs.CoaddPatches.s_region: arraysize=512; size=null
+E-TMS-TSSZ-5 Size does not match arraysize for vector: dp02_dc2_catalogs.DiaSource.filterName: arraysize=1; size=null
+E-TMS-TSSZ-6 Size does not match arraysize for vector: dp02_dc2_catalogs.ForcedSource.skymap: arraysize=12; size=null
+E-TMS-TSSZ-7 Size does not match arraysize for vector: dp02_dc2_catalogs.ForcedSourceOnDiaObject.skymap: arraysize=12; size=null
+E-TMS-TSSZ-8 Size does not match arraysize for vector: dp02_dc2_catalogs.MatchesTruth.id: arraysize=16; size=null
+E-TMS-TSSZ-9 Size does not match arraysize for vector: dp02_dc2_catalogs.MatchesTruth.id_truth_type: arraysize=18; size=null
+
+# 2
+Section UUC: Check column units and UCDs are legal
+(UCD issue)
+
+W-UUC-VUNR-1 Questionable unit "nmgy.arcsec**2"; Questionable VOUnits string (UNKNOWN_UNIT): Unknown unit "mgy" in 6 columns: dp01_dc2_catalogs.object.Ixx_pixel, dp01_dc2_catalogs.object.IxxPSF_pixel, dp01_dc2_catalogs.object.Ixy_pixel, dp01_dc2_catalogs.object.IxyPSF_pixel, ...
+W-UUC-VUNR-2 Questionable unit "nmgy"; Questionable VOUnits string (UNKNOWN_UNIT): Unknown unit "mgy" in 12 columns: dp01_dc2_catalogs.object.psFlux_g, dp01_dc2_catalogs.object.psFlux_i, dp01_dc2_catalogs.object.psFlux_r, dp01_dc2_catalogs.object.psFlux_u, ...
+
+# 3 
+Section CAP: Check TAP and TAPRegExt content of capabilities document
+(Capabilities issue)
+
+Section CAP: Check TAP and TAPRegExt content of capabilities document
+W-CAP-SVR0-1 No HTTP Server header
+
+
+# 4
+Section QAS: Make ADQL queries in async mode
+(ADQL async auth issue)
+
+
+I-QAS-QJOB-2 Submitted query at https://data-dev.lsst.cloud/api/tap/async/hyj62pv5abn5ub53
+E-QAS-QERR-2 TAP query failed [No supported auth-schemes in WWW-Authenticate]
+I-QAS-QSUB-3 Submitting query: SELECT apFlux FROM dp02_dc2_catalogs.DiaSource
+I-QAS-QJOB-3 Submitted query at https://data-dev.lsst.cloud/api/tap/async/hezx7xckwyzmxpf7
+E-QAS-QERR-3 TAP query failed [No supported auth-schemes in WWW-Authenticate]
+
+Related stack trace with debug on:
+
+E-QAS-QERR-3 TAP query failed [No supported auth-schemes in WWW-Authenticate]
+java.io.IOException: No supported auth-schemes in WWW-Authenticate
+	at uk.ac.starlink.auth.AuthManager.makeConnection(AuthManager.java:269)
+	at uk.ac.starlink.auth.AuthManager.connect(AuthManager.java:193)
+	at uk.ac.starlink.auth.AuthManager.connect(AuthManager.java:169)
+	at uk.ac.starlink.auth.AuthManager.connect(AuthManager.java:148)
+	at uk.ac.starlink.ttools.taplint.VotLintTapRunner$4.getResultConnection(VotLintTapRunner.java:629)
+	at uk.ac.starlink.ttools.taplint.VotLintTapRunner.readResultInputStream(VotLintTapRunner.java:128)
+	at uk.ac.starlink.ttools.taplint.VotLintTapRunner.executeQuery(VotLintTapRunner.java:112)
+	at uk.ac.starlink.ttools.taplint.TapRunner.attemptGetResultTable(TapRunner.java:79)
+	at uk.ac.starlink.ttools.taplint.TapRunner.getResultTable(TapRunner.java:51)
+	at uk.ac.starlink.ttools.taplint.QueryStage$Querier.runCheckedQuery(QueryStage.java:536)
+	at uk.ac.starlink.ttools.taplint.QueryStage$Querier.runJustMeta(QueryStage.java:517)
+	at uk.ac.starlink.ttools.taplint.QueryStage$Querier.run(QueryStage.java:319)
+	at uk.ac.starlink.ttools.taplint.QueryStage.run(QueryStage.java:105)
+	at uk.ac.starlink.ttools.taplint.TapLinter$4.execute(TapLinter.java:259)
+	at uk.ac.starlink.ttools.task.LineInvoker.invoke(LineInvoker.java:303)
+	at uk.ac.starlink.ttools.Stilts.main(Stilts.java:54)
+
+
+# 5
+Section UWS: Test asynchronous UWS/TAP behavior
+(UWS auth issue)
+
+I-UWS-CJOB-1 Created new job https://data-dev.lsst.cloud/api/tap/async/jg6xa3jayo3069ip
+E-UWS-NFND-1 Non-OK response 401 Unauthorized from https://data-dev.lsst.cloud/api/tap/async/jg6xa3jayo3069ip/phase
+
+# 6
+Section UWS: Test asynchronous UWS/TAP behavior
+(Issue with Execution duration & quote endpoint)
+
+E-UWS-NFND-5 Non-OK response 401 Unauthorized from https://data-dev.lsst.cloud/api/tap/async/etkrrr2c3dp7881y/quote
+E-UWS-NFND-6 Non-OK response 401 Unauthorized from https://data-dev.lsst.cloud/api/tap/async/etkrrr2c3dp7881y/executionduration
+
+# 7
+Section UWS: Test asynchronous UWS/TAP behavior
+(Issue with Destruction time endpoint)
+
+E-UWS-NFND-7 Non-OK response 401 Unauthorized from https://data-dev.lsst.cloud/api/tap/async/etkrrr2c3dp7881y/destruction
+E-UWS-JDDE-1 Destruction time mismatch between job info and /destruction URL (2024-06-19T00:14:46.403Z != null)
+
+# 8
+Section MDQ: Check table query result columns against declared metadata
+(Query results vs declared metadata issue)
+I-MDQ-QSUB-1 Submitting query: SELECT TOP 1 * FROM dp01_dc2_catalogs.forced_photometry
+W-MDQ-DRUN-1 Declared/result Unit mismatch for column coord_ra in table dp01_dc2_catalogs.forced_photometry (null != )
+W-MDQ-DRUN-2 Declared/result Unit mismatch for column coord_dec in table dp01_dc2_catalogs.forced_photometry (null != )
+W-MDQ-DRUN-3 Declared/result Unit mismatch for column g_base_classificationextendedness_flag in table dp01_dc2_catalogs.forced_photometry (null != )
+W-MDQ-DRUN-4 Declared/result Unit mismatch for column g_base_classificationextendedness_value in table dp01_dc2_catalogs.forced_photometry (null != )
+W-MDQ-DRUN-5 Declared/result Unit mismatch for column g_base_inputcount_flag in table dp01_dc2_catalogs.forced_photometry (null != )
+W-MDQ-DRUN-6 Declared/result Unit mismatch for column g_base_inputcount_flag_badcentroid in table dp01_dc2_catalogs.forced_photometry (null != )
+W-MDQ-DRUN-7 Declared/result Unit mismatch for column g_base_inputcount_flag_noinputs in table dp01_dc2_catalogs.forced_photometry (null != )
+W-MDQ-DRUN-8 Declared/result Unit mismatch for column g_base_inputcount_value in table dp01_dc2_catalogs.forced_photometry (null != )
+W-MDQ-DRUN-9 Declared/result Unit mismatch for column g_base_localbackground_flag in table dp01_dc2_catalogs.forced_photometry (null != )
+
+# 9
+Section MDQ: Check table query result columns against declared metadata
+(Query to UWS failure)
+
+E-MDQ-QERR-1 Failed TAP query SELECT TOP 1 * FROM uws.Job [Service error: "Query processing error: QI=?: Failed to instantiate query: NoSuchDb(sql):No such database: uws [in function listColumns at /home/runner/code/qserv/src/sql/MySqlConnection.cc:352]"]
+
+# 10
+Section OBS: Test implementation of ObsCore Data Model
+(ObsCore Table issues)
+
+I-OBS-DMID-1 Checking against ObsCore DM 1.1
+E-OBS-CUTP-1 Wrong Utype in ObsCore column dataproduct_type: ObsDataset.dataProductType != obscore:ObsDataset.dataProductType
+E-OBS-CUTP-2 Wrong Utype in ObsCore column calib_level: ObsDataset.calibLevel != obscore:ObsDataset.calibLevel
+E-OBS-CUTP-3 Wrong Utype in ObsCore column obs_collection: DataID.collection != obscore:DataID.Collection
+E-OBS-CUTP-4 Wrong Utype in ObsCore column obs_id: DataID.observationID != obscore:DataID.observationID
+E-OBS-CUTP-5 Wrong Utype in ObsCore column obs_publisher_did: Curation.publisherDID != obscore:Curation.PublisherDID
+E-OBS-CUTP-6 Wrong Utype in ObsCore column access_url: Access.reference != obscore:Access.Reference
+E-OBS-CUTP-7 Wrong Utype in ObsCore column access_format: Access.format != obscore:Access.Format
+E-OBS-OCOL-1 Required ObsCore column access_estsize is missing
+E-OBS-CUTP-8 Wrong Utype in ObsCore column target_name: Target.name != obscore:Target.Name
+E-OBS-CUTP-9 Wrong Utype in ObsCore column s_ra: Char.SpatialAxis.Coverage.Location.Coord.Position2D.Value2.C1 != obscore:Char.SpatialAxis.Coverage.Location.Coord.Position2D.Value2.C1
+E-OBS-OCOL-2 Required ObsCore column pol_states is missing
+
+E-OBS-HNUL-1 Illegal NULL(s) in ObsCore column obs_publisher_did
+
+
+# 11
+Section OBS: Test implementation of ObsCore Data Model
+(ObsCore Table issues)
+
+Full Logs:
+This is STILTS taplint, 3.4-10/c1ed9b907 (2024-03-01)
+Timestamp: 2024-06-11 17:13:32 MST
+Static report types: ERROR(173), WARNING(77), INFO(32), SUMMARY(13), FAILURE(25)
+
+Section TMV: Validate table metadata against XML schema
+I-TMV-VURL-1 Validating https://data-dev.lsst.cloud/api/tap/tables as tableset (http://www.ivoa.net/xml/VODataService/v1.1)
+Login URL: https://data-dev.lsst.cloud/api/tap/tables
+HTTP Basic Authentication (Realm: data-dev.lsst.cloud)
+Username: x-oauth-basic
+Password: 
+S-TMV-VALI-1 SAX report: warnings 0, errors 0, fatal 0
+
+Section TME: Check content of tables metadata from /tables
+I-TME-CURL-1 Reading capability metadata from https://data-dev.lsst.cloud/api/tap/capabilities
+I-TME-TURL-1 Reading table metadata from https://data-dev.lsst.cloud/api/tap/tables?detail=max
+S-TME-SUMM-1 Schemas: 5, Tables: 23, Columns: 2746, Foreign Keys: 16
+S-TME-FLGS-1 Standard column flags: indexed: 1, primary: 0, nullable: 0
+S-TME-FLGO-1 Other column flags: none
+
+Section TMS: Check content of tables metadata from TAP_SCHEMA
+I-TMS-TAPV-1 Validating for TAP version V1.1
+I-TMS-QSUB-1 Submitting query: SELECT COUNT(*) AS nr FROM TAP_SCHEMA.schemas
+I-TMS-QGET-1 Query GET URL: https://data-dev.lsst.cloud/api/tap/sync?LANG=ADQL&QUERY=SELECT+COUNT%28*%29+AS+nr+FROM+TAP_SCHEMA.schemas
+I-TMS-QSUB-2 Submitting query: SELECT COUNT(*) AS nr FROM TAP_SCHEMA.tables
+I-TMS-QGET-2 Query GET URL: https://data-dev.lsst.cloud/api/tap/sync?LANG=ADQL&QUERY=SELECT+COUNT%28*%29+AS+nr+FROM+TAP_SCHEMA.tables
+I-TMS-QSUB-3 Submitting query: SELECT COUNT(*) AS nr FROM TAP_SCHEMA.columns
+I-TMS-QGET-3 Query GET URL: https://data-dev.lsst.cloud/api/tap/sync?LANG=ADQL&QUERY=SELECT+COUNT%28*%29+AS+nr+FROM+TAP_SCHEMA.columns
+I-TMS-QSUB-4 Submitting query: SELECT COUNT(*) AS nr FROM TAP_SCHEMA.keys
+I-TMS-QGET-4 Query GET URL: https://data-dev.lsst.cloud/api/tap/sync?LANG=ADQL&QUERY=SELECT+COUNT%28*%29+AS+nr+FROM+TAP_SCHEMA.keys
+I-TMS-QSUB-5 Submitting query: SELECT COUNT(*) AS nr FROM TAP_SCHEMA.key_columns
+I-TMS-QGET-5 Query GET URL: https://data-dev.lsst.cloud/api/tap/sync?LANG=ADQL&QUERY=SELECT+COUNT%28*%29+AS+nr+FROM+TAP_SCHEMA.key_columns
+I-TMS-QSUB-6 Submitting query: SELECT principal, indexed, std, "size" FROM TAP_SCHEMA.columns
+I-TMS-QGET-6 Query GET URL: https://data-dev.lsst.cloud/api/tap/sync?LANG=ADQL&QUERY=SELECT+principal%2C+indexed%2C+std%2C+%22size%22+FROM+TAP_SCHEMA.columns&MAXREC=2756
+I-TMS-QSUB-7 Submitting query: SELECT TOP 1 * FROM TAP_SCHEMA.columns
+I-TMS-QGET-7 Query GET URL: https://data-dev.lsst.cloud/api/tap/sync?LANG=ADQL&QUERY=SELECT+TOP+1+*+FROM+TAP_SCHEMA.columns&MAXREC=1
+I-TMS-QSUB-8 Submitting query: SELECT arraysize, column_index, column_name, datatype, description, indexed, principal, std, table_name, ucd, unit, utype, xtype FROM TAP_SCHEMA.columns
+I-TMS-QGET-8 Query GET URL: https://data-dev.lsst.cloud/api/tap/sync?LANG=ADQL&QUERY=SELECT+arraysize%2C+column_index%2C+column_name%2C+datatype%2C+description%2C+indexed%2C+principal%2C+std%2C+table_name%2C+ucd%2C+unit%2C+utype%2C+xtype+FROM+TAP_SCHEMA.columns&MAXREC=2756
+I-TMS-QSUB-9 Submitting query: SELECT from_column, target_column, key_id FROM TAP_SCHEMA.key_columns
+I-TMS-QGET-9 Query GET URL: https://data-dev.lsst.cloud/api/tap/sync?LANG=ADQL&QUERY=SELECT+from_column%2C+target_column%2C+key_id+FROM+TAP_SCHEMA.key_columns&MAXREC=2756
+E-TMS-TSSZ-1 Size does not match arraysize for vector: dp01_dc2_catalogs.object.patch: arraysize=3; size=null
+E-TMS-TSSZ-2 Size does not match arraysize for vector: dp01_dc2_catalogs.truth_match.id: arraysize=20; size=null
+E-TMS-TSSZ-3 Size does not match arraysize for vector: dp01_dc2_catalogs.truth_match.patch: arraysize=3; size=null
+E-TMS-TSSZ-4 Size does not match arraysize for vector: dp02_dc2_catalogs.CoaddPatches.s_region: arraysize=512; size=null
+E-TMS-TSSZ-5 Size does not match arraysize for vector: dp02_dc2_catalogs.DiaSource.filterName: arraysize=1; size=null
+E-TMS-TSSZ-6 Size does not match arraysize for vector: dp02_dc2_catalogs.ForcedSource.skymap: arraysize=12; size=null
+E-TMS-TSSZ-7 Size does not match arraysize for vector: dp02_dc2_catalogs.ForcedSourceOnDiaObject.skymap: arraysize=12; size=null
+E-TMS-TSSZ-8 Size does not match arraysize for vector: dp02_dc2_catalogs.MatchesTruth.id: arraysize=16; size=null
+E-TMS-TSSZ-9 Size does not match arraysize for vector: dp02_dc2_catalogs.MatchesTruth.id_truth_type: arraysize=18; size=null
+S-TMS-SUMM-1 Schemas: 5, Tables: 23, Columns: 2746, Foreign Keys: 16
+S-TMS-FLGS-1 Standard column flags: indexed: 1, principal: 221, std: 65
+S-TMS-QNUM-1 Successful/submitted TAP queries: 31/31
+S-TMS-QTIM-1 Average successful query time: 0.15s
+I-TMS-QSUB-x (22 more)
+I-TMS-QGET-x (22 more)
+E-TMS-TSSZ-x (44 more)
+
+Section TMC: Compare table metadata from /tables and TAP_SCHEMA
+
+Section UUC: Check column units and UCDs are legal
+I-UUC-UCDV-1 UCD validation details: Ucidy version 1.2, UCD words version EN-UCD1+-1.4, UCD deprecated words version EN-UCD1+-1.4
+W-UUC-VUNR-1 Questionable unit "nmgy.arcsec**2"; Questionable VOUnits string (UNKNOWN_UNIT): Unknown unit "mgy" in 6 columns: dp01_dc2_catalogs.object.Ixx_pixel, dp01_dc2_catalogs.object.IxxPSF_pixel, dp01_dc2_catalogs.object.Ixy_pixel, dp01_dc2_catalogs.object.IxyPSF_pixel, ...
+W-UUC-VUNR-2 Questionable unit "nmgy"; Questionable VOUnits string (UNKNOWN_UNIT): Unknown unit "mgy" in 12 columns: dp01_dc2_catalogs.object.psFlux_g, dp01_dc2_catalogs.object.psFlux_i, dp01_dc2_catalogs.object.psFlux_r, dp01_dc2_catalogs.object.psFlux_u, ...
+
+Section CPV: Validate capabilities against XML schema
+I-CPV-VURL-1 Validating https://data-dev.lsst.cloud/api/tap/capabilities as capabilities (http://www.ivoa.net/xml/VOSICapabilities/v1.0)
+S-CPV-VALI-1 SAX report: warnings 0, errors 0, fatal 0
+
+Section CAP: Check TAP and TAPRegExt content of capabilities document
+W-CAP-SVR0-1 No HTTP Server header
+I-CAP-SVRI-1 HTTP server header "Server: null"
+
+Section AVV: Validate availability against XML schema
+I-AVV-VURL-1 Validating https://data-dev.lsst.cloud/api/tap/availability as availability (http://www.ivoa.net/xml/VOSIAvailability/v1.0)
+S-AVV-VALI-1 SAX report: warnings 0, errors 0, fatal 0
+
+Section QGE: Make ADQL queries in sync GET mode
+I-QGE-SCHM-1 Using standard TAP_SCHEMA tables for metadata
+I-QGE-QSUB-1 Submitting query: SELECT TOP 10 dataproduct_type FROM ivoa.ObsCore
+I-QGE-QGET-1 Query GET URL: https://data-dev.lsst.cloud/api/tap/sync?LANG=ADQL&QUERY=SELECT+TOP+10+dataproduct_type+FROM+ivoa.ObsCore
+I-QGE-QSUB-2 Submitting query: SELECT dataproduct_type FROM ivoa.ObsCore
+I-QGE-QGET-2 Query GET URL: https://data-dev.lsst.cloud/api/tap/sync?LANG=ADQL&QUERY=SELECT+dataproduct_type+FROM+ivoa.ObsCore&MAXREC=9
+I-QGE-QSUB-3 Submitting query: SELECT TOP 10 dataproduct_type FROM ivoa.ObsCore
+I-QGE-QGET-3 Query GET URL: https://data-dev.lsst.cloud/api/tap/sync?LANG=ADQL&QUERY=SELECT+TOP+10+dataproduct_type+FROM+ivoa.ObsCore&DUMMY=ignore-me
+I-QGE-QSUB-4 Submitting query: SELECT TOP 1 dataproduct_type FROM ivoa.ObsCore
+I-QGE-QGET-4 Query GET URL: https://data-dev.lsst.cloud/api/tap/sync?LANG=ADQL-2.0&QUERY=SELECT+TOP+1+dataproduct_type+FROM+ivoa.ObsCore
+I-QGE-QSUB-5 Submitting query: SELECT TOP 1 dataproduct_type FROM ivoa.ObsCore
+I-QGE-QGET-5 Query GET URL: https://data-dev.lsst.cloud/api/tap/sync?LANG=ADQL&QUERY=SELECT+TOP+1+dataproduct_type+FROM+ivoa.ObsCore
+I-QGE-QSUB-6 Submitting query: SELECT TOP 8 localWcs_flag, localWcs_CDMatrix_1_2 AS taplint_c_2, d.localPhotoCalibErr, localBackground_instFlux AS taplint_c_4, pixelFlags_saturatedCenter, d.pixelFlags_interpolated AS taplint_c_6, pixelFlags_cr, detect_isTractInner AS taplint_c_8, d.patch, coord_dec AS taplint_c_10, ccdVisitId, d.psfDiffFlux AS taplint_c_12, psfFlux FROM dp02_dc2_catalogs.ForcedSource AS d
+I-QGE-QGET-6 Query GET URL: https://data-dev.lsst.cloud/api/tap/sync?LANG=ADQL&QUERY=SELECT+TOP+8+localWcs_flag%2C+localWcs_CDMatrix_1_2+AS+taplint_c_2%2C+d.localPhotoCalibErr%2C+localBackground_instFlux+AS+taplint_c_4%2C+pixelFlags_saturatedCenter%2C+d.pixelFlags_interpolated+AS+taplint_c_6%2C+pixelFlags_cr%2C+detect_isTractInner+AS+taplint_c_8%2C+d.patch%2C+coord_dec+AS+taplint_c_10%2C+ccdVisitId%2C+d.psfDiffFlux+AS+taplint_c_12%2C+psfFlux++FROM+dp02_dc2_catalogs.ForcedSource+AS+d
+I-QGE-QSUB-7 Submitting query: SELECT apFlux FROM dp02_dc2_catalogs.DiaSource
+I-QGE-QGET-7 Query GET URL: https://data-dev.lsst.cloud/api/tap/sync?LANG=ADQL&QUERY=SELECT+apFlux+FROM+dp02_dc2_catalogs.DiaSource&MAXREC=0
+I-QGE-DUFF-1 Submitting query expected to fail (bad ADQL): DUFF QUERY
+I-QGE-QGET-8 Query GET URL: https://data-dev.lsst.cloud/api/tap/sync?LANG=ADQL&QUERY=DUFF+QUERY
+I-QGE-DUFF-2 Submitting query expected to fail (unknown query language): SELECT TOP 1 * FROM TAP_SCHEMA.tables
+I-QGE-QGET-9 Query GET URL: https://data-dev.lsst.cloud/api/tap/sync?LANG=OOBLECK&QUERY=SELECT+TOP+1+*+FROM+TAP_SCHEMA.tables
+S-QGE-QNUM-1 Successful/submitted TAP queries: 7/7
+S-QGE-QTIM-1 Average successful query time: 1.1s
+
+Section QPO: Make ADQL queries in sync POST mode
+I-QPO-QSUB-1 Submitting query: SELECT TOP 10 dataproduct_type FROM ivoa.ObsCore
+I-QPO-QSUB-2 Submitting query: SELECT dataproduct_type FROM ivoa.ObsCore
+I-QPO-QSUB-3 Submitting query: SELECT TOP 10 dataproduct_type FROM ivoa.ObsCore
+I-QPO-QSUB-4 Submitting query: SELECT TOP 8 localWcs_flag, localWcs_CDMatrix_1_2 AS taplint_c_2, d.localPhotoCalibErr, localBackground_instFlux AS taplint_c_4, pixelFlags_saturatedCenter, d.pixelFlags_interpolated AS taplint_c_6, pixelFlags_cr, detect_isTractInner AS taplint_c_8, d.patch, coord_dec AS taplint_c_10, ccdVisitId, d.psfDiffFlux AS taplint_c_12, psfFlux FROM dp02_dc2_catalogs.ForcedSource AS d
+I-QPO-QSUB-5 Submitting query: SELECT apFlux FROM dp02_dc2_catalogs.DiaSource
+I-QPO-DUFF-1 Submitting query expected to fail (bad ADQL): DUFF QUERY
+I-QPO-DUFF-2 Submitting query expected to fail (unknown query language): SELECT TOP 1 * FROM TAP_SCHEMA.tables
+S-QPO-QNUM-1 Successful/submitted TAP queries: 5/5
+S-QPO-QTIM-1 Average successful query time: 2.5s
+
+Section QAS: Make ADQL queries in async mode
+I-QAS-QSUB-1 Submitting query: SELECT TOP 10 dataproduct_type FROM ivoa.ObsCore
+I-QAS-QJOB-1 Submitted query at https://data-dev.lsst.cloud/api/tap/async/swsd12ltj335ik7r
+E-QAS-QERR-1 TAP query failed [No supported auth-schemes in WWW-Authenticate]
+I-QAS-QSUB-2 Submitting query: SELECT TOP 8 localWcs_flag, localWcs_CDMatrix_1_2 AS taplint_c_2, d.localPhotoCalibErr, localBackground_instFlux AS taplint_c_4, pixelFlags_saturatedCenter, d.pixelFlags_interpolated AS taplint_c_6, pixelFlags_cr, detect_isTractInner AS taplint_c_8, d.patch, coord_dec AS taplint_c_10, ccdVisitId, d.psfDiffFlux AS taplint_c_12, psfFlux FROM dp02_dc2_catalogs.ForcedSource AS d
+I-QAS-QJOB-2 Submitted query at https://data-dev.lsst.cloud/api/tap/async/hyj62pv5abn5ub53
+E-QAS-QERR-2 TAP query failed [No supported auth-schemes in WWW-Authenticate]
+I-QAS-QSUB-3 Submitting query: SELECT apFlux FROM dp02_dc2_catalogs.DiaSource
+I-QAS-QJOB-3 Submitted query at https://data-dev.lsst.cloud/api/tap/async/hezx7xckwyzmxpf7
+E-QAS-QERR-3 TAP query failed [No supported auth-schemes in WWW-Authenticate]
+I-QAS-DUFF-1 Submitting query expected to fail (bad ADQL): DUFF QUERY
+I-QAS-QJOB-4 Submitted query at https://data-dev.lsst.cloud/api/tap/async/kdgu7pipez3vdnmq
+E-QAS-DFIO-1 TAP job failed for bad query (bad ADQL) [No supported auth-schemes in WWW-Authenticate]
+I-QAS-DUFF-2 Submitting query expected to fail (unknown query language): SELECT TOP 1 * FROM TAP_SCHEMA.tables
+I-QAS-QJOB-5 Submitted query at https://data-dev.lsst.cloud/api/tap/async/qycg1fybxuejy7g3
+E-QAS-DFIO-2 TAP job failed for bad query (unknown query language) [No supported auth-schemes in WWW-Authenticate]
+S-QAS-QNUM-1 Successful/submitted TAP queries: 0/3
+
+Section UWS: Test asynchronous UWS/TAP behaviour
+I-UWS-CJOB-1 Created new job https://data-dev.lsst.cloud/api/tap/async/jg6xa3jayo3069ip
+E-UWS-NFND-1 Non-OK response 401 Unauthorized from https://data-dev.lsst.cloud/api/tap/async/jg6xa3jayo3069ip/phase
+I-UWS-POPA-1 POSTed runId=TAPLINT-002 to https://data-dev.lsst.cloud/api/tap/async/jg6xa3jayo3069ip/parameters (303)
+I-UWS-POPA-2 POSTed PHASE=ABORT to https://data-dev.lsst.cloud/api/tap/async/jg6xa3jayo3069ip/phase (303)
+E-UWS-NFND-2 Non-OK response 401 Unauthorized from https://data-dev.lsst.cloud/api/tap/async/jg6xa3jayo3069ip/phase
+I-UWS-POPA-3 POSTed ACTION=DELETE to https://data-dev.lsst.cloud/api/tap/async/jg6xa3jayo3069ip (303)
+I-UWS-CJOB-2 Created new job https://data-dev.lsst.cloud/api/tap/async/lbuqx5rn2p23hh7b
+E-UWS-NFND-3 Non-OK response 401 Unauthorized from https://data-dev.lsst.cloud/api/tap/async/lbuqx5rn2p23hh7b/phase
+I-UWS-CJOB-3 Created new job https://data-dev.lsst.cloud/api/tap/async/etkrrr2c3dp7881y
+E-UWS-NFND-4 Non-OK response 401 Unauthorized from https://data-dev.lsst.cloud/api/tap/async/etkrrr2c3dp7881y
+I-UWS-VUWS-1 UWS job document explicitly V1.1
+E-UWS-NFND-5 Non-OK response 401 Unauthorized from https://data-dev.lsst.cloud/api/tap/async/etkrrr2c3dp7881y/quote
+E-UWS-NFND-6 Non-OK response 401 Unauthorized from https://data-dev.lsst.cloud/api/tap/async/etkrrr2c3dp7881y/executionduration
+E-UWS-IFMT-1 Not integer content "null" from https://data-dev.lsst.cloud/api/tap/async/etkrrr2c3dp7881y/executionduration
+E-UWS-JDED-1 Execution duration mismatch between job info and /executionduration URL (14400 != null)
+E-UWS-NFND-7 Non-OK response 401 Unauthorized from https://data-dev.lsst.cloud/api/tap/async/etkrrr2c3dp7881y/destruction
+E-UWS-JDDE-1 Destruction time mismatch between job info and /destruction URL (2024-06-19T00:14:46.403Z != null)
+E-UWS-NFND-8 Non-OK response 401 Unauthorized from https://data-dev.lsst.cloud/api/tap/async/etkrrr2c3dp7881y/phase
+I-UWS-POPA-4 POSTed PHASE=RUN to https://data-dev.lsst.cloud/api/tap/async/etkrrr2c3dp7881y/phase (303)
+
+Section MDQ: Check table query result columns against declared metadata
+I-MDQ-QSUB-1 Submitting query: SELECT TOP 1 * FROM dp01_dc2_catalogs.forced_photometry
+W-MDQ-DRUN-1 Declared/result Unit mismatch for column coord_ra in table dp01_dc2_catalogs.forced_photometry (null != )
+W-MDQ-DRUN-2 Declared/result Unit mismatch for column coord_dec in table dp01_dc2_catalogs.forced_photometry (null != )
+W-MDQ-DRUN-3 Declared/result Unit mismatch for column g_base_classificationextendedness_flag in table dp01_dc2_catalogs.forced_photometry (null != )
+W-MDQ-DRUN-4 Declared/result Unit mismatch for column g_base_classificationextendedness_value in table dp01_dc2_catalogs.forced_photometry (null != )
+W-MDQ-DRUN-5 Declared/result Unit mismatch for column g_base_inputcount_flag in table dp01_dc2_catalogs.forced_photometry (null != )
+W-MDQ-DRUN-6 Declared/result Unit mismatch for column g_base_inputcount_flag_badcentroid in table dp01_dc2_catalogs.forced_photometry (null != )
+W-MDQ-DRUN-7 Declared/result Unit mismatch for column g_base_inputcount_flag_noinputs in table dp01_dc2_catalogs.forced_photometry (null != )
+W-MDQ-DRUN-8 Declared/result Unit mismatch for column g_base_inputcount_value in table dp01_dc2_catalogs.forced_photometry (null != )
+W-MDQ-DRUN-9 Declared/result Unit mismatch for column g_base_localbackground_flag in table dp01_dc2_catalogs.forced_photometry (null != )
+I-MDQ-QSUB-2 Submitting query: SELECT TOP 1 * FROM dp01_dc2_catalogs.object
+I-MDQ-QSUB-3 Submitting query: SELECT TOP 1 * FROM dp01_dc2_catalogs.position
+I-MDQ-QSUB-4 Submitting query: SELECT TOP 1 * FROM dp01_dc2_catalogs.reference
+I-MDQ-QSUB-5 Submitting query: SELECT TOP 1 * FROM dp01_dc2_catalogs.truth_match
+I-MDQ-QSUB-6 Submitting query: SELECT TOP 1 * FROM dp02_dc2_catalogs.CcdVisit
+I-MDQ-QSUB-7 Submitting query: SELECT TOP 1 * FROM dp02_dc2_catalogs.CoaddPatches
+I-MDQ-QSUB-8 Submitting query: SELECT TOP 1 * FROM dp02_dc2_catalogs.DiaObject
+I-MDQ-QSUB-9 Submitting query: SELECT TOP 1 * FROM dp02_dc2_catalogs.DiaSource
+E-MDQ-QERR-1 Failed TAP query SELECT TOP 1 * FROM uws.Job [Service error: "Query processing error: QI=?: Failed to instantiate query: NoSuchDb(sql):No such database: uws [in function listColumns at /home/runner/code/qserv/src/sql/MySqlConnection.cc:352]"]
+S-MDQ-QNUM-1 Successful/submitted TAP queries: 22/23
+S-MDQ-QTIM-1 Average successful query time: 2.5s
+I-MDQ-QSUB-x (14 more)
+W-MDQ-DRUN-x (679 more)
+
+Section OBS: Test implementation of ObsCore Data Model
+I-OBS-DMID-1 Checking against ObsCore DM 1.1
+E-OBS-CUTP-1 Wrong Utype in ObsCore column dataproduct_type: ObsDataset.dataProductType != obscore:ObsDataset.dataProductType
+E-OBS-CUTP-2 Wrong Utype in ObsCore column calib_level: ObsDataset.calibLevel != obscore:ObsDataset.calibLevel
+E-OBS-CUTP-3 Wrong Utype in ObsCore column obs_collection: DataID.collection != obscore:DataID.Collection
+E-OBS-CUTP-4 Wrong Utype in ObsCore column obs_id: DataID.observationID != obscore:DataID.observationID
+E-OBS-CUTP-5 Wrong Utype in ObsCore column obs_publisher_did: Curation.publisherDID != obscore:Curation.PublisherDID
+E-OBS-CUTP-6 Wrong Utype in ObsCore column access_url: Access.reference != obscore:Access.Reference
+E-OBS-CUTP-7 Wrong Utype in ObsCore column access_format: Access.format != obscore:Access.Format
+E-OBS-OCOL-1 Required ObsCore column access_estsize is missing
+E-OBS-CUTP-8 Wrong Utype in ObsCore column target_name: Target.name != obscore:Target.Name
+E-OBS-CUTP-9 Wrong Utype in ObsCore column s_ra: Char.SpatialAxis.Coverage.Location.Coord.Position2D.Value2.C1 != obscore:Char.SpatialAxis.Coverage.Location.Coord.Position2D.Value2.C1
+E-OBS-OCOL-2 Required ObsCore column pol_states is missing
+I-OBS-QSUB-1 Submitting query: SELECT DISTINCT TOP 4 dataproduct_type FROM ivoa.ObsCore WHERE dataproduct_type NOT IN ('image', 'cube', 'spectrum', 'sed', 'timeseries', 'visibility', 'event', 'measurements') AND dataproduct_type IS NOT NULL
+I-OBS-QGET-1 Query GET URL: https://data-dev.lsst.cloud/api/tap/sync?LANG=ADQL&QUERY=SELECT+DISTINCT+TOP+4+dataproduct_type+FROM+ivoa.ObsCore+WHERE+dataproduct_type+NOT+IN+%28%27image%27%2C+%27cube%27%2C+%27spectrum%27%2C+%27sed%27%2C+%27timeseries%27%2C+%27visibility%27%2C+%27event%27%2C+%27measurements%27%29+AND+dataproduct_type+IS+NOT+NULL
+I-OBS-QSUB-2 Submitting query: SELECT TOP 1 calib_level FROM ivoa.ObsCore WHERE calib_level IS NULL
+I-OBS-QGET-2 Query GET URL: https://data-dev.lsst.cloud/api/tap/sync?LANG=ADQL&QUERY=SELECT+TOP+1+calib_level+FROM+ivoa.ObsCore+WHERE+calib_level+IS+NULL
+I-OBS-QSUB-3 Submitting query: SELECT TOP 1 calib_level FROM ivoa.ObsCore WHERE calib_level NOT BETWEEN 0 AND 4
+I-OBS-QGET-3 Query GET URL: https://data-dev.lsst.cloud/api/tap/sync?LANG=ADQL&QUERY=SELECT+TOP+1+calib_level+FROM+ivoa.ObsCore+WHERE+calib_level+NOT+BETWEEN+0+AND+4
+I-OBS-QSUB-4 Submitting query: SELECT TOP 1 obs_id FROM ivoa.ObsCore WHERE obs_id IS NULL
+I-OBS-QGET-4 Query GET URL: https://data-dev.lsst.cloud/api/tap/sync?LANG=ADQL&QUERY=SELECT+TOP+1+obs_id+FROM+ivoa.ObsCore+WHERE+obs_id+IS+NULL
+I-OBS-QSUB-5 Submitting query: SELECT TOP 1 obs_collection FROM ivoa.ObsCore WHERE obs_collection IS NULL
+I-OBS-QGET-5 Query GET URL: https://data-dev.lsst.cloud/api/tap/sync?LANG=ADQL&QUERY=SELECT+TOP+1+obs_collection+FROM+ivoa.ObsCore+WHERE+obs_collection+IS+NULL
+I-OBS-QSUB-6 Submitting query: SELECT TOP 1 obs_publisher_did FROM ivoa.ObsCore WHERE obs_publisher_did IS NULL
+I-OBS-QGET-6 Query GET URL: https://data-dev.lsst.cloud/api/tap/sync?LANG=ADQL&QUERY=SELECT+TOP+1+obs_publisher_did+FROM+ivoa.ObsCore+WHERE+obs_publisher_did+IS+NULL
+E-OBS-HNUL-1 Illegal NULL(s) in ObsCore column obs_publisher_did
+S-OBS-COLS-1 ivoa.ObsCore columns: 28/30 required, 2/30 optional, 7 custom
+S-OBS-QNUM-1 Successful/submitted TAP queries: 6/6
+S-OBS-QTIM-1 Average successful query time: 4.5s
+E-OBS-CUTP-x (21 more)
+
+Section LOC: Test implementation of ObsLocTAP Data Model
+F-LOC-NOTP-1 No table with name ivoa.obsplan
+
+Section UPL: Make queries with table uploads
+F-UPL-NOUP-1 Table capabilities lists no upload methods - will not attempt upload tests
+
+Section EXA: Check content of examples document
+I-EXA-EURL-1 Reading examples document from https://data-dev.lsst.cloud/api/tap/examples
+F-EXA-EXNO-1 No examples document at https://data-dev.lsst.cloud/api/tap/examples
+
+Totals: Errors: 103; Warnings: 691; Infos: 151; Summaries: 20; Failures: 3
+
+
+
