@@ -1,0 +1,190 @@
+java -jar topcat-full.jar -stilts taplint tapurl=https://data-dev.lsst.cloud/api/ssotap
+This is STILTS taplint, 3.4-10+/441fab2f59 (2024-06-28)
+Timestamp: 2024-07-02 10:21:28 MST
+Static report types: ERROR(173), WARNING(77), INFO(32), SUMMARY(13), FAILURE(25)
+
+Section TMV: Validate table metadata against XML schema
+I-TMV-VURL-1 Validating https://data-dev.lsst.cloud/api/ssotap/tables as tableset (http://www.ivoa.net/xml/VODataService/v1.1)
+Login URL: https://data-dev.lsst.cloud/api/ssotap/tables
+HTTP Basic Authentication (Realm: data-dev.lsst.cloud)
+Username: x-oauth-basic
+Password: 
+S-TMV-VALI-1 SAX report: warnings 0, errors 0, fatal 0
+
+Section TME: Check content of tables metadata from /tables
+I-TME-CURL-1 Reading capability metadata from https://data-dev.lsst.cloud/api/ssotap/capabilities
+I-TME-TURL-1 Reading table metadata from https://data-dev.lsst.cloud/api/ssotap/tables?detail=max
+S-TME-SUMM-1 Schemas: 4, Tables: 14, Columns: 293, Foreign Keys: 9
+S-TME-FLGS-1 Standard column flags: indexed: 15, primary: 0, nullable: 0
+S-TME-FLGO-1 Other column flags: none
+
+Section TMS: Check content of tables metadata from TAP_SCHEMA
+I-TMS-TAPV-1 Validating for TAP version V1.1
+I-TMS-QSUB-1 Submitting query: SELECT COUNT(*) AS nr FROM TAP_SCHEMA.schemas
+I-TMS-QGET-1 Query GET URL: https://data-dev.lsst.cloud/api/ssotap/sync?LANG=ADQL&QUERY=SELECT+COUNT%28*%29+AS+nr+FROM+TAP_SCHEMA.schemas
+I-TMS-QSUB-2 Submitting query: SELECT COUNT(*) AS nr FROM TAP_SCHEMA.tables
+I-TMS-QGET-2 Query GET URL: https://data-dev.lsst.cloud/api/ssotap/sync?LANG=ADQL&QUERY=SELECT+COUNT%28*%29+AS+nr+FROM+TAP_SCHEMA.tables
+I-TMS-QSUB-3 Submitting query: SELECT COUNT(*) AS nr FROM TAP_SCHEMA.columns
+I-TMS-QGET-3 Query GET URL: https://data-dev.lsst.cloud/api/ssotap/sync?LANG=ADQL&QUERY=SELECT+COUNT%28*%29+AS+nr+FROM+TAP_SCHEMA.columns
+I-TMS-QSUB-4 Submitting query: SELECT COUNT(*) AS nr FROM TAP_SCHEMA.keys
+I-TMS-QGET-4 Query GET URL: https://data-dev.lsst.cloud/api/ssotap/sync?LANG=ADQL&QUERY=SELECT+COUNT%28*%29+AS+nr+FROM+TAP_SCHEMA.keys
+I-TMS-QSUB-5 Submitting query: SELECT COUNT(*) AS nr FROM TAP_SCHEMA.key_columns
+I-TMS-QGET-5 Query GET URL: https://data-dev.lsst.cloud/api/ssotap/sync?LANG=ADQL&QUERY=SELECT+COUNT%28*%29+AS+nr+FROM+TAP_SCHEMA.key_columns
+I-TMS-QSUB-6 Submitting query: SELECT principal, indexed, std, "size" FROM TAP_SCHEMA.columns
+I-TMS-QGET-6 Query GET URL: https://data-dev.lsst.cloud/api/ssotap/sync?LANG=ADQL&QUERY=SELECT+principal%2C+indexed%2C+std%2C+%22size%22+FROM+TAP_SCHEMA.columns&MAXREC=303
+I-TMS-QSUB-7 Submitting query: SELECT TOP 1 * FROM TAP_SCHEMA.columns
+I-TMS-QGET-7 Query GET URL: https://data-dev.lsst.cloud/api/ssotap/sync?LANG=ADQL&QUERY=SELECT+TOP+1+*+FROM+TAP_SCHEMA.columns&MAXREC=1
+I-TMS-QSUB-8 Submitting query: SELECT arraysize, column_index, column_name, datatype, description, indexed, principal, std, table_name, ucd, unit, utype, xtype FROM TAP_SCHEMA.columns
+I-TMS-QGET-8 Query GET URL: https://data-dev.lsst.cloud/api/ssotap/sync?LANG=ADQL&QUERY=SELECT+arraysize%2C+column_index%2C+column_name%2C+datatype%2C+description%2C+indexed%2C+principal%2C+std%2C+table_name%2C+ucd%2C+unit%2C+utype%2C+xtype+FROM+TAP_SCHEMA.columns&MAXREC=303
+I-TMS-QSUB-9 Submitting query: SELECT from_column, target_column, key_id FROM TAP_SCHEMA.key_columns
+I-TMS-QGET-9 Query GET URL: https://data-dev.lsst.cloud/api/ssotap/sync?LANG=ADQL&QUERY=SELECT+from_column%2C+target_column%2C+key_id+FROM+TAP_SCHEMA.key_columns&MAXREC=303
+E-TMS-TSSZ-1 Size does not match arraysize for vector: dp03_catalogs_10yr.DiaSource.band: arraysize=1; size=null
+E-TMS-TSSZ-2 Size does not match arraysize for vector: dp03_catalogs_10yr.DiaSource.nameTrue: arraysize=20; size=null
+E-TMS-TSSZ-3 Size does not match arraysize for vector: dp03_catalogs_10yr.MPCORB.computer: arraysize=10; size=null
+E-TMS-TSSZ-4 Size does not match arraysize for vector: dp03_catalogs_10yr.MPCORB.fullDesignation: arraysize=26; size=null
+E-TMS-TSSZ-5 Size does not match arraysize for vector: dp03_catalogs_10yr.MPCORB.mpcDesignation: arraysize=8; size=null
+E-TMS-TSSZ-6 Size does not match arraysize for vector: dp03_catalogs_10yr.MPCORB.pertsLong: arraysize=3; size=null
+E-TMS-TSSZ-7 Size does not match arraysize for vector: dp03_catalogs_10yr.MPCORB.pertsShort: arraysize=3; size=null
+E-TMS-TSSZ-8 Size does not match arraysize for vector: dp03_catalogs_10yr.MPCORB.reference: arraysize=9; size=null
+E-TMS-TSSZ-9 Size does not match arraysize for vector: dp03_catalogs_10yr.MPCORB.uncertaintyParameter: arraysize=1; size=null
+S-TMS-SUMM-1 Schemas: 4, Tables: 14, Columns: 293, Foreign Keys: 9
+S-TMS-FLGS-1 Standard column flags: indexed: 15, principal: 32, std: 32
+S-TMS-QNUM-1 Successful/submitted TAP queries: 31/31
+S-TMS-QTIM-1 Average successful query time: 0.15s
+I-TMS-QSUB-x (22 more)
+I-TMS-QGET-x (22 more)
+E-TMS-TSSZ-x (35 more)
+
+Section TMC: Compare table metadata from /tables and TAP_SCHEMA
+
+Section UUC: Check column units and UCDs are legal
+I-UUC-UCDV-1 UCD validation details: Ucidy version 1.2, UCD words version EN-UCD1+-1.4, UCD deprecated words version EN-UCD1+-1.4
+
+Section CPV: Validate capabilities against XML schema
+I-CPV-VURL-1 Validating https://data-dev.lsst.cloud/api/ssotap/capabilities as capabilities (http://www.ivoa.net/xml/VOSICapabilities/v1.0)
+S-CPV-VALI-1 SAX report: warnings 0, errors 0, fatal 0
+
+Section CAP: Check TAP and TAPRegExt content of capabilities document
+W-CAP-SVR0-1 No HTTP Server header
+I-CAP-SVRI-1 HTTP server header "Server: null"
+
+Section AVV: Validate availability against XML schema
+I-AVV-VURL-1 Validating https://data-dev.lsst.cloud/api/ssotap/availability as availability (http://www.ivoa.net/xml/VOSIAvailability/v1.0)
+S-AVV-VALI-1 SAX report: warnings 0, errors 0, fatal 0
+
+Section QGE: Make ADQL queries in sync GET mode
+I-QGE-SCHM-1 Using standard TAP_SCHEMA tables for metadata
+I-QGE-QSUB-1 Submitting query: SELECT TOP 10 arc FROM dp03_catalogs_1yr.MPCORB
+I-QGE-QGET-1 Query GET URL: https://data-dev.lsst.cloud/api/ssotap/sync?LANG=ADQL&QUERY=SELECT+TOP+10+arc+FROM+dp03_catalogs_1yr.MPCORB
+I-QGE-QSUB-2 Submitting query: SELECT arc FROM dp03_catalogs_1yr.MPCORB
+I-QGE-QGET-2 Query GET URL: https://data-dev.lsst.cloud/api/ssotap/sync?LANG=ADQL&QUERY=SELECT+arc+FROM+dp03_catalogs_1yr.MPCORB&MAXREC=9
+I-QGE-QSUB-3 Submitting query: SELECT TOP 10 arc FROM dp03_catalogs_1yr.MPCORB
+I-QGE-QGET-3 Query GET URL: https://data-dev.lsst.cloud/api/ssotap/sync?LANG=ADQL&QUERY=SELECT+TOP+10+arc+FROM+dp03_catalogs_1yr.MPCORB&DUMMY=ignore-me
+I-QGE-QSUB-4 Submitting query: SELECT TOP 1 arc FROM dp03_catalogs_1yr.MPCORB
+I-QGE-QGET-4 Query GET URL: https://data-dev.lsst.cloud/api/ssotap/sync?LANG=ADQL-2.0&QUERY=SELECT+TOP+1+arc+FROM+dp03_catalogs_1yr.MPCORB
+I-QGE-QSUB-5 Submitting query: SELECT TOP 1 arc FROM dp03_catalogs_1yr.MPCORB
+I-QGE-QGET-5 Query GET URL: https://data-dev.lsst.cloud/api/ssotap/sync?LANG=ADQL&QUERY=SELECT+TOP+1+arc+FROM+dp03_catalogs_1yr.MPCORB
+I-QGE-QSUB-6 Submitting query: SELECT TOP 8 topocentricZ, topocentricX AS taplint_c_2, d.topocentricVY, topocentricDist AS taplint_c_4, residualRa, d.predictedRaErr AS taplint_c_6, predictedMagnitudeErr, predictedDecErr AS taplint_c_8, d.mpcUniqueId, heliocentricY AS taplint_c_10, heliocentricVZ, d.heliocentricVX AS taplint_c_12, galacticL, eclipticLambda AS taplint_c_14, d.diaSourceId FROM dp03_catalogs_10yr.SSSource AS d
+I-QGE-QGET-6 Query GET URL: https://data-dev.lsst.cloud/api/ssotap/sync?LANG=ADQL&QUERY=SELECT+TOP+8+topocentricZ%2C+topocentricX+AS+taplint_c_2%2C+d.topocentricVY%2C+topocentricDist+AS+taplint_c_4%2C+residualRa%2C+d.predictedRaErr+AS+taplint_c_6%2C+predictedMagnitudeErr%2C+predictedDecErr+AS+taplint_c_8%2C+d.mpcUniqueId%2C+heliocentricY+AS+taplint_c_10%2C+heliocentricVZ%2C+d.heliocentricVX+AS+taplint_c_12%2C+galacticL%2C+eclipticLambda+AS+taplint_c_14%2C+d.diaSourceId++FROM+dp03_catalogs_10yr.SSSource+AS+d
+I-QGE-QSUB-7 Submitting query: SELECT diaSourceId FROM dp03_catalogs_1yr.SSSource
+I-QGE-QGET-7 Query GET URL: https://data-dev.lsst.cloud/api/ssotap/sync?LANG=ADQL&QUERY=SELECT+diaSourceId+FROM+dp03_catalogs_1yr.SSSource&MAXREC=0
+I-QGE-DUFF-1 Submitting query expected to fail (bad ADQL): DUFF QUERY
+I-QGE-QGET-8 Query GET URL: https://data-dev.lsst.cloud/api/ssotap/sync?LANG=ADQL&QUERY=DUFF+QUERY
+I-QGE-DUFF-2 Submitting query expected to fail (unknown query language): SELECT TOP 1 * FROM TAP_SCHEMA.tables
+I-QGE-QGET-9 Query GET URL: https://data-dev.lsst.cloud/api/ssotap/sync?LANG=OOBLECK&QUERY=SELECT+TOP+1+*+FROM+TAP_SCHEMA.tables
+S-QGE-QNUM-1 Successful/submitted TAP queries: 7/7
+S-QGE-QTIM-1 Average successful query time: 0.4s
+
+Section QPO: Make ADQL queries in sync POST mode
+I-QPO-QSUB-1 Submitting query: SELECT TOP 10 arc FROM dp03_catalogs_1yr.MPCORB
+W-QPO-NOCT-1 No Content-Type header for https://data-dev.lsst.cloud/api/ssotap/sync
+I-QPO-VVNL-1 Undeclared VOTable version; assuming v1.2
+E-QPO-YJDQ-1 (l.1, c.1): Premature end of file.
+E-QPO-QERX-1 TAP query result parse failed [Premature end of file.]
+I-QPO-QSUB-2 Submitting query: SELECT TOP 8 topocentricZ, topocentricX AS taplint_c_2, d.topocentricVY, topocentricDist AS taplint_c_4, residualRa, d.predictedRaErr AS taplint_c_6, predictedMagnitudeErr, predictedDecErr AS taplint_c_8, d.mpcUniqueId, heliocentricY AS taplint_c_10, heliocentricVZ, d.heliocentricVX AS taplint_c_12, galacticL, eclipticLambda AS taplint_c_14, d.diaSourceId FROM dp03_catalogs_10yr.SSSource AS d
+W-QPO-NOCT-2 No Content-Type header for https://data-dev.lsst.cloud/api/ssotap/sync
+I-QPO-VVNL-2 Undeclared VOTable version; assuming v1.2
+E-QPO-YJDQ-2 (l.1, c.1): Premature end of file.
+E-QPO-QERX-2 TAP query result parse failed [Premature end of file.]
+I-QPO-QSUB-3 Submitting query: SELECT diaSourceId FROM dp03_catalogs_1yr.SSSource
+W-QPO-NOCT-3 No Content-Type header for https://data-dev.lsst.cloud/api/ssotap/sync
+I-QPO-VVNL-3 Undeclared VOTable version; assuming v1.2
+E-QPO-YJDQ-3 (l.1, c.1): Premature end of file.
+E-QPO-QERX-3 TAP query result parse failed [Premature end of file.]
+I-QPO-DUFF-1 Submitting query expected to fail (bad ADQL): DUFF QUERY
+W-QPO-NOCT-4 No Content-Type header for https://data-dev.lsst.cloud/api/ssotap/sync
+I-QPO-VVNL-4 Undeclared VOTable version; assuming v1.2
+E-QPO-YJDQ-4 (l.1, c.1): Premature end of file.
+E-QPO-DFSF-1 TAP result parse failed for bad query (bad ADQL) [Premature end of file.]
+I-QPO-DUFF-2 Submitting query expected to fail (unknown query language): SELECT TOP 1 * FROM TAP_SCHEMA.tables
+W-QPO-NOCT-5 No Content-Type header for https://data-dev.lsst.cloud/api/ssotap/sync
+I-QPO-VVNL-5 Undeclared VOTable version; assuming v1.2
+E-QPO-YJDQ-5 (l.1, c.1): Premature end of file.
+E-QPO-DFSF-2 TAP result parse failed for bad query (unknown query language) [Premature end of file.]
+S-QPO-QNUM-1 Successful/submitted TAP queries: 0/3
+
+Section QAS: Make ADQL queries in async mode
+I-QAS-QSUB-1 Submitting query: SELECT TOP 10 arc FROM dp03_catalogs_1yr.MPCORB
+I-QAS-QJOB-1 Submitted query at https://data-dev.lsst.cloud/api/ssotap/async/ws9k4n44dc12eak6
+I-QAS-QSUB-2 Submitting query: SELECT arc FROM dp03_catalogs_1yr.MPCORB
+I-QAS-QJOB-2 Submitted query at https://data-dev.lsst.cloud/api/ssotap/async/dmqyaftie2qfq1wf
+I-QAS-QSUB-3 Submitting query: SELECT TOP 10 arc FROM dp03_catalogs_1yr.MPCORB
+I-QAS-QJOB-3 Submitted query at https://data-dev.lsst.cloud/api/ssotap/async/hkhtaf42gynfspei
+I-QAS-QSUB-4 Submitting query: SELECT TOP 8 topocentricZ, topocentricX AS taplint_c_2, d.topocentricVY, topocentricDist AS taplint_c_4, residualRa, d.predictedRaErr AS taplint_c_6, predictedMagnitudeErr, predictedDecErr AS taplint_c_8, d.mpcUniqueId, heliocentricY AS taplint_c_10, heliocentricVZ, d.heliocentricVX AS taplint_c_12, galacticL, eclipticLambda AS taplint_c_14, d.diaSourceId FROM dp03_catalogs_10yr.SSSource AS d
+I-QAS-QJOB-4 Submitted query at https://data-dev.lsst.cloud/api/ssotap/async/qibyxquaeaqijr2z
+I-QAS-QSUB-5 Submitting query: SELECT diaSourceId FROM dp03_catalogs_1yr.SSSource
+I-QAS-QJOB-5 Submitted query at https://data-dev.lsst.cloud/api/ssotap/async/kz5vmjzubvvl8u80
+I-QAS-DUFF-1 Submitting query expected to fail (bad ADQL): DUFF QUERY
+I-QAS-QJOB-6 Submitted query at https://data-dev.lsst.cloud/api/ssotap/async/x3wcbyj48zpqgkrb
+I-QAS-DUFF-2 Submitting query expected to fail (unknown query language): SELECT TOP 1 * FROM TAP_SCHEMA.tables
+I-QAS-QJOB-7 Submitted query at https://data-dev.lsst.cloud/api/ssotap/async/dts6hrfgqdejbwql
+S-QAS-QNUM-1 Successful/submitted TAP queries: 5/5
+S-QAS-QTIM-1 Average successful query time: 1.8s
+
+Section UWS: Test asynchronous UWS/TAP behaviour
+I-UWS-CJOB-1 Created new job https://data-dev.lsst.cloud/api/ssotap/async/n0ng66ruiokaf969
+I-UWS-POPA-1 POSTed runId=TAPLINT-002 to https://data-dev.lsst.cloud/api/ssotap/async/n0ng66ruiokaf969/parameters (303)
+I-UWS-POPA-2 POSTed PHASE=ABORT to https://data-dev.lsst.cloud/api/ssotap/async/n0ng66ruiokaf969/phase (303)
+I-UWS-POPA-3 POSTed ACTION=DELETE to https://data-dev.lsst.cloud/api/ssotap/async/n0ng66ruiokaf969 (303)
+I-UWS-CJOB-2 Created new job https://data-dev.lsst.cloud/api/ssotap/async/e8qso52fer0tkjiw
+I-UWS-CJOB-3 Created new job https://data-dev.lsst.cloud/api/ssotap/async/nqh0t1zbmsuyd896
+I-UWS-VUWS-1 UWS job document explicitly V1.1
+I-UWS-POPA-4 POSTed PHASE=RUN to https://data-dev.lsst.cloud/api/ssotap/async/nqh0t1zbmsuyd896/phase (303)
+
+Section MDQ: Check table query result columns against declared metadata
+I-MDQ-QSUB-1 Submitting query: SELECT TOP 1 * FROM dp03_catalogs_10yr.DiaSource
+I-MDQ-QSUB-2 Submitting query: SELECT TOP 1 * FROM dp03_catalogs_10yr.MPCORB
+I-MDQ-QSUB-3 Submitting query: SELECT TOP 1 * FROM dp03_catalogs_10yr.SSObject
+I-MDQ-QSUB-4 Submitting query: SELECT TOP 1 * FROM dp03_catalogs_10yr.SSSource
+I-MDQ-QSUB-5 Submitting query: SELECT TOP 1 * FROM dp03_catalogs_1yr.DiaSource
+I-MDQ-QSUB-6 Submitting query: SELECT TOP 1 * FROM dp03_catalogs_1yr.MPCORB
+I-MDQ-QSUB-7 Submitting query: SELECT TOP 1 * FROM dp03_catalogs_1yr.SSObject
+I-MDQ-QSUB-8 Submitting query: SELECT TOP 1 * FROM dp03_catalogs_1yr.SSSource
+I-MDQ-QSUB-9 Submitting query: SELECT TOP 1 * FROM tap_schema.columns
+E-MDQ-QERR-1 Failed TAP query SELECT TOP 1 * FROM uws.Job [Service error: "ERROR: relation "uws.job" does not exist
+E-MDQ-QERR+1   Position: 27"]
+S-MDQ-QNUM-1 Successful/submitted TAP queries: 13/14
+S-MDQ-QTIM-1 Average successful query time: 0.19s
+I-MDQ-QSUB-x (5 more)
+
+Section OBS: Test implementation of ObsCore Data Model
+I-OBS-NODM-1 Table capabilities lists no ObsCore DataModel - no ObsCore tests
+
+Section LOC: Test implementation of ObsLocTAP Data Model
+F-LOC-NOTP-1 No table with name ivoa.obsplan
+
+Section UPL: Make queries with table uploads
+I-UPL-QSUB-1 Submitting query: SELECT * FROM TAP_UPLOAD.t1
+I-UPL-QJOB-1 Submitted query at https://data-dev.lsst.cloud/api/ssotap/async/n7khbo0bt03waih3
+E-UPL-QERR-1 TAP query failed [Service error: "failed to create table TAP_UPLOAD.t1_n7khbo0bt03waih3 StatementCallback; uncategorized SQLException for SQL [CREATE TABLE TAP_UPLOAD.t1_n7khbo0bt03waih3(d_short SMALLINT null , d_int INTEGER null , d_long BIGINT null , d_float REAL null , d_double DOUBLE PRECISION null , d_char CHAR(1) null , d_string CHAR(2) null , d_time TIMESTAMP null )]; SQL state [25P02]; error code [0]; ERROR: current transaction is aborted, commands ignored until end of transaction block; nested exception is org.postgresql.util.PSQLException: ERROR: current transaction is aborted, commands ignored until end of...
+E-UPL-QERR+1   Position: 27"]
+I-UPL-QSUB-2 Submitting query: SELECT * FROM TAP_UPLOAD.t1
+I-UPL-QJOB-2 Submitted query at https://data-dev.lsst.cloud/api/ssotap/async/uvkcq79pmi3j6nmc
+E-UPL-QERR-2 TAP query failed [Service error: "failed to access class uk.ac.starlink.votable.Decoder from class ca.nrc.cadc.dali.tables.BinaryTableData$BinaryStreamIterator (uk.ac.starlink.votable.Decoder and ca.nrc.cadc.dali.tables.BinaryTableData$BinaryStreamIterator are in unnamed module of loader org.apache.catalina.loader.ParallelWebappClassLoader @1e097d59)"]
+
+Section EXA: Check content of examples document
+I-EXA-EURL-1 Reading examples document from https://data-dev.lsst.cloud/api/ssotap/examples
+F-EXA-EXNO-1 No examples document at https://data-dev.lsst.cloud/api/ssotap/examples
+
+Totals: Errors: 57; Warnings: 6; Infos: 141; Summaries: 17; Failures: 2
+
