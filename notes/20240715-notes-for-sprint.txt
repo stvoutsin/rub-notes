@@ -1,0 +1,230 @@
+Known Issues
+
+TAP Async queries not working after QServ problems 
+Date: Issue occurred on Friday (July 12, 2024) on data.lsst.cloud
+
+Summary:
+Asynchronous queries stopped working, (status never moved past queued) and only started working again after Adam restarted the deployment. During that time, to the best of my knowledge QServ was not executing queries  at the expected execution duration, though I’m not sure if this means that they were executing successfully but very slow, or if Qserv was not responding to queries at all. Colin Slater also mentioned that he has stopped some queries that seemed to be “stuck”. There were at least two queries that were being continuously polled by a client after the restart, with the UWS job status being “QUEUED”. 
+
+Potential causes:
+The above symptoms and fix potentially imply that the async jobs had opened a thread and connection to QServ which may have stopped abruptly, causing resources to not be released correctly. Something in the process led to jobs that had been stuck in a queued status, and it may also be that the queue was eventually filled, not allowing new jobs to execute. These are guesses that require looking into how the interaction between QServ and CADC-TAP works and how the queueing mechanism works.
+
+How to fix:
+Have we tested what happens when Qserv admin cancels a query, while Firefly is polling the job? 
+Need to start by seeing if & how we can recreate the issue, perhaps by adding tests that mock the connection to qserv and either leading to timeouts or stopping them abruptly.
+
+Estimated Time: 2 weeks
+
+
+TAP_UPLOAD with binary tables does not work
+
+Summary: 
+Taplint TAP_UPLOAD step fails when run on the SSO TAP service.
+This stage runs two tests as far as I can see, one with tabledata & one with binary stream data. The second one fails with the taplint validation, with an error that the expected value does not match the actual (0!=23)
+https://rubinobs.atlassian.net/browse/DM-45153
+
+Estimated Time: 1 week
+
+Time wrong in uws job results
+Summary:
+While investigating the query issues on July 12th I noticed that the time in the UWS jobs is two days ahead. 
+
+Estimated Time: 2 days
+
+TAP_UPLOAD not available in QServ
+Summary:
+It is a known limitation of QServ that it currently does not support TAP_UPLOAD. This will be a limitation of the TAP service, is it known when the functionality may be available? Is there agreement which release will include the functionality and does that agreement align with the expected date for QServ support of upload?
+
+Estimated Time: ?
+
+TAPlint Obscore metadata issues
+Summary:
+There are a couple obscore metadata related issues that Taplint complains about, described here:
+https://rubinobs.atlassian.net/browse/DM-44992
+It looks like this may not be solved in the short term, I’m not sure if there is a plan or timeline for getting these fixed, but until they are we will get taplint errors and also will not have an A+ rating from the validators. Apart from the rating, if we want to use taplint for validation, for example in a CI we’d have to turn off the obscore validation stage.
+
+
+New Features
+
+User tables (Youcat)
+
+Summary:
+One of the requirements for DP1 (I think?) will be to allow users to store tables in an SQL database. One potential solution for this may be Youcat by CADC. 
+
+Youcat is deployed as a TAP service that includes an additional API for allowing 
+Example of API for user table access:
+
+create table: PUT /youcat/tables/{table_name} 
+update table metadata: POST /youcat/tables/{table_name}
+drop table: DELETE /youcat/tables/{table_name}
+load data:  POST /youcat/load/{table_name}
+
+Limitations: 
+Currently PostgreSQL+pgsphere only
+Some documentation still to come
+
+Suggested Approach:
+Fork / Clone cadc-tap repo,  build Youcat and deploy,  using the Mock Postgres Database. Investigate & document how this works and devise a plan depending on if this seems to meet the requirements. 
+ 
+
+Estimated time: 4 weeks
+
+User queries
+Summary:
+Requirements (DP1?) Include persisting user query history.
+User history is currently already being persisted in the UWS database, which as of next week will be stored on CloudSQL for all the IDF environments. This can potentially be used for providing query history, either directly (queryable via TAP) or through a separate safir API service. This assumes that the cadc-uws implementation is able to store synchronous queries in the job tables as well.
+
+A few questions to help decide best design:
+What is the client of this service? (Firefly, Nublado? cli?)
+What metadata is needed by the client?
+Is UWS metadata sufficient or is it missing anything?
+Below is the metadata that is available in UWS:
+
+    jobID                   varchar(16)     not null,
+    runID                   varchar,
+    executionPhase          varchar(16)     not null,
+    executionDuration       bigint          not null,
+    creationTime            timestamp       not null,
+    destructionTime         timestamp,
+    quote                   timestamp,
+    startTime               timestamp,
+    endTime                 timestamp,
+    error_summaryMessage    varchar,
+    error_type              varchar(16),
+    error_documentURL       varchar,
+    requestPath             varchar,
+    remoteIP                varchar,
+    jobInfo_content         varchar,
+    jobInfo_contentType     varchar,
+    jobInfo_valid           smallint,
+    deletedByUser           smallint        default 0,
+    lastModified            timestamp       not null,
+
+Below is a suggested API for accessing a user’s query history:
+(Sample, more detailed API tbd via a technote)
+Get All User Queries History
+    GET /queries
+    Response
+{
+    "userId": "string",
+    "queries": [
+        {
+            "jobID": "string",
+            "runID": "string",
+            "executionPhase": "string",
+            "executionDuration": "integer",
+            "creationTime": "timestamp",
+            "destructionTime": "timestamp",
+            "quote": "timestamp",
+            "startTime": "timestamp",
+            "endTime": "timestamp",
+            "error_summaryMessage": "string",
+            "error_type": "string",
+            "error_documentURL": "string",
+            "requestPath": "string",
+            "remoteIP": "string",
+            "jobInfo_content": "string",
+            "jobInfo_contentType": "string"
+        }
+    ]
+}
+
+
+Get Details for Specific Query
+    GET /queries/{jobID}
+
+    Response:
+
+
+        {
+            "jobID": "string",
+            "runID": "string",
+            "executionPhase": "string",
+            "executionDuration": "integer",
+            "creationTime": "timestamp",
+            "destructionTime": "timestamp",
+            "quote": "timestamp",
+            "startTime": "timestamp",
+            "endTime": "timestamp",
+            "error_summaryMessage": "string",
+            "error_type": "string",
+            "error_documentURL": "string",
+            "requestPath": "string",
+            "remoteIP": "string",
+            "jobInfo_content": "string",
+            "jobInfo_contentType": "string"
+        }
+
+	.. Pending: Define how to filter by parameters (i.e. status)
+
+ Estimated time: 4 weeks
+
+
+Datalink for tap-postgres
+
+Summary:
+Datalink is currently available for lsst-tap-service (Qserv) but not tap-postgres (DP03). I’ve made some early progress on this by applying the equivalent changes that were made to the Qserv TAP, to the PG TAP service. However I’m not sure how to test this & how it should work exactly. What queries can be used to trigger it? Is ivoa.obscore needed or not?
+
+Estimated time: 1 week
+
+
+Use of QServ API
+
+Summary:
+Qserv team will be rolling out a new API for accessing and running queries. Firstly do we know what the API will look like, if there will be authenticated access to it and when it is expected to be available? If we are to use it with TAP, that will require changing the TAP services and modify how creating connections, executing and getting results work to all use the API.  
+
+Estimated time: 2 weeks
+
+
+Technical Debt
+
+
+Merging lsst-tap-service & tap-postgres Databases
+
+Estimated time: 2 weeks
+Investigate TAP connection pool settings 
+
+Summary:
+There are a number of configuration values in TAP (maxActive, maxIdle etc..)
+Are these correct, have we and should test how decreasing/increasing affects the service and generally what the optimal values are based on expected usage?
+CI for TAP service
+Summary:
+It would be useful if we could add a GH workflow that builds a TAP image with some sample data and runs some tests, perhaps a taplint validation. Currently testing TAP is a manual process of building an image, deploying on dev, running some TAP pyvo tests (recently also tapling), run some notebooks & test via firefly which takes some time.
+
+
+Scalability
+
+
+Summary:
+Some questions regarding scalability of the TAP services:
+
+Expected max number of concurrent users 
+Expected max requests p/m
+Average, min & max query execution duration?
+Queries per month
+Can we run multiple replicas of the TAP server pod?
+Do we want to introduce any rate limiting?
+Is there any point in caching frequent queries?
+
+
+Suggested Tests:
+Run multiple replicas of TAP
+Run concurrent long-running queries (async & sync) and scale up until failure
+Test multiple naive queries (long running) queries 
+Select * from table
+Select and filter on non-indexed 
+
+
+
+Robustness & Stability
+
+
+Summary:
+The target for the stability/robustness of the TAP Services should be that it never requires manual intervention and pod deletion / redeployments. The aforementioned issue we had last week implies that the current service does not meet this target.
+
+Mitigation:
+Fix the above issue with jobs stuck in QUEUE status
+(Perhaps) change the liveness probe to run a simple sync query
+
+
+
