@@ -1,0 +1,93 @@
+**Summary:**
+
+Move UWS databases for all idfs to CloudSQL & upgrade TAP images
+
+**Detailed Description:**
+
+This PR includes the following changes to phalanx:
+
+- Enable cloudsql on all the idfs to move the UWS database to CloudSQL for the ssotap & tap applications
+- Upgrade TAP to version 2.4.7
+- Upgrade tap-postgres to version 1.18.5
+- Add -Dpath_prefix param, needed by the upgraded version of TAP (Lets it know what the path is for generating the redirect URLs)
+- Move tap config to /config on the tomcat container, needed by the upgraded TAP version (upstream cadc changes)
+- Move idfdev to use the new int QServ that is password protected
+- Change idfdev & idfint TAP services to use TLSv1.3 for the QServ connection (This is enabled via upgrade to mysql connector in the newer TAP releases)
+
+The TAP version for tap-postgres (ssotap) & lsst-tap-service (tap) jumps up quite a few versions from what is currently released on prod & available on phalanx/main.
+- lsst-tap-service (2.2.0 -> 2.4.7)
+- tap-postgres (1.16.0 -> 1.18.5)
+
+This generally shouldn't be the case and is an exception hopefully for this one and the reason was that we deployed an newer release which ran fine for a couple weeks, but eventually we got a series of operations failures where TAP service queries were getting stuck in "QUEUED" phase https://rubinobs.atlassian.net/browse/DM-45307. We then rolled back to 2.2.0 while trying to reproduce bug, and simultaneously working on other upgrades. While I haven't been able to reproduce the issue, I think the cause was a change to the uws pool settings which has been reverted in the release proposed here. 
+
+
+**Detailed Description of lsst-tap-service release**
+
+- Remove cadc-tap log package from logLevelPackages & Add header to log4j.xml
+- Change authentication provider in QueryJobManager
+- Upgrade version of uws-server to 1.2.21
+- Upgrade log4j
+- Fixed Capabilities handling. Use new CapGetAction & CapInitAction, modified by getting pathPrefix from ENV property
+- Change result handling, to use a redirect servlet. Addresses issue with async failing due to auth header propagation with clients like pyvo, topcat (#105)
+- Upgrade mysql connector to 8.4.0
+- Added UWSInitAction class to initialise a UWS database
+- Changed Dockerfile for lsst-tap-service to use cadc-tomcat base image
+- Deprecated AuthenticatorImpl class
+- Fixed capabilities output to be IVOA valid
+
+
+**Detailed Description of tap-postgres release**
+
+- Fix issue with ownerID missing by @stvoutsin in #40
+- Changed QueryJobManager to use the IdentityManager available via the AuthenticationUtil class (OpenID in our case)
+- Upgrade version of uws-server to 1.2.21
+- Upgrade log4j
+- Fix stilts conflict issue
+- Move to using cadc docker base image for TAP
+- Fixed broken build due to centos base image EOL
+- Change result handling, to use a redirect servlet. Addresses issue with async failing due to auth header propagation with clients like pyvo, topcat
+- Fixed Capabilities handling. Use new CapGetAction & CapInitAction, modified by getting pathPrefix from ENV property
+- Upgrade mysql-connector to 8.4.0
+- Fixed Capabilities based on standard, mainly Table Access and authentication related
+- Added PgsphereDeParser to AdqlQueryImpl / Fixes issue with queries having quotes around column names ("size")
+- Updated cadc libraries to more recent version. Moved to using the cadc-tomcat Docker image
+
+
+## Related Issue(s)
+
+https://rubinobs.atlassian.net/browse/DM-45307
+https://rubinobs.atlassian.net/browse/DM-45354
+https://rubinobs.atlassian.net/browse/DM-45528
+https://rubinobs.atlassian.net/browse/DM-45320
+https://rubinobs.atlassian.net/browse/DM-45320
+https://rubinobs.atlassian.net/browse/DM-44877
+
+## Steps used to Test
+- Point ArgoCD to branch and sync
+- Run validation suite which does the following:
+   - Run some basic queries via Portal
+   - Run 4 of the tutorials via Nublado
+   - Run a query to ssotap & tap with single user & 10 concurrent users scenarios
+   - Validate capabilities endpoint
+
+- Run taplint on prod & PR version and compare
+
+Prod - Totals: Errors: 70; Warnings: 694; Infos: 143; Summaries: 18; Failures: 3
+PR - Totals: Errors: 92; Warnings: 2; Infos: 155; Summaries: 21; Failures: 3
+
+I think the reason for the additional errors are that the version on prod has an invalid capabilities endpoint, which leads to several tests like the obscore model not being tested:
+
+Section OBS: Test implementation of ObsCore Data Model
+I-OBS-NODM-1 Table capabilities lists no ObsCore DataModel - no ObsCore tests
+
+
+The Errors that appear can be stripped down to the following:
+
+E-OBS-CUTP-1 Wrong Utype in ObsCore column .. 
+E-OBS-OCOL-2 Required ObsCore column .. is missing
+
+E-MDQ-QERR-6 Failed TAP query SELECT TOP 1 * FROM uws.Job (Known issue, uws is not queryable, will be removed soon)
+
+E-MDQ-QERR-5 Failed TAP query SELECT TOP 1 * FROM dp01_dc2_catalogs.truth_match (Known issue, uws is not queryable, will be removed soon from tap schema)
+
+E-TMS-TSSZ-5 Size does not match arraysize for vector: dp02_dc2_catalogs.DiaSource.filterName: arraysize=1; size=null (Fixed in sdm_schemas, new version should fix error when added to phalanx)
