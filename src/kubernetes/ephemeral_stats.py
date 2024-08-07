@@ -120,7 +120,6 @@ class EphemeralStorageAnalyzer:
             if node_summary:
                 top_pods = self.get_top_ephemeral_storage_pods(node_summary,
                                                                top_n=top_n)
-                logger.info("Top 5 Pods by Ephemeral Storage Usage:")
                 for pod_name, storage_used in top_pods:
                     logger.info(
                         f"Pod: {pod_name}, Ephemeral Storage Used: "
