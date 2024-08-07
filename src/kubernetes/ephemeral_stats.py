@@ -3,7 +3,8 @@ import json
 from typing import List, Dict, Any, Tuple, Optional
 import logging
 
-logging.basicConfig(level=logging.INFO, format='%(message)s')
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - '
+                                               '%(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
 
@@ -105,20 +106,21 @@ class EphemeralStorageAnalyzer:
         pod_storage_usage.sort(key=lambda x: x[1], reverse=True)
         return pod_storage_usage[:top_n]
 
-    def analyze_nodes(self):
+    def analyze_nodes(self, top_n: int = 5):
         """Analyze ephemeral storage usage for all nodes in the cluster."""
         nodes = self.client.get_nodes()
         if not nodes:
             logger.error("No nodes found or error retrieving nodes.")
             return
-
+        logger.info(f"Top {top_n} Pods by Ephemeral Storage Usage on each node:")
         for node_name in nodes:
             logger.info(f"\nNode: {node_name}")
             node_summary = self.client.get_node_summary(node_name)
 
             if node_summary:
                 top_pods = self.get_top_ephemeral_storage_pods(node_summary,
-                                                               top_n=5)
+                                                               top_n=top_n)
+                logger.info("Top 5 Pods by Ephemeral Storage Usage:")
                 for pod_name, storage_used in top_pods:
                     logger.info(
                         f"Pod: {pod_name}, Ephemeral Storage Used: "
@@ -130,10 +132,9 @@ class EphemeralStorageAnalyzer:
 
 def main():
     """Run the ephemeral storage analyzer."""
-    logger.info("Top 5 Pods by Ephemeral Storage Usage per node:")
     client = KubernetesClient()
     analyzer = EphemeralStorageAnalyzer(client)
-    analyzer.analyze_nodes()
+    analyzer.analyze_nodes(top_n=5)
 
 
 if __name__ == "__main__":
