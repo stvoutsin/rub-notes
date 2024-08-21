@@ -1,0 +1,84 @@
+Some stats on TAP usage over past 6 days and some rough Back-of-envelope calculations for how the UWS database might scale for 1000 users:
+
+The stats were collected as:
+TAP Service:
+  TAP/idfprod (UWS stored in CloudSQL)
+
+Start Date:
+  August 15th 2024
+
+End Date:
+  August 21th 2024
+
+Total Days:
+  6
+
+
+
+Total Queries:
+  SELECT count(*) FROM uws.job
+  62214
+
+Number of users:
+  30
+
+Expected number of users:
+  1000
+
+Queries per Day:
+  62214 / 6
+  10369 queries (rows)
+
+Expected Rows (1 year): 
+  q_per_day * 1000/30 * 365
+  125 million rows
+
+Expected Rows (5 years):
+  630 million rows
+
+
+Total size of uws.job (6 days):
+  SELECT pg_total_relation_size('uws.job') AS total_size;
+  20357120 ~= 19.41Mb
+
+Total size of uws.jobdetail (6 days):
+  SELECT pg_total_relation_size('uws.jobdetail') AS total_size;
+  ~= 66 Mb
+
+Average size per row (uws.job):
+  SELECT pg_total_relation_size('uws.job')::numeric / COUNT(*) AS avg_row_size FROM uws.job;
+  ~326.38 bytes
+
+
+Expected Database size for 1000 Users:
+
+  uws.job:
+    1 Year: Approximately 38 GB
+    5 Years: Approximately 190 GB
+
+  uws.jobdetail:
+    1 Year: Approximately 130 GB
+    5 Years: Approximately 650 GB
+
+
+Non-indexed table scan duration for larger table: 650Gb
+  (Assuming SSD 200Mb/s read-speed)
+  665600 Mb/200Mb/s = 3328 seconds ~= 55 minutes
+
+
+What about adding indexes?
+  Assuming an index adds about 100bytes per row
+  If we want to add 1 index to jobdetail:
+  New jobdetail table size= 650Gb + 50Gb = 700Gb
+
+
+What columns are indexed currently:
+  uws.job:
+    job_creationtime
+    job_ownerid
+    job_pkey
+	
+uws.jobdetail:
+    jobdetail_fkey
+
+If these are the only columns a query history client would filter on we can expect a few ms - seconds duration in the 5 year scenario 
