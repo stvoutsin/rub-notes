@@ -168,6 +168,7 @@ class QueryHistory:
     def __init__(self, parser: QueryParser, session: Optional[requests.Session] = None,
                  base_url: Optional[str] = None, token: Optional[str] = None):
         """Initializes the QueryHistory object with a session for making requests.
+        
         Parameters
         ----------
         parser
