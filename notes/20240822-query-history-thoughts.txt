@@ -1,0 +1,207 @@
+Query History
+Thoughts on using UWS /jobs as the solution for getting a user’s query history
+
+Generally I think it seems like a very good idea, and probably the quickest & easiest way to get something up & running. The /jobs interface which can be found here: http://data.lsst.cloud/api/tap/async which comes out of the box with the CADC TAP service will give a user a list of all their queries, and the endpoint can be filter-able by phase and time. Combining that endpoint with the UWS job details can give Firefly all the information it needs for a given user’s queries.
+
+A sample Python class that does query history:
+
+
+
+Some thoughts and potential concerns that we may want to think about however are listed below:
+
+
+/jobs endpoint only shows jobId, ownerID & creationTime (optionally)
+
+Sample:
+
+<uws:jobs xmlns:uws="http://www.ivoa.net/xml/UWS/v1.0" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1">
+<script/>
+<uws:jobref id="ae5m9oso95k2t7wi">
+<uws:phase>COMPLETED</uws:phase>
+<uws:ownerId>svoutsin</uws:ownerId>
+<uws:creationTime>2024-07-31T19:52:48.567Z</uws:creationTime>
+</uws:jobref>
+<uws:jobref id="afoh4if9romqx5yk">
+<uws:phase>ERROR</uws:phase>
+<uws:ownerId>svoutsin</uws:ownerId>
+<uws:creationTime>2024-08-10T21:05:56.928Z</uws:creationTime>
+</uws:jobref>
+..
+
+This means that getting the actual query requires an extra jump to async/jobid
+
+
+Async vs sync queries:
+
+/async queries do end up in the list available at:
+http://data.lsst.cloud/api/tap/async
+
+/sync queries however do not, even though behind the scenes they are executed as asynchronous queries and get an entry in the UWS table.
+
+This probably means there is some sort of filtering on the CADC TAP side to only show async queries.
+
+Mitigation:
+ 
+  - Can this be configurable? If it is, is it valid to show both async & sync queries under /async?
+    Do we add a non-standard endpoint that returns all queries (async & sync) in the expected format?
+
+
+Scalability Concerns
+
+Are we worried about scalability when the UWS table grows over X years?
+
+Some stats & back-of-envelope calculations for how UWS table may grow:
+
+Stat (Query) collection info:
+
+TAP Service:
+  TAP/idfprod (UWS stored in CloudSQL)
+
+Start Date:
+  August 15th 2024
+
+End Date:
+  August 21th 2024
+
+Total Days:
+  6
+
+Total Queries:
+  SELECT count(*) FROM uws.job
+  62214
+
+Number of users:
+  30
+
+Expected number of users:
+  1000
+
+UWS has 4 tables, the relevant tables that job & jobdetail, the others are empty or have just 1 row.
+The "job" table stores one row per query, the jobdetail stores several rows per query with various metadata.
+
+Queries per Day (uws.job table):
+  62214 / 6
+  10369 queries (rows)
+
+Expected Rows (1 year) (uws.job table): 
+  q_per_day * 1000/30 * 365
+  125 million rows
+
+Expected Rows (5 years) (uws.job table):
+  630 million rows
+
+Total size of uws.job (6 days):
+  SELECT pg_total_relation_size('uws.job') AS total_size;
+  20357120 ~= 19.41Mb
+
+Total size of uws.jobdetail (6 days):
+  SELECT pg_total_relation_size('uws.jobdetail') AS total_size;
+  ~= 66 Mb
+
+Average size per row (uws.job):
+  SELECT pg_total_relation_size('uws.job')::numeric / COUNT(*) AS avg_row_size FROM uws.job;
+  ~326.38 bytes
+
+
+Expected Database size for 1000 Users:
+
+  uws.job:
+    1 Year: Approximately 38 GB
+    5 Years: Approximately 190 GB
+
+  uws.jobdetail:
+    1 Year: Approximately 130 GB
+    5 Years: Approximately 650 GB
+
+
+Non-indexed table scan duration for larger table: 650Gb
+  (Assuming SSD 200Mb/s read-speed)
+  665600Mb/200Mb/s = 3328 seconds ~= 55 minutes
+
+
+What about adding indexes?
+  Assuming an index adds about 100bytes per row
+  If we want to add 1 index to jobdetail:
+  New jobdetail table size= 650Gb + 50Gb = 700Gb
+
+What columns are indexed currently:
+  uws.job:
+    job_creationtime
+    job_ownerid
+    job_pkey
+	
+uws.jobdetail:
+    jobdetail_fkey
+
+If these are the only columns a query history client would filter on we can expect a few ms - seconds duration in the 5 year scenario 
+
+The estimated rows are probably wrong since the query count is probably dominated by mobu queries. If I can filter out the mobu queries I may be able to get a better idea, but I don't think I can currently due to the ownerID change which in this iteration uses a UUID.
+Also this is not accounting for jobs being garbage collected, as I’m not sure at this moment what that process looks like.
+
+
+Mitigations
+
+ - UWS Sets a default destruction time, which I assume means the UWS job gets deleted
+   Figure out a good destruction time and garbage collection of UWS jobs.
+   I don't think we can persist everything, we need to find a minimum or middle ground and delete the rest. 
+   Is there an X duration after which a user is fine not seeing queries before that?
+
+   In the currently deployed TAP service this is set to 1 week, but I do not know at this moment if it is in fact enforced  
+
+ - Our clients should delete the uws job where possible. (Pyvo does this, so does taplint)
+  
+ 
+
+
+Performance Concerns 
+
+Potential performance issues with use of UWS and /jobs endpoint:
+
+For Firefly to show list of queries:
+
+   HTTP GET https://data.lsst.cloud/api/tap/async
+      parse XML to UWS job list
+      for each UWS job
+          HTTP GET https://data.lsst.cloud/api/tap/async/jobid
+              parse XML UWS job and add query to list
+      
+      return list
+
+ 
+   Say a user has 10 queries in their history to display, this leads to 11 HTTP Requests and XML parse actions.
+          
+   How long would this get_queries action take for queries = 10?
+   
+   P = Time to parse single XML file ~= 20ms
+   H = HTTP Get request time ~= 300ms
+   I = Time to get initial list ~= 300ms
+  
+   T = (P + H) * 10 + I ~= 3.5 seconds
+  
+   (Missing additional possible delays due to networking latency, server load etc..) 
+   
+   If the list of queries is 50:
+
+   T = 16 seconds
+   
+   
+   Mitigations
+   
+   - Limit how many queries a user can see. (Showing only 10 max sets an upper bound to response time)
+   - We could consider caching most X recent queries per user
+   - Don't show additional query info until requested (Only show ID & status)
+
+
+
+ 
+Saving a User’s query
+
+Can a user save / archive a query with UWS as the query history store?
+
+    We can in theory archive a uws job by setting the PHASE=ARCHIVED, which I think means it will not get deleted. 
+    I also think an ARCHIVED query will not show up by default when querying the /jobs endpoint. But perhaps it does if /jobs?PHASE=ARCHIVED
+    
+
+/jobs endpoint is limited to one TAP service
+
+Do users expect to see their queries for both TAP & SSOTAP at the same place? If so, that would require Firefly to combine results from /api/tap/async and /api/ssotap/async or us (SQuare) to provide a new endpoint which gives them a combined view.
