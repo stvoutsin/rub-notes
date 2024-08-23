@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "queryhistory"
+version = "0.1.0"
+description = "A Python module to query history for a TAP service using UWS."
+readme = "README.md"  # Path to your README file
+requires-python = ">=3.11"
+dependencies = [
+    "requests>=2.26.0",
+]
+
+license = {text = "MIT"}
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/stvoutsin/rub-notes"
+"Documentation" = "https://github.com/stvoutsin/rub-notes"
+"Source Code" = "https://github.com/stvoutsin/rub-notes/tap/queryhistory"
+
+
+[tool.setuptools.packages.find]
+where = ["queryhistory"]
+
+[tool.pytest.ini_options]
+addopts = "--strict-markers"
