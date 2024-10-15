@@ -1,3 +1,28 @@
+# Summary
+
+Parallel test was run on:
+  https://data-dev.lsst.cloud/api/sia/dp02/query
+
+Query run was:
+  https://data-dev.lsst.cloud/api/sia/dp02/query?POS=CIRCLE+55.7467+-32.2862+0.05&time=60550.31803461111+60550.31838182871
+
+Test was run using parallel_tester.py module from src/analytics in this repo
+
+
+# Results
+- Runtime for one user is about 4 seconds
+
+- Test runtime scales linearly with number of users
+
+- After 15-20 users we start to get 500 exceptions with some of the requests
+
+The error logs look like this:
+  Error: Error while communicating with Butler server.  Request ID: ddc5626a-c923-4764-a6f0-4c70cfe98aa2
+
+- With 30 users all queries fail
+
+
+
 # Run with 1 user
 # ----------------------------
 
