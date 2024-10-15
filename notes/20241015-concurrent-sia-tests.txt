@@ -1,0 +1,192 @@
+# Summary
+
+Parallel test was run on:
+  https://data-dev.lsst.cloud/api/sia/dp02/query
+
+Query run was:
+  https://data-dev.lsst.cloud/api/sia/dp02/query?POS=CIRCLE+55.7467+-32.2862+0.05&time=60550.31803461111+60550.31838182871
+
+Test was run using parallel_tester.py module from src/analytics in this repo
+
+
+# Results
+- Runtime for one user is about 4 seconds
+
+- Test runtime scales linearly with number of users
+
+- After 15-20 users we start to get 500 exceptions with some of the requests
+
+The error logs look like this:
+  Error: Error while communicating with Butler server.  Request ID: ddc5626a-c923-4764-a6f0-4c70cfe98aa2
+
+- With 30 users all queries fail
+
+
+
+# Run with 1 user
+# ----------------------------
+
+2024-10-15 10:16:31,464 - INFO - Starting the parallel request test...
+2024-10-15 10:16:35,542 - INFO - HTTP Request: GET https://data-dev.lsst.cloud/api/sia/dp02/query?POS=CIRCLE+55.7467+-32.2862+0.05&time=60550.31803461111+60550.31838182871 "HTTP/1.1 200 OK"
+2024-10-15 10:16:35,661 - INFO - 
+Test Completed in 4.20 seconds
+2024-10-15 10:16:35,661 - INFO - Total Users: 1
+2024-10-15 10:16:35,661 - INFO - Average Response Time per Request: 4.16 seconds
+2024-10-15 10:16:35,661 - INFO - Standard Deviation of Response Times: 0.00 seconds
+2024-10-15 10:16:35,661 - INFO - Number of Successful Requests: 1 / 1
+2024-10-15 10:16:35,661 - INFO - 
+Detailed User Response Times:
+2024-10-15 10:16:35,661 - INFO - User 1: Status Code 200, Response Time 4.16 seconds
+
+# Run with 20 concurrent users
+# ----------------------------
+
+2024-10-15 10:19:56,246 - INFO - Starting the parallel request test...
+2024-10-15 10:19:57,014 - INFO - HTTP Request: GET https://data-dev.lsst.cloud/api/sia/dp02/query?POS=CIRCLE+55.7467+-32.2862+0.05&time=60550.31803461111+60550.31838182871 "HTTP/1.1 500 Internal Server Error"
+2024-10-15 10:20:20,558 - INFO - HTTP Request: GET https://data-dev.lsst.cloud/api/sia/dp02/query?POS=CIRCLE+55.7467+-32.2862+0.05&time=60550.31803461111+60550.31838182871 "HTTP/1.1 200 OK"
+2024-10-15 10:20:20,636 - INFO - HTTP Request: GET https://data-dev.lsst.cloud/api/sia/dp02/query?POS=CIRCLE+55.7467+-32.2862+0.05&time=60550.31803461111+60550.31838182871 "HTTP/1.1 200 OK"
+2024-10-15 10:20:20,670 - INFO - HTTP Request: GET https://data-dev.lsst.cloud/api/sia/dp02/query?POS=CIRCLE+55.7467+-32.2862+0.05&time=60550.31803461111+60550.31838182871 "HTTP/1.1 200 OK"
+2024-10-15 10:20:20,690 - INFO - HTTP Request: GET https://data-dev.lsst.cloud/api/sia/dp02/query?POS=CIRCLE+55.7467+-32.2862+0.05&time=60550.31803461111+60550.31838182871 "HTTP/1.1 200 OK"
+2024-10-15 10:20:21,385 - INFO - HTTP Request: GET https://data-dev.lsst.cloud/api/sia/dp02/query?POS=CIRCLE+55.7467+-32.2862+0.05&time=60550.31803461111+60550.31838182871 "HTTP/1.1 200 OK"
+2024-10-15 10:20:21,385 - INFO - HTTP Request: GET https://data-dev.lsst.cloud/api/sia/dp02/query?POS=CIRCLE+55.7467+-32.2862+0.05&time=60550.31803461111+60550.31838182871 "HTTP/1.1 200 OK"
+2024-10-15 10:20:21,645 - INFO - HTTP Request: GET https://data-dev.lsst.cloud/api/sia/dp02/query?POS=CIRCLE+55.7467+-32.2862+0.05&time=60550.31803461111+60550.31838182871 "HTTP/1.1 200 OK"
+2024-10-15 10:20:21,857 - INFO - HTTP Request: GET https://data-dev.lsst.cloud/api/sia/dp02/query?POS=CIRCLE+55.7467+-32.2862+0.05&time=60550.31803461111+60550.31838182871 "HTTP/1.1 200 OK"
+2024-10-15 10:20:21,893 - INFO - HTTP Request: GET https://data-dev.lsst.cloud/api/sia/dp02/query?POS=CIRCLE+55.7467+-32.2862+0.05&time=60550.31803461111+60550.31838182871 "HTTP/1.1 200 OK"
+2024-10-15 10:20:22,260 - INFO - 
+Test Completed in 26.01 seconds
+2024-10-15 10:20:22,261 - INFO - Total Users: 10
+2024-10-15 10:20:22,261 - INFO - Average Response Time per Request: 22.56 seconds
+2024-10-15 10:20:22,261 - INFO - Standard Deviation of Response Times: 7.73 seconds
+2024-10-15 10:20:22,261 - INFO - Number of Successful Requests: 9 / 10
+2024-10-15 10:20:22,261 - INFO - 
+Detailed User Response Times:
+2024-10-15 10:20:22,261 - INFO - User 1: Status Code 200, Response Time 25.26 seconds
+2024-10-15 10:20:22,261 - INFO - User 2: Status Code 200, Response Time 25.96 seconds
+2024-10-15 10:20:22,261 - INFO - User 3: Status Code 200, Response Time 25.70 seconds
+2024-10-15 10:20:22,261 - INFO - User 4: Status Code 200, Response Time 24.46 seconds
+2024-10-15 10:20:22,261 - INFO - User 5: Status Code 500, Response Time 0.65 seconds
+2024-10-15 10:20:22,261 - INFO - User 6: Status Code 200, Response Time 24.36 seconds
+2024-10-15 10:20:22,261 - INFO - User 7: Status Code 200, Response Time 25.62 seconds
+2024-10-15 10:20:22,261 - INFO - User 8: Status Code 200, Response Time 25.06 seconds
+2024-10-15 10:20:22,261 - INFO - User 9: Status Code 200, Response Time 24.21 seconds
+2024-10-15 10:20:22,261 - INFO - User 10: Status Code 200, Response Time 24.30 seconds
+
+
+# Run with 15 concurrent users
+# ----------------------------
+
+2024-10-15 10:25:14,273 - INFO - Starting the parallel request test...
+2024-10-15 10:25:15,235 - INFO - HTTP Request: GET https://data-dev.lsst.cloud/api/sia/dp02/query?POS=CIRCLE+55.7467+-32.2862+0.05&time=60550.31803461111+60550.31838182871 "HTTP/1.1 500 Internal Server Error"
+2024-10-15 10:25:51,473 - INFO - HTTP Request: GET https://data-dev.lsst.cloud/api/sia/dp02/query?POS=CIRCLE+55.7467+-32.2862+0.05&time=60550.31803461111+60550.31838182871 "HTTP/1.1 200 OK"
+2024-10-15 10:25:51,639 - INFO - HTTP Request: GET https://data-dev.lsst.cloud/api/sia/dp02/query?POS=CIRCLE+55.7467+-32.2862+0.05&time=60550.31803461111+60550.31838182871 "HTTP/1.1 200 OK"
+2024-10-15 10:25:53,980 - INFO - HTTP Request: GET https://data-dev.lsst.cloud/api/sia/dp02/query?POS=CIRCLE+55.7467+-32.2862+0.05&time=60550.31803461111+60550.31838182871 "HTTP/1.1 200 OK"
+2024-10-15 10:25:54,491 - INFO - HTTP Request: GET https://data-dev.lsst.cloud/api/sia/dp02/query?POS=CIRCLE+55.7467+-32.2862+0.05&time=60550.31803461111+60550.31838182871 "HTTP/1.1 200 OK"
+2024-10-15 10:25:54,526 - INFO - HTTP Request: GET https://data-dev.lsst.cloud/api/sia/dp02/query?POS=CIRCLE+55.7467+-32.2862+0.05&time=60550.31803461111+60550.31838182871 "HTTP/1.1 200 OK"
+2024-10-15 10:25:54,566 - INFO - HTTP Request: GET https://data-dev.lsst.cloud/api/sia/dp02/query?POS=CIRCLE+55.7467+-32.2862+0.05&time=60550.31803461111+60550.31838182871 "HTTP/1.1 200 OK"
+2024-10-15 10:25:54,707 - INFO - HTTP Request: GET https://data-dev.lsst.cloud/api/sia/dp02/query?POS=CIRCLE+55.7467+-32.2862+0.05&time=60550.31803461111+60550.31838182871 "HTTP/1.1 200 OK"
+2024-10-15 10:25:54,805 - INFO - HTTP Request: GET https://data-dev.lsst.cloud/api/sia/dp02/query?POS=CIRCLE+55.7467+-32.2862+0.05&time=60550.31803461111+60550.31838182871 "HTTP/1.1 200 OK"
+2024-10-15 10:25:55,330 - INFO - HTTP Request: GET https://data-dev.lsst.cloud/api/sia/dp02/query?POS=CIRCLE+55.7467+-32.2862+0.05&time=60550.31803461111+60550.31838182871 "HTTP/1.1 200 OK"
+2024-10-15 10:25:56,080 - INFO - HTTP Request: GET https://data-dev.lsst.cloud/api/sia/dp02/query?POS=CIRCLE+55.7467+-32.2862+0.05&time=60550.31803461111+60550.31838182871 "HTTP/1.1 200 OK"
+2024-10-15 10:25:56,081 - INFO - HTTP Request: GET https://data-dev.lsst.cloud/api/sia/dp02/query?POS=CIRCLE+55.7467+-32.2862+0.05&time=60550.31803461111+60550.31838182871 "HTTP/1.1 200 OK"
+2024-10-15 10:25:56,131 - INFO - HTTP Request: GET https://data-dev.lsst.cloud/api/sia/dp02/query?POS=CIRCLE+55.7467+-32.2862+0.05&time=60550.31803461111+60550.31838182871 "HTTP/1.1 200 OK"
+2024-10-15 10:25:56,135 - INFO - HTTP Request: GET https://data-dev.lsst.cloud/api/sia/dp02/query?POS=CIRCLE+55.7467+-32.2862+0.05&time=60550.31803461111+60550.31838182871 "HTTP/1.1 200 OK"
+2024-10-15 10:25:56,160 - INFO - HTTP Request: GET https://data-dev.lsst.cloud/api/sia/dp02/query?POS=CIRCLE+55.7467+-32.2862+0.05&time=60550.31803461111+60550.31838182871 "HTTP/1.1 200 OK"
+2024-10-15 10:25:56,280 - INFO - 
+Test Completed in 42.01 seconds
+2024-10-15 10:25:56,280 - INFO - Total Users: 15
+2024-10-15 10:25:56,280 - INFO - Average Response Time per Request: 37.77 seconds
+2024-10-15 10:25:56,280 - INFO - Standard Deviation of Response Times: 10.38 seconds
+2024-10-15 10:25:56,280 - INFO - Number of Successful Requests: 14 / 15
+2024-10-15 10:25:56,280 - INFO - 
+Detailed User Response Times:
+2024-10-15 10:25:56,280 - INFO - User 1: Status Code 200, Response Time 41.92 seconds
+2024-10-15 10:25:56,280 - INFO - User 2: Status Code 200, Response Time 40.28 seconds
+2024-10-15 10:25:56,280 - INFO - User 3: Status Code 200, Response Time 37.41 seconds
+2024-10-15 10:25:56,280 - INFO - User 4: Status Code 200, Response Time 41.08 seconds
+2024-10-15 10:25:56,280 - INFO - User 5: Status Code 200, Response Time 41.88 seconds
+2024-10-15 10:25:56,280 - INFO - User 6: Status Code 200, Response Time 41.85 seconds
+2024-10-15 10:25:56,280 - INFO - User 7: Status Code 200, Response Time 40.21 seconds
+2024-10-15 10:25:56,280 - INFO - User 8: Status Code 200, Response Time 40.07 seconds
+2024-10-15 10:25:56,280 - INFO - User 9: Status Code 200, Response Time 37.10 seconds
+2024-10-15 10:25:56,280 - INFO - User 10: Status Code 200, Response Time 40.32 seconds
+2024-10-15 10:25:56,280 - INFO - User 11: Status Code 200, Response Time 40.16 seconds
+2024-10-15 10:25:56,280 - INFO - User 12: Status Code 200, Response Time 41.73 seconds
+2024-10-15 10:25:56,280 - INFO - User 13: Status Code 200, Response Time 40.36 seconds
+2024-10-15 10:25:56,280 - INFO - User 14: Status Code 200, Response Time 41.61 seconds
+2024-10-15 10:25:56,280 - INFO - User 15: Status Code 500, Response Time 0.62 seconds
+
+
+
+# Run with 30 users
+# -----------------
+
+2024-10-15 10:39:55,569 - INFO - Starting the parallel request test...
+2024-10-15 10:40:46,724 - INFO - HTTP Request: GET https://data-dev.lsst.cloud/api/sia/dp02/query?POS=CIRCLE+55.7467+-32.2862+0.05&time=60550.31803461111+60550.31838182871 "HTTP/1.1 500 Internal Server Error"
+2024-10-15 10:40:57,152 - INFO - HTTP Request: GET https://data-dev.lsst.cloud/api/sia/dp02/query?POS=CIRCLE+55.7467+-32.2862+0.05&time=60550.31803461111+60550.31838182871 "HTTP/1.1 500 Internal Server Error"
+2024-10-15 10:41:22,971 - INFO - HTTP Request: GET https://data-dev.lsst.cloud/api/sia/dp02/query?POS=CIRCLE+55.7467+-32.2862+0.05&time=60550.31803461111+60550.31838182871 "HTTP/1.1 500 Internal Server Error"
+2024-10-15 10:41:22,972 - INFO - HTTP Request: GET https://data-dev.lsst.cloud/api/sia/dp02/query?POS=CIRCLE+55.7467+-32.2862+0.05&time=60550.31803461111+60550.31838182871 "HTTP/1.1 500 Internal Server Error"
+2024-10-15 10:41:22,972 - INFO - HTTP Request: GET https://data-dev.lsst.cloud/api/sia/dp02/query?POS=CIRCLE+55.7467+-32.2862+0.05&time=60550.31803461111+60550.31838182871 "HTTP/1.1 500 Internal Server Error"
+2024-10-15 10:41:22,972 - INFO - HTTP Request: GET https://data-dev.lsst.cloud/api/sia/dp02/query?POS=CIRCLE+55.7467+-32.2862+0.05&time=60550.31803461111+60550.31838182871 "HTTP/1.1 500 Internal Server Error"
+2024-10-15 10:41:22,973 - INFO - HTTP Request: GET https://data-dev.lsst.cloud/api/sia/dp02/query?POS=CIRCLE+55.7467+-32.2862+0.05&time=60550.31803461111+60550.31838182871 "HTTP/1.1 500 Internal Server Error"
+2024-10-15 10:41:22,991 - INFO - HTTP Request: GET https://data-dev.lsst.cloud/api/sia/dp02/query?POS=CIRCLE+55.7467+-32.2862+0.05&time=60550.31803461111+60550.31838182871 "HTTP/1.1 500 Internal Server Error"
+2024-10-15 10:41:22,999 - INFO - HTTP Request: GET https://data-dev.lsst.cloud/api/sia/dp02/query?POS=CIRCLE+55.7467+-32.2862+0.05&time=60550.31803461111+60550.31838182871 "HTTP/1.1 500 Internal Server Error"
+2024-10-15 10:41:23,005 - INFO - HTTP Request: GET https://data-dev.lsst.cloud/api/sia/dp02/query?POS=CIRCLE+55.7467+-32.2862+0.05&time=60550.31803461111+60550.31838182871 "HTTP/1.1 500 Internal Server Error"
+2024-10-15 10:41:23,560 - INFO - HTTP Request: GET https://data-dev.lsst.cloud/api/sia/dp02/query?POS=CIRCLE+55.7467+-32.2862+0.05&time=60550.31803461111+60550.31838182871 "HTTP/1.1 500 Internal Server Error"
+2024-10-15 10:41:23,643 - INFO - HTTP Request: GET https://data-dev.lsst.cloud/api/sia/dp02/query?POS=CIRCLE+55.7467+-32.2862+0.05&time=60550.31803461111+60550.31838182871 "HTTP/1.1 500 Internal Server Error"
+2024-10-15 10:41:24,200 - INFO - HTTP Request: GET https://data-dev.lsst.cloud/api/sia/dp02/query?POS=CIRCLE+55.7467+-32.2862+0.05&time=60550.31803461111+60550.31838182871 "HTTP/1.1 500 Internal Server Error"
+2024-10-15 10:41:24,446 - INFO - HTTP Request: GET https://data-dev.lsst.cloud/api/sia/dp02/query?POS=CIRCLE+55.7467+-32.2862+0.05&time=60550.31803461111+60550.31838182871 "HTTP/1.1 500 Internal Server Error"
+2024-10-15 10:41:24,925 - INFO - HTTP Request: GET https://data-dev.lsst.cloud/api/sia/dp02/query?POS=CIRCLE+55.7467+-32.2862+0.05&time=60550.31803461111+60550.31838182871 "HTTP/1.1 500 Internal Server Error"
+2024-10-15 10:41:25,007 - INFO - HTTP Request: GET https://data-dev.lsst.cloud/api/sia/dp02/query?POS=CIRCLE+55.7467+-32.2862+0.05&time=60550.31803461111+60550.31838182871 "HTTP/1.1 500 Internal Server Error"
+2024-10-15 10:41:25,087 - INFO - HTTP Request: GET https://data-dev.lsst.cloud/api/sia/dp02/query?POS=CIRCLE+55.7467+-32.2862+0.05&time=60550.31803461111+60550.31838182871 "HTTP/1.1 500 Internal Server Error"
+2024-10-15 10:41:26,057 - INFO - HTTP Request: GET https://data-dev.lsst.cloud/api/sia/dp02/query?POS=CIRCLE+55.7467+-32.2862+0.05&time=60550.31803461111+60550.31838182871 "HTTP/1.1 500 Internal Server Error"
+2024-10-15 10:41:26,352 - INFO - HTTP Request: GET https://data-dev.lsst.cloud/api/sia/dp02/query?POS=CIRCLE+55.7467+-32.2862+0.05&time=60550.31803461111+60550.31838182871 "HTTP/1.1 500 Internal Server Error"
+2024-10-15 10:41:26,353 - INFO - HTTP Request: GET https://data-dev.lsst.cloud/api/sia/dp02/query?POS=CIRCLE+55.7467+-32.2862+0.05&time=60550.31803461111+60550.31838182871 "HTTP/1.1 500 Internal Server Error"
+2024-10-15 10:41:26,864 - INFO - HTTP Request: GET https://data-dev.lsst.cloud/api/sia/dp02/query?POS=CIRCLE+55.7467+-32.2862+0.05&time=60550.31803461111+60550.31838182871 "HTTP/1.1 500 Internal Server Error"
+2024-10-15 10:41:26,901 - INFO - HTTP Request: GET https://data-dev.lsst.cloud/api/sia/dp02/query?POS=CIRCLE+55.7467+-32.2862+0.05&time=60550.31803461111+60550.31838182871 "HTTP/1.1 500 Internal Server Error"
+2024-10-15 10:41:27,006 - INFO - HTTP Request: GET https://data-dev.lsst.cloud/api/sia/dp02/query?POS=CIRCLE+55.7467+-32.2862+0.05&time=60550.31803461111+60550.31838182871 "HTTP/1.1 500 Internal Server Error"
+2024-10-15 10:41:27,052 - INFO - HTTP Request: GET https://data-dev.lsst.cloud/api/sia/dp02/query?POS=CIRCLE+55.7467+-32.2862+0.05&time=60550.31803461111+60550.31838182871 "HTTP/1.1 500 Internal Server Error"
+2024-10-15 10:41:27,107 - INFO - HTTP Request: GET https://data-dev.lsst.cloud/api/sia/dp02/query?POS=CIRCLE+55.7467+-32.2862+0.05&time=60550.31803461111+60550.31838182871 "HTTP/1.1 500 Internal Server Error"
+2024-10-15 10:41:27,108 - INFO - HTTP Request: GET https://data-dev.lsst.cloud/api/sia/dp02/query?POS=CIRCLE+55.7467+-32.2862+0.05&time=60550.31803461111+60550.31838182871 "HTTP/1.1 500 Internal Server Error"
+2024-10-15 10:41:27,166 - INFO - HTTP Request: GET https://data-dev.lsst.cloud/api/sia/dp02/query?POS=CIRCLE+55.7467+-32.2862+0.05&time=60550.31803461111+60550.31838182871 "HTTP/1.1 500 Internal Server Error"
+2024-10-15 10:41:27,167 - INFO - HTTP Request: GET https://data-dev.lsst.cloud/api/sia/dp02/query?POS=CIRCLE+55.7467+-32.2862+0.05&time=60550.31803461111+60550.31838182871 "HTTP/1.1 500 Internal Server Error"
+2024-10-15 10:41:27,175 - INFO - HTTP Request: GET https://data-dev.lsst.cloud/api/sia/dp02/query?POS=CIRCLE+55.7467+-32.2862+0.05&time=60550.31803461111+60550.31838182871 "HTTP/1.1 500 Internal Server Error"
+2024-10-15 10:41:27,176 - INFO - HTTP Request: GET https://data-dev.lsst.cloud/api/sia/dp02/query?POS=CIRCLE+55.7467+-32.2862+0.05&time=60550.31803461111+60550.31838182871 "HTTP/1.1 500 Internal Server Error"
+2024-10-15 10:41:27,178 - INFO - 
+Test Completed in 91.61 seconds
+2024-10-15 10:41:27,179 - INFO - Total Users: 30
+2024-10-15 10:41:27,179 - INFO - Average Response Time per Request: 87.00 seconds
+2024-10-15 10:41:27,179 - INFO - Standard Deviation of Response Times: 8.71 seconds
+2024-10-15 10:41:27,179 - INFO - Number of Successful Requests: 0 / 30
+2024-10-15 10:41:27,179 - INFO - 
+Detailed User Response Times:
+2024-10-15 10:41:27,179 - INFO - User 1: Status Code 500, Response Time 91.58 seconds
+2024-10-15 10:41:27,179 - INFO - User 2: Status Code 500, Response Time 89.31 seconds
+2024-10-15 10:41:27,179 - INFO - User 3: Status Code 500, Response Time 88.56 seconds
+2024-10-15 10:41:27,179 - INFO - User 4: Status Code 500, Response Time 91.51 seconds
+2024-10-15 10:41:27,179 - INFO - User 5: Status Code 500, Response Time 91.42 seconds
+2024-10-15 10:41:27,179 - INFO - User 6: Status Code 500, Response Time 87.26 seconds
+2024-10-15 10:41:27,179 - INFO - User 7: Status Code 500, Response Time 87.24 seconds
+2024-10-15 10:41:27,179 - INFO - User 8: Status Code 500, Response Time 91.10 seconds
+2024-10-15 10:41:27,179 - INFO - User 9: Status Code 500, Response Time 50.94 seconds
+2024-10-15 10:41:27,179 - INFO - User 10: Status Code 500, Response Time 90.54 seconds
+2024-10-15 10:41:27,179 - INFO - User 11: Status Code 500, Response Time 87.14 seconds
+2024-10-15 10:41:27,179 - INFO - User 12: Status Code 500, Response Time 88.59 seconds
+2024-10-15 10:41:27,179 - INFO - User 13: Status Code 500, Response Time 89.13 seconds
+2024-10-15 10:41:27,179 - INFO - User 14: Status Code 500, Response Time 91.15 seconds
+2024-10-15 10:41:27,179 - INFO - User 15: Status Code 500, Response Time 87.07 seconds
+2024-10-15 10:41:27,179 - INFO - User 16: Status Code 500, Response Time 90.95 seconds
+2024-10-15 10:41:27,179 - INFO - User 17: Status Code 500, Response Time 90.09 seconds
+2024-10-15 10:41:27,179 - INFO - User 18: Status Code 500, Response Time 90.36 seconds
+2024-10-15 10:41:27,179 - INFO - User 19: Status Code 500, Response Time 87.62 seconds
+2024-10-15 10:41:27,179 - INFO - User 20: Status Code 500, Response Time 91.12 seconds
+2024-10-15 10:41:27,179 - INFO - User 21: Status Code 500, Response Time 61.08 seconds
+2024-10-15 10:41:27,180 - INFO - User 22: Status Code 500, Response Time 88.99 seconds
+2024-10-15 10:41:27,180 - INFO - User 23: Status Code 500, Response Time 86.87 seconds
+2024-10-15 10:41:27,180 - INFO - User 24: Status Code 500, Response Time 87.42 seconds
+2024-10-15 10:41:27,180 - INFO - User 25: Status Code 500, Response Time 86.84 seconds
+2024-10-15 10:41:27,180 - INFO - User 26: Status Code 500, Response Time 90.82 seconds
+2024-10-15 10:41:27,180 - INFO - User 27: Status Code 500, Response Time 86.76 seconds
+2024-10-15 10:41:27,180 - INFO - User 28: Status Code 500, Response Time 90.88 seconds
+2024-10-15 10:41:27,180 - INFO - User 29: Status Code 500, Response Time 90.91 seconds
+2024-10-15 10:41:27,180 - INFO - User 30: Status Code 500, Response Time 86.70 seconds
+
