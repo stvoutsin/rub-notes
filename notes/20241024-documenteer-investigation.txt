@@ -248,7 +248,7 @@ Do we suggest applying it elsewhere? Are other builds failing?
 # Other attempts at fix:
 # -----------------------
 
-Try using pydata_sphinx_theme.
+Try using latest pydata_sphinx_theme.
 Fails because it requires certain entries in documenteer.toml that don't exist in this repo.
 Trying to populate them, but haven't managed to get the right values setup there at the time of writing this.
 
