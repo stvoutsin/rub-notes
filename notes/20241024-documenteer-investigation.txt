@@ -216,6 +216,15 @@ Last successful build used:
 But this used two incompatible versions, though an older version of documenteer.
 
 
+# Does building the docs with the failing versions here worked elsewhere?
+Yes, see:
+https://github.com/lsst/dp0_lsst_io/actions/runs/11505385540/job/32026980237
+- documenteer==1.4.2
+- sphinx==8.1.2
+- pydata_sphinx_theme==0.12.0
+
+So perhaps something specific to the dp03 repo is triggering that line that causes the exception
+
 
 # What happens if we try to build what is on main
 
