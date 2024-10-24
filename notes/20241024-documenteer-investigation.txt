@@ -1,0 +1,259 @@
+#############################
+## Notes on failing build  ##
+#############################
+
+# Documentation site fails to build with Documenteer
+# Date: October 23, 2024
+# Github PR:
+https://github.com/lsst/dp0-3_lsst_io/pull/78
+
+
+
+# Clone and build locally 
+# -----------------------
+
+
+# Update Makefile to make logging verbose
+
+# Makefile
+...
+
+html:
+        $(SPHINXBUILD) -v -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html
+
+...
+
+
+
+# Run Build
+# -----------------------
+
+python3.12 -m venv .venv
+source .venv/bin/activate
+python -m pip install --no-cache-dir -U pip
+python -m pip install --no-cache-dir -r requirements.txt
+make linkcheck
+make html
+
+
+# Build Failed..
+# Output:
+
+	building [html]: build_info mismatch, copying .buildinfo to .buildinfo.bak
+	building [html]: targets for 26 source files that are out of date
+	updating environment: locale_dir /home/stelios/projects/dp03test/locales/en/LC_MESSAGES does not exist
+	0 added, 0 changed, 0 removed
+	reading sources... 
+	/home/stelios/projects/dp03test/.venv/lib/python3.12/site-packages/pydata_sphinx_theme/__init__.py:76: RemovedInSphinx90Warning: The '_Opt' object tuple interface is deprecated, use attribute access instead for 'default', 'rebuild', and 'valid_types'.
+	  app.config.values["html_permalinks_icon"] = ("#", *icon_default[1:])
+	looking for now-outdated files... none found
+	preparing documents... done
+	copying assets... 
+	copying static files... 
+	Writing evaluated template result to /home/stelios/projects/dp03test/_build/html/_static/basic.css
+	Writing evaluated template result to /home/stelios/projects/dp03test/_build/html/_static/documentation_options.js
+	Writing evaluated template result to /home/stelios/projects/dp03test/_build/html/_static/language_data.js
+	Writing evaluated template result to /home/stelios/projects/dp03test/_build/html/_static/copybutton.js
+	copying static files: done
+	copying extra files... 
+	copying extra files: done
+	copying assets: done
+	writing output... [  4%] data-products-dp0-3/	rm
+	/home/stelios/projects/dp03test/data-products-dp0-3/data-simulation-dp0-3.rst:205: WARNING: py:obj reference target not found: G [ref.obj]
+	/home/stelios/projects/dp03test/data-products-dp0-3/data-simulation-dp0-3.rst:205: WARNING: py:obj reference target not found: V [ref.obj]
+
+	Traceback (most recent call last):
+	  File "/home/stelios/projects/dp03test/.venv/lib/python3.12/site-packages/sphinx/events.py", line 404, in emit
+	    results.append(listener.handler(self.app, *args))
+		           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+	  File "/home/stelios/projects/dp03test/.venv/lib/python3.12/site-packages/sphinx/ext/ifconfig.py", line 55, in process_ifconfig_nodes
+	    ns = {confval.name: confval.value for confval in app.config}
+		 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+	  File "/home/stelios/projects/dp03test/.venv/lib/python3.12/site-packages/sphinx/config.py", line 452, in __iter__
+	    yield ConfigValue(name, getattr(self, name), opt.rebuild)
+		                                         ^^^^^^^^^^^
+	AttributeError: 'tuple' object has no attribute 'rebuild'
+
+	The above exception was the direct cause of the following exception:
+
+	Traceback (most recent call last):
+	  File "/home/stelios/projects/dp03test/.venv/lib/python3.12/site-packages/sphinx/cmd/build.py", line 514, in build_main
+	    app.build(args.force_all, args.filenames)
+	  File "/home/stelios/projects/dp03test/.venv/lib/python3.12/site-packages/sphinx/application.py", line 381, in build
+	    self.builder.build_update()
+	  File "/home/stelios/projects/dp03test/.venv/lib/python3.12/site-packages/sphinx/builders/__init__.py", line 358, in build_update
+	    self.build(
+	  File "/home/stelios/projects/dp03test/.venv/lib/python3.12/site-packages/sphinx/builders/__init__.py", line 437, in build
+	    self.write(docnames, list(updated_docnames), method)
+	  File "/home/stelios/projects/dp03test/.venv/lib/python3.12/site-packages/sphinx/builders/__init__.py", line 711, in write
+	    self.write_documents(docnames)
+	  File "/home/stelios/projects/dp03test/.venv/lib/python3.12/site-packages/sphinx/builders/__init__.py", line 725, in write_documents
+	    self._write_serial(sorted_docnames)
+	  File "/home/stelios/projects/dp03test/.venv/lib/python3.12/site-packages/sphinx/builders/__init__.py", line 741, in _write_serial
+	    doctree = self.env.get_and_resolve_doctree(docname, self)
+		      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+	  File "/home/stelios/projects/dp03test/.venv/lib/python3.12/site-packages/sphinx/environment/__init__.py", line 661, in get_and_resolve_doctree
+	    self.apply_post_transforms(doctree, docname)
+	  File "/home/stelios/projects/dp03test/.venv/lib/python3.12/site-packages/sphinx/environment/__init__.py", line 734, in apply_post_transforms
+	    self.events.emit('doctree-resolved', doctree, docname)
+	  File "/home/stelios/projects/dp03test/.venv/lib/python3.12/site-packages/sphinx/events.py", line 415, in emit
+	    raise ExtensionError(
+	sphinx.errors.ExtensionError: Handler <function process_ifconfig_nodes at 0x77ba58d1afc0> for event 'doctree-resolved' threw an exception (exception: 'tuple' object has no attribute 'rebuild')
+
+	Extension error (sphinx.ext.ifconfig):
+	Handler <function process_ifconfig_nodes at 0x77ba58d1afc0> for event 'doctree-resolved' threw an exception (exception: 'tuple' object has no attribute 'rebuild')
+	make: *** [Makefile:29: html] Error 2
+
+
+
+
+# Version of relevant packages:
+
+- documenteer == 1.4.2
+- sphinx == 8.1.3
+- pydata_sphinx_theme == 0.12.0
+
+
+
+
+# Run build again..
+# -----------------------
+
+# Success ? 
+
+...
+
+	copying images... [ 72%] _static/portal_tut04_step02d.png
+	copying images... [ 73%] _static/portal_tut04_step02e.png
+	copying images... [ 75%] _static/portal_tut04_step03a.png
+	copying images... [ 77%] _static/portal_tut04_step03b.png
+	copying images... [ 78%] _static/portal_tut04_step03c.png
+	copying images... [ 80%] _static/portal_tut04_step03d.png
+	copying images... [ 82%] _static/portal_tut04_step03e.png
+	copying images... [ 83%] _static/portal_tut04_step03f.png
+	copying images... [ 85%] _static/portal_tut05_step01a.png
+	copying images... [ 87%] _static/portal_tut05_step01b.png
+	copying images... [ 88%] _static/portal_tut05_step01c.png
+	copying images... [ 90%] _static/portal_tut05_step01d.png
+	copying images... [ 92%] _static/portal_tut05_step02a.png
+	copying images... [ 93%] _static/portal_tut05_step02b.png
+	copying images... [ 95%] _static/portal_tut05_step02c.png
+	copying images... [ 97%] _static/portal_tut05_step03a.png
+	copying images... [ 98%] _static/portal_tut05_step03b.png
+	copying images... [100%] _static/portal_tut05_step03c.png
+
+	dumping search index in English (code: en)... done
+	dumping object inventory... done
+	Writing redirects...
+	build succeeded, 101 warnings.
+
+	The HTML pages are in _build/html.
+
+	Build finished. The HTML pages are in _build/html.
+
+
+# make html works the second time..
+
+
+
+
+
+# Notes & Ramblings:
+# -----------------------
+
+
+# Notes on release versions:
+pydata_sphinx_theme's latest version is v0.16.0
+For the other two we are using the latest
+
+
+
+# Opt class in sphinx & pydata_sphinx_theme:
+
+Sphinx in line https://github.com/sphinx-doc/sphinx/blob/master/sphinx/config.py#L447 expects opts to be of type class _Opt: https://github.com/sphinx-doc/sphinx/blob/master/sphinx/config.py#L94
+The Opt class was introduced in release v7.3.0 (Before that a tuple was expected there):
+https://github.com/sphinx-doc/sphinx/commit/fd23cf0256bd401211ae3535206f48f7e28bca64
+
+Last pip release of sphinx before 7.3.0 is 7.2.6: 
+https://www.sphinx-doc.org/en/master/changes/7.2.html#release-7-2-6-released-sep-13-2023
+
+
+Looking at pydata_sphinx_theme..
+
+This warning:
+
+/home/stelios/projects/dp03test/.venv/lib/python3.12/site-packages/pydata_sphinx_theme/__init__.py:76: RemovedInSphinx90Warning: The '_Opt' object tuple interface is deprecated, use attribute access instead for 'default', 'rebuild', and 'valid_types'.
+  app.config.values["html_permalinks_icon"] = ("#", *icon_default[1:])
+
+implies we are still using tuple here. Note we are using 1.12.0 for pydata_sphinx_theme.
+
+The fix to update this to no longer be a tuple was in version v0.13.0rc5.
+https://github.com/pydata/pydata-sphinx-theme/commit/4aa06733957521e9ae5ef374811baf83e51f26c5
+
+
+
+
+# Why are we using 1.12.0 of pydata_sphinx_theme?
+
+JSick: 
+"""
+The extra path checking involved in the light and dark logos in the
+html_theme_options isn't compatible with images installed via
+html_static_path.
+"""
+https://github.com/lsst-sqre/documenteer/commit/d649059da01fe1b635ce93798e7aa29460af0712
+
+
+
+# Have other builds for this repo worked before and what were they using?
+
+Last successful build used:
+
+  - documenteer 0.8.4
+  - sphinx 8.0.2
+  - pydata_sphinx_theme 0.12.0
+
+But this used two incompatible versions, though an older version of documenteer.
+
+
+
+# What happens if we try to build what is on main
+
+Same failure..
+
+
+# What if we tag documeteer to 0.8.4 
+
+Try a build with documenteer==0.8.4 and latest sphinx
+ 
+  > Mermaid error:
+  > Requires mermaid js version 10.3.0 or later
+  > make: *** [Makefile:29: html] Error 2
+
+
+# Summary:
+# -----------------------
+I think Sphinx 8.1.2 does not play well with 1.12.0 which we seem to be stuck with for now, although not sure why previous builds worked.
+
+
+
+# Suggested Fixes:
+# -----------------------
+Pin sphinx version to 7.2.6 until we can use latest version pf pydata_sphinx_theme
+This fix worked for this PR.
+Do we suggest applying it elsewhere? Are other builds failing?
+
+
+
+# Other attempts at fix:
+# -----------------------
+
+Try using pydata_sphinx_theme.
+Fails because it requires certain entries in documenteer.toml that don't exist in this repo.
+Trying to populate them, but haven't managed to get the right values setup there at the time of writing this.
+
+
+# Other Questions:
+# -----------------------
+Why was this triggered now? Have build with this set of dependencies ever build?
+If so why is it failing for this package? Is this repo using some specific aspects of sphinx that trigger it?
