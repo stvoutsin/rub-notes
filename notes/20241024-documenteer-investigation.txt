@@ -266,3 +266,10 @@ Trying to populate them, but haven't managed to get the right values setup there
 # -----------------------
 Why was this triggered now? Have build with this set of dependencies ever build?
 If so why is it failing for this package? Is this repo using some specific aspects of sphinx that trigger it?
+
+
+
+# Update (2024/10/25)
+# -----------------------
+Build works when using tox, similar to https://github.com/lsst/dp0_lsst_io/
+
