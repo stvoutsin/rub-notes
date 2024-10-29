@@ -145,7 +145,7 @@ class ParallelRequestTester:
     "--api-url",
     default="https://data-dev.lsst.cloud/api/sia/dp02/query?"
             "POS=CIRCLE+55.7467+-32.2862+0.05&time=60550.31803461111+"
-            "60550.31838182871",
+            "60550.3183818287",
     show_default=True,
     help="API endpoint to test.",
 )
