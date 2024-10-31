@@ -1,0 +1,91 @@
+# Summary
+
+Parallel test was run on:
+  https://data-dev.lsst.cloud/api/sia/dp02/query
+
+Query run was:
+  https://data-dev.lsst.cloud/api/sia/dp02/query?POS=CIRCLE+55.7467+-32.2862+0.05&time=60550.31803461111+60550.31838182871
+
+Test was run using parallel_tester.py module from src/analytics in this repo
+
+
+# Results
+- Runtime for one user is about 2-3 seconds
+
+- Test runtime scales linearly with number of users
+
+- After 50 users we start to get 500 exceptions with some of the requests
+
+The error logs look like this:
+  Error: Error while communicating with Butler server.  Request ID: ddc5626a-c923-4764-a6f0-4c70cfe98aa2
+
+
+1 user
+------
+
+Test Completed in 2.77 seconds
+2024-10-30 15:59:33,324 - INFO - Total Users: 1
+2024-10-30 15:59:33,324 - INFO - Average Response Time per Request: 2.75 seconds
+2024-10-30 15:59:33,324 - INFO - Standard Deviation of Response Times: 0.00 seconds
+2024-10-30 15:59:33,324 - INFO - Number of Successful Requests: 1 / 1
+
+
+2 users
+-------
+
+Test Completed in 3.79 seconds
+2024-10-30 16:02:27,327 - INFO - Total Users: 2
+2024-10-30 16:02:27,327 - INFO - Average Response Time per Request: 3.69 seconds
+2024-10-30 16:02:27,327 - INFO - Standard Deviation of Response Times: 0.03 seconds
+2024-10-30 16:02:27,327 - INFO - Number of Successful Requests: 2 / 2
+
+
+5 users
+-------
+
+Test Completed in 6.72 seconds
+2024-10-30 16:02:45,945 - INFO - Total Users: 5
+2024-10-30 16:02:45,945 - INFO - Average Response Time per Request: 6.38 seconds
+2024-10-30 16:02:45,945 - INFO - Standard Deviation of Response Times: 0.29 seconds
+2024-10-30 16:02:45,945 - INFO - Number of Successful Requests: 5 / 5
+
+
+10 users
+--------
+
+
+Test Completed in 12.75 seconds
+2024-10-30 16:03:22,528 - INFO - Total Users: 10
+2024-10-30 16:03:22,528 - INFO - Average Response Time per Request: 12.17 seconds
+2024-10-30 16:03:22,528 - INFO - Standard Deviation of Response Times: 0.37 seconds
+2024-10-30 16:03:22,528 - INFO - Number of Successful Requests: 10 / 10
+
+
+20 users
+--------
+
+Test Completed in 25.58 seconds
+2024-10-30 16:04:20,981 - INFO - Total Users: 20
+2024-10-30 16:04:20,981 - INFO - Average Response Time per Request: 23.98 seconds
+2024-10-30 16:04:20,981 - INFO - Standard Deviation of Response Times: 1.46 seconds
+2024-10-30 16:04:20,982 - INFO - Number of Successful Requests: 20 / 20
+
+
+50 users
+--------
+
+Test Completed in 60.41 seconds
+2024-10-30 16:06:04,987 - INFO - Total Users: 50
+2024-10-30 16:06:04,987 - INFO - Average Response Time per Request: 47.79 seconds
+2024-10-30 16:06:04,987 - INFO - Standard Deviation of Response Times: 6.03 seconds
+2024-10-30 16:06:04,987 - INFO - Number of Successful Requests: 49 / 50
+
+
+100 users
+---------
+
+Test Completed in 64.72 seconds
+2024-10-30 16:07:49,392 - INFO - Total Users: 100
+2024-10-30 16:07:49,392 - INFO - Average Response Time per Request: 55.86 seconds
+2024-10-30 16:07:49,392 - INFO - Standard Deviation of Response Times: 7.57 seconds
+2024-10-30 16:07:49,392 - INFO - Number of Successful Requests: 39 / 100
