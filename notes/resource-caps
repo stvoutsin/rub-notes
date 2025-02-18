@@ -1,0 +1,183 @@
+#
+# This file maps resource identifiers to the location of capability
+# information.
+#
+
+ivo://cadc.nrc.ca/reg = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/reg/capabilities
+
+## storage inventory services
+ivo://cadc.nrc.ca/cadc/minoc = https://ws-cadc.canfar.net/minoc/capabilities
+ivo://cadc.nrc.ca/cadc/luskan = https://ws-cadc.canfar.net/luskan/capabilities
+
+ivo://cadc.nrc.ca/uvic/minoc = https://ws-uv.canfar.net/minoc/capabilities
+ivo://cadc.nrc.ca/uvic/luskan = https://ws-uv.canfar.net/luskan/capabilities
+
+ivo://cadc.nrc.ca/sfu/minoc = https://ws-sf.canfar.net/minoc/capabilities
+ivo://cadc.nrc.ca/sfu/luskan = https://ws-sf.canfar.net/luskan/capabilities
+
+ivo://cadc.nrc.ca/global/baldur = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/baldur/capabilities
+ivo://cadc.nrc.ca/global/luskan = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/luskan/capabilities
+ivo://cadc.nrc.ca/global/raven = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/raven/capabilities
+
+## CADC services
+ivo://cadc.nrc.ca/argus = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/argus/capabilities
+ivo://cadc.nrc.ca/caom2ops = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/caom2ops/capabilities
+ivo://cadc.nrc.ca/cred = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/cred/capabilities
+ivo://cadc.nrc.ca/data = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/data/capabilities
+ivo://cadc.nrc.ca/resolver = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/cadc-target-resolver/capabilities
+ivo://cadc.nrc.ca/sia = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/sia/capabilities
+ivo://cadc.nrc.ca/files = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/files/capabilities
+ivo://cadc.nrc.ca/cadc/youcat = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/youcat/capabilities
+
+## archive metadata service(s)
+ivo://cadc.nrc.ca/ams = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/ams/capabilities
+ivo://cadc.nrc.ca/ams/alma = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/ams/alma/capabilities
+ivo://cadc.nrc.ca/ams/cfht = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/ams/cfht/capabilities
+ivo://cadc.nrc.ca/ams/cirada = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/ams/cirada/capabilities
+ivo://cadc.nrc.ca/ams/dao = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/ams/dao/capabilities
+ivo://cadc.nrc.ca/ams/drao = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/ams/drao/capabilities
+ivo://cadc.nrc.ca/ams/eao = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/ams/eao/capabilities
+ivo://cadc.nrc.ca/ams/gemini = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/ams/gemini/capabilities
+ivo://cadc.nrc.ca/ams/ngvs = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/ams/ngvs/capabilities
+ivo://cadc.nrc.ca/ams/maq = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/ams/maq/capabilities
+ivo://cadc.nrc.ca/ams/mast = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/ams/mast/capabilities
+ivo://cadc.nrc.ca/ams/omm = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/ams/omm/capabilities
+ivo://cadc.nrc.ca/ams/shared = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/ams/shared/capabilities
+
+## CANFAR services
+ivo://cadc.nrc.ca/doi = https://ws-cadc.canfar.net/doi/capabilities
+ivo://cadc.nrc.ca/gms = https://ws-cadc.canfar.net/ac/capabilities
+ivo://cadc.nrc.ca/vault = https://ws-cadc.canfar.net/vault/capabilities
+ivo://cadc.nrc.ca/youcat = https://ws-uv.canfar.net/youcat/capabilities
+
+## canfar science platform
+ivo://cadc.nrc.ca/skaha = https://ws-uv.canfar.net/skaha/capabilities
+ivo://cadc.nrc.ca/arc = https://ws-uv.canfar.net/arc/capabilities
+
+ivo://oats.inaf.it/gms = http://gms01.oats.inaf.it/ac/capabilities
+ivo://oats.inaf.it/cred = http://gms01.oats.inaf.it/cred/capabilities
+ivo://oats.inaf.it/vospace = http://space01.oats.inaf.it/vospace/capabilities
+
+## canSRC 0.1 Release Candidate Deployment
+ivo://canfar.net/src/skaha = https://src.canfar.net/skaha/capabilities
+ivo://canfar.net/src/cavern = https://src.canfar.net/cavern/capabilities
+ivo://canfar.net/src/posix-mapper = https://src.canfar.net/posix-mapper/capabilities
+ivo://skao.int/gms = https://ws-uv.canfar.net/gms/capabilities
+
+# MAST caom2 metadata service
+ivo://mast.stsci.edu/caom2repo = https://mast.stsci.edu/portal/ArchivePartner/meta-service/capabilities
+
+# caom2 sandbox services
+ivo://cadc.nrc.ca/sc2repo = https://sc2.canfar.net/sc2repo/capabilities
+ivo://cadc.nrc.ca/sc2tap = https://sc2.canfar.net/sc2tap/capabilities
+ivo://cadc.nrc.ca/sc2links = https://sc2.canfar.net/sc2links/capabilities
+ivo://cadc.nrc.ca/sc2meta = https://sc2.canfar.net/sc2meta/capabilities
+ivo://cadc.nrc.ca/sc2soda = https://sc2.canfar.net/sc2soda/capabilities
+
+# CADC data collections with caps
+
+ivo://cadc.nrc.ca/AICO = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/reg/cadc/capabilities
+ivo://cadc.nrc.ca/APASS = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/reg/cadc/capabilities
+ivo://cadc.nrc.ca/ALMACA = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/reg/cadc/capabilities
+ivo://cadc.nrc.ca/BLAST = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/reg/cadc/capabilities
+ivo://cadc.nrc.ca/BNUNN = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/reg/cadc/capabilities
+ivo://cadc.nrc.ca/BRITE-Constellation = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/reg/cadc/capabilities
+ivo://cadc.nrc.ca/CFHT = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/reg/cadc/capabilities
+ivo://cadc.nrc.ca/CFHTMEGAPIPE = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/reg/cadc/capabilities
+ivo://cadc.nrc.ca/CFHTTERAPIX = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/reg/cadc/capabilities
+ivo://cadc.nrc.ca/CFHTUSER = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/reg/cadc/capabilities
+ivo://cadc.nrc.ca/CFHTWIRWOLF = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/reg/cadc/capabilities
+ivo://cadc.nrc.ca/CGPS = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/reg/cadc/capabilities
+ivo://cadc.nrc.ca/DAO = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/reg/cadc/capabilities
+ivo://cadc.nrc.ca/DAOCADC = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/reg/cadc/capabilities
+ivo://cadc.nrc.ca/DAOPLATES = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/reg/cadc/capabilities
+ivo://cadc.nrc.ca/DRAO = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/reg/cadc/capabilities
+ivo://cadc.nrc.ca/EUCLID = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/reg/cadc/capabilities
+ivo://cadc.nrc.ca/FUSE = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/reg/cadc/capabilities
+ivo://cadc.nrc.ca/GEMINI = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/reg/cadc/capabilities
+ivo://cadc.nrc.ca/GEMINICADC = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/reg/cadc/capabilities
+ivo://cadc.nrc.ca/GEMINIPROC = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/reg/cadc/capabilities
+ivo://cadc.nrc.ca/HSTHLA = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/reg/cadc/capabilities
+ivo://cadc.nrc.ca/IRIS = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/reg/cadc/capabilities
+ivo://cadc.nrc.ca/JCMT = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/reg/cadc/capabilities
+ivo://cadc.nrc.ca/JCMTLP = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/reg/cadc/capabilities
+ivo://cadc.nrc.ca/JCMTLS = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/reg/cadc/capabilities
+ivo://cadc.nrc.ca/JCMTSL = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/reg/cadc/capabilities
+ivo://cadc.nrc.ca/LCO = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/reg/cadc/capabilities
+ivo://cadc.nrc.ca/LOTSS = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/reg/cadc/capabilities
+ivo://cadc.nrc.ca/MACHO = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/reg/cadc/capabilities
+ivo://cadc.nrc.ca/MOST = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/reg/cadc/capabilities
+ivo://cadc.nrc.ca/NEOSSAT = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/reg/cadc/capabilities
+ivo://cadc.nrc.ca/NGVS = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/reg/cadc/capabilities
+ivo://cadc.nrc.ca/OMM = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/reg/cadc/capabilities
+ivo://cadc.nrc.ca/POSSUM = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/reg/cadc/capabilities
+ivo://cadc.nrc.ca/RACS = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/reg/cadc/capabilities
+ivo://cadc.nrc.ca/SPICE-RACS = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/reg/cadc/capabilities
+ivo://cadc.nrc.ca/SUBARUCADC = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/reg/cadc/capabilities
+ivo://cadc.nrc.ca/UKIRT = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/reg/cadc/capabilities
+ivo://cadc.nrc.ca/VGPS = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/reg/cadc/capabilities
+ivo://cadc.nrc.ca/VLASS = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/reg/cadc/capabilities
+ivo://cadc.nrc.ca/WALLABY = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/reg/cadc/capabilities
+
+# CADC mirror MAST data collections
+ivo://cadc.nrc.ca/mirror/HST = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/reg/cadc/capabilities
+ivo://cadc.nrc.ca/mirror/JWST = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/reg/cadc/capabilities
+ivo://cadc.nrc.ca/mirror/TESS = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/reg/maq/capabilities
+
+# CADC collections in the sandbox for testing
+ivo://cadc.nrc.ca/test/AICO = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/reg/cadc/sandbox/capabilities
+ivo://cadc.nrc.ca/test/BRITE-Constellation = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/reg/cadc/sandbox/capabilities
+ivo://cadc.nrc.ca/test/CFHT = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/reg/cadc/sandbox/capabilities
+ivo://cadc.nrc.ca/test/CFHTMEGAPIPE = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/reg/cadc/sandbox/capabilities
+ivo://cadc.nrc.ca/test/DAO = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/reg/cadc/sandbox/capabilities
+ivo://cadc.nrc.ca/test/DAOCADC = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/reg/cadc/sandbox/capabilities
+ivo://cadc.nrc.ca/test/DDO = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/reg/cadc/sandbox/capabilities
+ivo://cadc.nrc.ca/test/DRAO = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/reg/cadc/sandbox/capabilities
+ivo://cadc.nrc.ca/test/EUCLID = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/reg/cadc/sandbox/capabilities
+ivo://cadc.nrc.ca/test/GEMINI = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/reg/cadc/sandbox/capabilities
+ivo://cadc.nrc.ca/test/GEMINICADC = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/reg/cadc/sandbox/capabilities
+ivo://cadc.nrc.ca/test/GEMINIPROC = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/reg/cadc/sandbox/capabilities
+ivo://cadc.nrc.ca/test/HST = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/reg/cadc/sandbox/capabilities
+ivo://cadc.nrc.ca/test/IRIS = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/reg/cadc/sandbox/capabilities
+ivo://cadc.nrc.ca/test/JCMTSL = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/reg/cadc/sandbox/capabilities
+ivo://cadc.nrc.ca/test/LCO = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/reg/cadc/sandbox/capabilities
+ivo://cadc.nrc.ca/test/LOTSS = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/reg/cadc/sandbox/capabilities
+ivo://cadc.nrc.ca/test/OMM = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/reg/cadc/sandbox/capabilities
+ivo://cadc.nrc.ca/test/PHANGS = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/reg/cadc/sandbox/capabilities
+ivo://cadc.nrc.ca/test/POSSUM = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/reg/cadc/sandbox/capabilities
+ivo://cadc.nrc.ca/test/VLASS = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/reg/cadc/sandbox/capabilities
+ivo://cadc.nrc.ca/test/TAOSII = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/reg/cadc/sandbox/capabilities
+ivo://cadc.nrc.ca/test/ALMACA = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/reg/cadc/sandbox/capabilities
+ivo://cadc.nrc.ca/test/NEOSSAT = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/reg/cadc/sandbox/capabilities
+ivo://cadc.nrc.ca/test/NGVS = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/reg/cadc/sandbox/capabilities
+ivo://cadc.nrc.ca/test/RACS = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/reg/cadc/sandbox/capabilities
+ivo://cadc.nrc.ca/test/SPICE-RACS = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/reg/cadc/sandbox/capabilities
+ivo://cadc.nrc.ca/test/SUBARUCADC = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/reg/cadc/sandbox/capabilities
+ivo://cadc.nrc.ca/test/VLITE = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/reg/cadc/sandbox/capabilities
+ivo://cadc.nrc.ca/test/WALLABY = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/reg/cadc/sandbox/capabilities
+
+# MAQ collections in production
+ivo://cadc.nrc.ca/maq/ALMA = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/reg/maq/capabilities
+ivo://cadc.nrc.ca/maq/CHANDRA = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/reg/maq/capabilities
+ivo://cadc.nrc.ca/maq/NOAO = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/reg/maq/capabilities
+ivo://cadc.nrc.ca/maq/SUBARU = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/reg/maq/capabilities
+ivo://cadc.nrc.ca/maq/SDSS = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/reg/maq/capabilities
+ivo://cadc.nrc.ca/maq/XMM = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/reg/maq/capabilities
+
+# MAQ collections in the sandbox for data engineer testing
+ivo://cadc.nrc.ca/test/ALMA = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/reg/maq/sandbox/capabilities
+ivo://cadc.nrc.ca/test/ESO = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/reg/maq/sandbox/capabilities
+ivo://cadc.nrc.ca/test/CHANDRA = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/reg/maq/sandbox/capabilities
+ivo://cadc.nrc.ca/test/NOAO = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/reg/maq/sandbox/capabilities
+ivo://cadc.nrc.ca/test/SUBARU = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/reg/maq/sandbox/capabilities
+ivo://cadc.nrc.ca/test/SDSS = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/reg/maq/sandbox/capabilities
+ivo://cadc.nrc.ca/test/XMM = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/reg/maq/sandbox/capabilities
+ivo://cadc.nrc.ca/test/ASKAP = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/reg/maq/sandbox/capabilities
+
+# externally curated collections in the sandbox
+ivo://cadc.nrc.ca/ext/SKA = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/reg/maq/sandbox/capabilities
+ivo://cadc.nrc.ca/ext/MeerKAT = https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/reg/maq/sandbox/capabilities
+
+
+# Meetings service
+ivo://cadc.nrc.ca/meetings = https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/meetings/capabilities
