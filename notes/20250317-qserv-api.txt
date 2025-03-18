@@ -1,0 +1,150 @@
+TAP over QServ HTTP API (event-based system)
+
+Core Components
+TAP Service: CADC TAP service
+UWS Database: Stores job information and status
+QServ: Distributed database with HTTP REST API for query execution
+Kafka: Event (Queue)-based communication system
+Strimzi: Helps manage Kafka (?)
+Kafka REST Proxy: HTTP to Kafka proxy (Receive QServ callbacks, creates events in Kafka for them)
+Google Cloud Storage (GCS): Store Query VOTable results
+Data Flow
+Job Creation Flow
+User submits a query to the TAP service
+TAP service synchronously creates a job in the UWS database, generating a UWS jobId
+TAP service publishes a message to the query-execution-requests (Kafka topic)
+A TAP service consumer reads from this topic
+Consumer sends an HTTP request to the QServ REST API with:
+The translated ADQL-Qserv SQL query
+A signed GCS URL for result storage
+The UWS jobId as metadata
+A callback URL pointing to the Kafka Connect HTTP source
+VOTable envelope with header and footer containing metadata, column definitions, and XML structure
+QServ returns a qservId
+TAP service stores the mapping between UWS jobId and qservId in a mapping table
+Query Execution Flow
+QServ processes the query asynchronously
+When query is completed QServ:
+Formats the results as a VOTable (ideally Binary2 serialized)
+Inserts the formatted data between the provided header and footer
+Writes the result to GCS using the signed URL that was provided
+Sends an HTTP callback to the provided endpoint with:
+The qservId
+The client metadata containing the UWS jobId
+The status (COMPLETED/FAILED/..)
+The GCS location where results were stored
+An alternative here is that QServ sets up an SSE endpoint and we maintain a Kafka Connect SSE source connector which maintains a persistent connection.
+Events than follow the flow Qserv SSE -> Kafka Connector -> Kafka queue
+
+
+Our REST Kafka proxy receives this callback and publishes it to the query-completion-events topic
+The TAP service consumer picks up this event
+Consumer updates the UWS job status and result metadata
+Result Retrieval Flow
+User requests results from the TAP service
+TAP service checks the UWS database for job status
+If completed TAP service redirects the user to the GCS URL with the results file
+Kafka Topics Structure
+query-execution-requests: Holds requests for queries to be executed
+query-completion-events: Captures all query completion notifications
+Key Technical Elements
+Job ID Correlation: We’ll maintain a mapping between uws jobId and qservId. This may be done as an additional field in the UWS table (qservId)
+Signed URLs: We may be able to to use signed URLs as a means for QServ to write to GCS without credential management
+VOTable Envelope: TAP service will provide the metadata structure which QServ is unaware of, so that it can then simply insert the data
+Kafka Connect or Webhook proxy: Acts as a proxy for QServ callbacks, i.e. take HTTP POST and create Kafka events for completed jobs.
+Event-Driven Processing: Decouples components for better scalability and allows us to later use alternative Query back-end mechanisms
+
+
+
+QServ Change Requirements
+
+1. Changes to the HTTP REST API Endpoint for Query Submission
+Create an endpoint that accepts query requests with the following features:
+
+HTTP Method: POST to /query-async
+Request Payload Format:
+
+{
+  "query": "SQL query string",
+  "clientMetadata": {
+    "uwsJobId": "uws-123",
+    "additionalInfo": "..."
+  },
+  "resultDestination": {
+    "type": "signedUrl",
+    "url": "https://storage.googleapis.com/bucket/results/...",
+    "expiresAt": "2025-03-16T16:30:00Z"
+  },
+  "callbackUrl": "https://rsp-kafka-endpoint/callback",
+  "resultFormat": { 
+      "type": "votable", 
+      "envelope": { 
+        "header": "<VOTable header>", 
+        "footer": "<VOTable footer>" 
+      }          
+   }
+}
+
+
+Response Format:
+
+{
+  "queryId": "qserv-012",
+}
+
+
+
+2. Result Writing Mechanism
+
+Implement functionality to:
+
+Write query results directly to GCS using the provided signed URL
+
+
+3. Result Format
+
+Generate a VOTable for the results. Ideally use the BINARY2 table serialization
+The VOTable header/footer will be provided in the initial query request.
+
+
+4. Callback System
+Create a callback mechanism that:
+
+Sends an HTTP POST to the provided callback URL upon query completion
+Includes all necessary information in the callback payload:
+
+{
+  "qservId": "qserv-012",
+  "clientMetadata": {
+    "uwsJobId": "uws-123"
+  },
+  "status": "COMPLETED",
+  "resultLocation": "https://bucket/results/uws-123/result.xml",
+  "metadata": {
+    "executionTime": 12345,
+    "rowCount": 100,
+  },
+  "error": { // Only if status is "FAILED"
+    "code": "SYNTAX_ERROR",
+    "message": "Invalid SQL..",
+    "details": "..."
+  },
+  "timestamp": "2025-03-16T14:30:00Z"
+}
+
+
+
+5. Client Metadata Handling
+
+Modify QServ to:
+
+Accept and store client metadata with each query, and return this metadata unchanged in the callback. This will allow us to include the UWS jobId so that we can correlate between qserv jobs and UWS jobs.
+
+
+6. Authentication and Security
+
+Writing to GCS:
+Qserv should be able to write results to GCS using signed URLs. 
+
+HTTP requests between TAP and QServ API
+Initially we allow traffic from idfs to the Qserv at USDF. Later we can introduce if we want some sort of authentication between the two.
