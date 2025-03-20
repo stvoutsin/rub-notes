@@ -1,0 +1,238 @@
+TAP over QServ HTTP API (event-based system)
+
+Core Components
+TAP Service: CADC TAP service
+UWS Database: Stores job information and status
+QServ: Distributed database with HTTP REST API for query execution
+Kafka (Sasquatch): Event streaming platform
+Google Cloud Storage (GCS): Store Query VOTable results
+
+Async query Data Flow
+Job Create Flow
+
+User submits a create job request. 
+TAP service creates a record in the UWS database 
+
+Job Run Flow
+    
+     TAP Service:
+User submits a request to execute a UWS job
+TAP service performs query validation, transformation to QServ SQL, and extracts select list with metadata
+TAP service updates the status of the job to QUEUED
+TAP service publishes a message to the run_query Kafka topic [1]
+Nothing else required at this point from the TAP Service.
+     QServ:
+QServ pulls an event from run_query Kafka queue
+QServ sends out an event that the job execution has started and begins the query execution [2]
+Upon completion, it serializes the results as a VOTable (XML), using the VOTable envelope provided, ideally using BINARY2 serialization.
+QServ writes the results to the GCS bucket, using the signed URL provided
+Upon successful writing, it sends out an event to the job_status. [2]
+
+     TAP Service:
+TAP Service pulls events from job_status.
+It then updates the UWS database with the metadata provided in that event.
+Events in this case may indicate a Completed job, a job that failed along with metadata on reasons for the failure, or a status of RUNNING to indicate that the job is now executing. We may also choose to include progress information here which is available in QServ, like how many chunks out of the total have completed. This can then be added to the jobdetail UWS table and become available via the UWS job endpoint.
+ 
+Result Retrieval Flow
+User requests results from the TAP service
+TAP service redirects the user to the GCS URL with the results file
+User (client) downloads the result file
+
+[1] 
+Example of what an event to start a job may contain:
+
+{
+  "query": "SELECT TOP 10 * FROM table",
+  "database": "dp1",
+  "jobID": "uws123",
+  "ownerID": "me",
+  "resultDestination": "https://bucket/results_uws123.xml?X-Goog-Signature=a82c76...",
+  "resultFormat": {
+    "type": "votable",
+    "envelope": {
+      "header": "<VOTable xmlns=\"http://www.ivoa.net/xml/VOTable/v1.3\" version=\"1.3\"><RESOURCE type=\"results\"><TABLE><FIELD ID=\"col_0\" arraysize=\"*\" datatype=\"char\" name=\"col1\"/>",
+      "footer": "</TABLE></RESOURCE></VOTable>"
+    }
+  }
+}
+
+
+
+[2]
+An event coming out of the QServ service, used to update the status of a UWS job. The schema of the Kafka event will match that of the UWS table, although it doesn’t necessarily have to contain all the fields, only the ones we expect QServ to be able to update.
+ 
+{
+  "jobId": "uws123",
+  "timestamp": "2025-03-19T14:32:17.842Z",
+  "qservId": "qserv12345",
+  "status": "COMPLETED",
+  "queryInfo": {
+    "startTime": "2025-03-19T14:30:05.123Z",
+    "endTime": "2025-03-19T14:32:15.456Z",
+    "duration": 130,
+    "totalChunks": 256,
+    "completedChunks": 256,
+  },
+  "resultInfo": {
+    "totalRows": 1000,
+    "resultLocation": "https://gcs-bucket/uws123.xml",
+    "format": "votable"
+  },
+  "metadata": {
+    "query": "SELECT TOP 1000 * FROM Table",
+    "database": "DP1"
+  }
+}
+
+Kafka Topics Structure
+run_query - Requests to start a query from TAP service towards QServ
+delete_query - Requests to stop & delete a query from TAP service towards QServ
+upload_table - Requests to upload a table from TAP service towards QServ 
+delete_table - Requests to delete a table from TAP Service towards QServ
+job_status - Update to job status from QServ towards TAP service 
+
+Key Technical Elements
+Job ID Correlation: We’ll maintain a mapping between uws jobId and qservId. This may be done as an additional field in the UWS table (qservId)
+Signed URLs: We may be able to to use signed URLs as a means for QServ to write to GCS without credential management
+VOTable Envelope: TAP service will provide the metadata structure which QServ is unaware of, so that it can then simply insert the data
+Event-Driven Processing: Decouples components for better scalability and allows us to later use alternative Query back-end mechanisms
+
+Sync query Data Flow
+
+If possible we’ll use a sync-over-async mechanism, so that we open a thread which runs the UWS async job process and blocks until the job is completed
+This can be done a few different ways:
+
+TAP service starts a thread which sends the async job off and polls the UWS table for updates to the job. The main downside of this approach is that it introduces additional traffic to the UWS database. We could reduce the traffic by making the polling use  Exponential Backoff, but it still has the potential to introduce a lot of traffic that we’d ideally want to avoid.
+An alternative would be to introduce the Semaphore pattern to synchronize between the jobs and the threads awaiting them, perhaps via Redis to address synchronization complexities that may arise if we’re running multiple replicas of the TAP Service. Details for this need to be considered a bit more carefully.
+
+
+Job Delete Data Flow
+    
+    TAP Service:
+1. Upon receiving a request to delete a job send an event to the delete_query topic
+2. Update the status of the UWS job to set it to DELETED
+     QServ:
+   	1. Upon receiving a request to delete a job, stop and delete query
+
+Should we set the job to DELETED in UWS regardless of what happens on the QServ side?
+Or do we instead add another interaction step where we wait for a job status update from QServ which will then set the job to DELETED?
+
+If we go with the second approach, we may run into the following scenario:
+User asks to delete a job.
+User asks to see this job, which has a status of COMPLETED instead of DELETED.
+
+
+TAP Upload Data Flow
+
+The TAP Upload process will look something like this:
+
+  TAP Service:
+1. Upon receiving a request to do a TAP_UPLOAD, we take the uploaded file and push it to GCS.
+2. Send the GCS URL along with a name for the file to the upload_table topic.
+3. Wait for acknowledgement that the table has been uploaded. 
+This 3rd step could be done either via a new topic and mechanism, or we could reuse the job status, and for example set the executionPhase to HELD until the table has been uploaded, then set the executionPhase to QUEUED.
+
+     QServ:
+Upon receiving a request to upload a user table, use the GCS URL to upload the file into QServ.
+Notify that the table has been uploaded. This needs a bit more consideration, an initial thought is that this means sending an event to move the job status from HELD to QUEUED (assuming we set the job to HELD once we got a table upload request for a job), but there may be better solutions.
+
+
+     TAP Service:
+
+Upon receiving acknowledgement that the table has been uploaded, run the query. 
+When the job is done, send an event to the delete_table topic so that QServ deletes the table.
+
+Questions, Challenges and potential issues
+
+Should QServ be aware of the UWS job? Should we be passing the uws jobID to it, or is the job identification done purely via the qserv query ID? We will have both a qservID and uws jobID in our table, but in the case we use the qserv query ID for this it needs to be indexed.
+
+Timeouts.
+What happens if Qserv goes down after having picked an event of the queue, and thus is never able to complete the query, in which case we never get a job status update for that query, leading to the case where the job is stuck as “RUNNING” infinitely.
+We need an approach to catch these cases, a few options to consider:
+A batch job which checks if jobs have exceeded a given timeout. If so, update it (Perhaps setting it to FAILED?)
+Upon a user checking the status of a job, we check the duration and time it out if it has exceeded our timeout
+
+What happens if QServ is down for a long period? The event queue would continue to fill up with query events. Once QServ is back-up, we need to decide if we start from the last offset, i.e. run all queries that were added to the queue, or if we want to have it auto-reset to the latest event. The potential issue with the first approach, is that if the queue grows quite a bit until QServ recovers, it may take a long time to process all events until it is able to start processing the newest ones. From the user’s point of view newer queries will be stuck as HELD for a while, while on the other hand, in all likelihood users would not be actively polling older jobs if they haven’t returned within a reasonable amount of time.
+
+
+Authentication:
+Qserv is at USDF so we need to figure out the best authentication story here so that Kafka consumer/producer can interact with the cloud idfs. 
+
+QServ Change Requirements
+
+1. Add Kafka consumer and Producer
+
+Add a Kafka consumer in the QServ app which will read from the run_query, delete_query, upload_table & delete_table topics, and execute, delete queries, upload tables and delete_tables accordingly.
+
+Add a Kafka producer in QServ which will send out events for job_status updates, including:
+Job is running
+Job has completed, either successfully or with failure
+Job is being held (i..e for TAP_UPLOAD)
+
+
+
+2. Result Writing Mechanism
+
+Implement functionality to:
+
+Write query results directly to GCS using the provided signed URL
+
+3. Result Format
+
+Generate a VOTable for the results. Ideally use the BINARY2 table serialization
+The VOTable header/footer will be provided in the initial query request.
+
+4. Correlate UWS job ID with QServ ID
+
+The metadata provided in the create query event will include the uws jobID. If this jobID can then be included in the outgoing event from QServ, then we can use this in the process of syncing this event to the UWS database, which uses the jobID as a pkey.
+
+
+If this is not possible we’ll have to use qservID as the key.
+
+5. Authentication and Security
+
+Writing to GCS:
+Qserv should be able to write results to GCS using signed URLs. 
+
+HTTP requests between TAP and QServ API
+Initially we allow traffic from idfs to the Qserv at USDF. Later we can introduce if we want some sort of authentication between the two.
+
+6. Failed queries
+
+Failed synchronous queries need to be written out as proper VOTable results with error status and messages contained as per the IVOA spec.
+
+TAP Service Change Requirements
+
+TAP Kafka Consumer
+
+A Kafka consumer which listens to job_status topics and updates the UWS database accordingly.
+
+TAP Kafka Producer
+
+A Kafka producer which sends events to various topics (run query, upload table, delete query).
+detail: separate tap_schema queries and content queries and always execute tap_schema queries using JDBC
+
+QueryRunner
+
+The above will probably require generic QueryRunner and JobExecutor interfaces that define the interfaces required for us to submit queries via a Kafka producer.
+
+
+Synchronous Queries
+
+Depending on which implementation we choose, we may have to customize the QueryRunner to run sync over async, and then introduce a synchronization mechanism like the Semaphore described. These are probably specific to our use case, but perhaps the interfaces can be such to allow this to be done via custom implementations.
+
+Job Cancellation
+
+Cancellation of jobs will involve using our Kafka plugin to generate a delete event and send it via the TAP Kafka producer to Qserv, then updating the UWS job to set the appropriate flags/fields in UWS.
+
+Separate TAP_SCHEMA from QServ queries
+
+We will have to separate tap_schema queries and QServ queries, with TAP_SCHEMA queries being executed via JDBC
+
+TAP Upload
+
+Since TAP Upload will again have to be done via Kafka events, we will have to modify the QueryRunner implementation to allow us to run a TAP_UPLOAD job via a set of steps:
+Upload file to GCS
+Send event with link to file
+Run query process (read in job status update events as they come in)
+Send table delete event
