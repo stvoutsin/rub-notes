@@ -1,0 +1,27 @@
+# To create new sciplat lab image:
+----------------------------------
+
+
+### Create new branch in https://github.com/lsst-sqre/sciplat-lab
+
+### In stage3.sh, modify pip-installs to point to git (git+https)
+
+### Commit + push
+
+### Go to scicplat-lab github actions
+
+### Use manually triggered build 
+
+- Run workflow
+
+- Choose branch
+
+- First box, pick first weekly
+
+- supplementary tag (Just a descriptive tag - this ends up being concatenated with the weekly tag in the name)
+
+-  Last box, where to push images, leave google artifact as the only option
+
+- Leave run as true
+
+- Run workflow
