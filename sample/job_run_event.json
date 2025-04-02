@@ -1,0 +1,5470 @@
+{
+  "query": "SELECT TOP 1 * FROM dp02_dc2_catalogs.Object",
+  "database": "dp02",
+  "jobID": "uws-123",
+  "ownerID": "user1",
+  "resultDestination": "https://gcs-location/uws-123.xml",
+  "resultLocation": "https://data-dev.lsst.cloud/api/tap/sync/results/uws-123.xml",
+  "resultFormat": {
+    "format": {
+      "type": "votable",
+      "serialization": "binary2"
+    },
+    "envelope": {
+      "header": "<?xml version=\"1.0\"?>\n<VOTABLE xmlns=\"http://www.ivoa.net/xml/VOTable/v1.3\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" version=\"1.4\">...",
+      "footer": "</VOTABLE>"
+    },
+    "columnTypes": [
+      {
+        "name": "coord_dec",
+        "datatype": "double",
+        "unit": "deg",
+        "ucd": "pos.eq.dec;meta.main",
+        "description": "Fiducial ICRS Declination of centroid used for database indexing"
+      },
+      {
+        "name": "coord_ra",
+        "datatype": "double",
+        "unit": "deg",
+        "ucd": "pos.eq.ra;meta.main",
+        "description": "Fiducial ICRS Right Ascension of centroid used for database indexing"
+      },
+      {
+        "name": "deblend_nChild",
+        "datatype": "int",
+        "description": "Number of children this object has (defaults to 0)"
+      },
+      {
+        "name": "deblend_skipped",
+        "datatype": "boolean",
+        "description": "Deblender skipped this source"
+      },
+      {
+        "name": "detect_fromBlend",
+        "datatype": "boolean",
+        "description": "This source is deblended from a parent with more than one child."
+      },
+      {
+        "name": "detect_isDeblendedModelSource",
+        "datatype": "boolean",
+        "description": "True if source has no children and is in the inner region of a coadd patch and is in the inner region of a coadd tract and is not a sky source and is a deblended child"
+      },
+      {
+        "name": "detect_isDeblendedSource",
+        "datatype": "boolean",
+        "description": "True if source has no children and is in the inner region of a coadd patch and is in the inner region of a coadd tract and is not a sky source and is either an unblended isolated source or a deblended child from a parent with"
+      },
+      {
+        "name": "detect_isIsolated",
+        "datatype": "boolean",
+        "description": "This source is not a part of a blend."
+      },
+      {
+        "name": "detect_isPatchInner",
+        "datatype": "boolean",
+        "description": "True if source is in the inner region of a coadd patch"
+      },
+      {
+        "name": "detect_isPrimary",
+        "datatype": "boolean",
+        "description": "True if source has no children and is in the inner region of a coadd patch and is in the inner region of a coadd tract and is not a sky source"
+      },
+      {
+        "name": "detect_isTractInner",
+        "datatype": "boolean",
+        "description": "True if source is in the inner region of a coadd tract"
+      },
+      {
+        "name": "footprintArea",
+        "datatype": "int",
+        "unit": "pix",
+        "description": "Number of pixels in the source's detection footprint. Reference band."
+      },
+      {
+        "name": "g_ap03Flux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux within 3.0-pixel aperture. Forced on g-band."
+      },
+      {
+        "name": "g_ap03Flux_flag",
+        "datatype": "boolean",
+        "description": "General Failure Flag. Forced on g-band."
+      },
+      {
+        "name": "g_ap03FluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty within 3.0-pixel aperture. Forced on g-band."
+      },
+      {
+        "name": "g_ap06Flux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux within 6.0-pixel aperture. Forced on g-band."
+      },
+      {
+        "name": "g_ap06Flux_flag",
+        "datatype": "boolean",
+        "description": "General Failure Flag. Forced on g-band."
+      },
+      {
+        "name": "g_ap06FluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty within 6.0-pixel aperture. Forced on g-band."
+      },
+      {
+        "name": "g_ap09Flux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux within 9.0-pixel aperture. Forced on g-band."
+      },
+      {
+        "name": "g_ap09Flux_flag",
+        "datatype": "boolean",
+        "description": "General Failure Flag. Forced on g-band."
+      },
+      {
+        "name": "g_ap09FluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty within 9.0-pixel aperture. Forced on g-band."
+      },
+      {
+        "name": "g_ap12Flux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux within 12.0-pixel aperture. Forced on g-band."
+      },
+      {
+        "name": "g_ap12Flux_flag",
+        "datatype": "boolean",
+        "description": "General Failure Flag. Forced on g-band."
+      },
+      {
+        "name": "g_ap12FluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty within 12.0-pixel aperture. Forced on g-band."
+      },
+      {
+        "name": "g_ap17Flux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux within 17.0-pixel aperture. Forced on g-band."
+      },
+      {
+        "name": "g_ap17Flux_flag",
+        "datatype": "boolean",
+        "description": "General Failure Flag. Forced on g-band."
+      },
+      {
+        "name": "g_ap17FluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty within 17.0-pixel aperture. Forced on g-band."
+      },
+      {
+        "name": "g_ap25Flux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux within 25.0-pixel aperture. Forced on g-band."
+      },
+      {
+        "name": "g_ap25Flux_flag",
+        "datatype": "boolean",
+        "description": "General Failure Flag. Forced on g-band."
+      },
+      {
+        "name": "g_ap25FluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty within 25.0-pixel aperture. Forced on g-band."
+      },
+      {
+        "name": "g_ap35Flux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux within 35.0-pixel aperture. Forced on g-band."
+      },
+      {
+        "name": "g_ap35Flux_flag",
+        "datatype": "boolean",
+        "description": "General Failure Flag. Forced on g-band."
+      },
+      {
+        "name": "g_ap35FluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty within 35.0-pixel aperture. Forced on g-band."
+      },
+      {
+        "name": "g_ap50Flux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux within 50.0-pixel aperture. Forced on g-band."
+      },
+      {
+        "name": "g_ap50Flux_flag",
+        "datatype": "boolean",
+        "description": "General Failure Flag. Forced on g-band."
+      },
+      {
+        "name": "g_ap50FluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty within 50.0-pixel aperture. Forced on g-band."
+      },
+      {
+        "name": "g_ap70Flux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux within 70.0-pixel aperture. Forced on g-band."
+      },
+      {
+        "name": "g_ap70Flux_flag",
+        "datatype": "boolean",
+        "description": "General Failure Flag. Forced on g-band."
+      },
+      {
+        "name": "g_ap70FluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty within 70.0-pixel aperture. Forced on g-band."
+      },
+      {
+        "name": "g_apFlux_flag",
+        "datatype": "boolean",
+        "description": "General Failure Flag. Measured on g-band."
+      },
+      {
+        "name": "g_apFlux_flag_apertureTruncated",
+        "datatype": "boolean",
+        "description": "Aperture did not fit within measurement image. Measured on g-band."
+      },
+      {
+        "name": "g_apFlux_flag_sincCoeffsTruncated",
+        "datatype": "boolean",
+        "description": "Full sinc coefficient image did not fit within measurement image. Measured on g-band."
+      },
+      {
+        "name": "g_bdChi2",
+        "datatype": "double",
+        "description": "-ln(likelihood) (chi^2) in cmodel fit. Measured on g-band."
+      },
+      {
+        "name": "g_bdE1",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "FracDev-weighted average of exp.ellipse and dev.ellipse. Measured on g-band."
+      },
+      {
+        "name": "g_bdE2",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "FracDev-weighted average of exp.ellipse and dev.ellipse. Measured on g-band."
+      },
+      {
+        "name": "g_bdFluxB",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux from the de Vaucouleurs fit. Measured on g-band."
+      },
+      {
+        "name": "g_bdFluxBErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty from the de Vaucouleurs fit. Measured on g-band."
+      },
+      {
+        "name": "g_bdFluxD",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux from the exponential fit. Measured on g-band."
+      },
+      {
+        "name": "g_bdFluxDErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty from the exponential fit. Measured on g-band."
+      },
+      {
+        "name": "g_bdReB",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "Half-light ellipse of the de Vaucouleurs fit. Measured on g-band."
+      },
+      {
+        "name": "g_bdReD",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "Half-light ellipse of the exponential fit. Measured on g-band."
+      },
+      {
+        "name": "g_blendedness",
+        "datatype": "double",
+        "description": "Measure of how much the flux is affected by neighbors, (1 - child_flux/parent_flux). Operates on the absolute value of the pixels to try to obtain a de-noised value. See section 4.9.11 of Bosch et al. 2018, PASJ, 70, S5 for details. Measured on g-band."
+      },
+      {
+        "name": "g_blendedness_flag",
+        "datatype": "boolean",
+        "description": "General Failure Flag. Measured on g-band."
+      },
+      {
+        "name": "g_calib_astrometry_used",
+        "datatype": "boolean",
+        "description": "Propagated from sources. Measured on g-band."
+      },
+      {
+        "name": "g_calib_photometry_reserved",
+        "datatype": "boolean",
+        "description": "Propagated from sources. Measured on g-band."
+      },
+      {
+        "name": "g_calib_photometry_used",
+        "datatype": "boolean",
+        "description": "Propagated from sources. Measured on g-band."
+      },
+      {
+        "name": "g_calib_psf_candidate",
+        "datatype": "boolean",
+        "description": "Propagated from sources. Measured on g-band."
+      },
+      {
+        "name": "g_calib_psf_reserved",
+        "datatype": "boolean",
+        "description": "Propagated from sources. Measured on g-band."
+      },
+      {
+        "name": "g_calib_psf_used",
+        "datatype": "boolean",
+        "description": "Propagated from sources. Measured on g-band."
+      },
+      {
+        "name": "g_calibFlux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux within 12.0-pixel aperture. Measured on g-band."
+      },
+      {
+        "name": "g_calibFlux_flag",
+        "datatype": "boolean",
+        "description": "General Failure Flag. Measured on g-band."
+      },
+      {
+        "name": "g_calibFlux_flag_apertureTruncated",
+        "datatype": "boolean",
+        "description": "Aperture did not fit within measurement image. Measured on g-band."
+      },
+      {
+        "name": "g_calibFlux_flag_sincCoeffsTruncated",
+        "datatype": "boolean",
+        "description": "Full sinc coefficient image did not fit within measurement image. Measured on g-band."
+      },
+      {
+        "name": "g_calibFluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty within 12.0-pixel aperture. Measured on g-band."
+      },
+      {
+        "name": "g_centroid_flag",
+        "datatype": "boolean",
+        "description": "General Failure Flag. Measured on g-band."
+      },
+      {
+        "name": "g_centroid_x",
+        "datatype": "double",
+        "unit": "pix",
+        "description": "Centroid from SDSS Centroid algorithm. Measured on g-band."
+      },
+      {
+        "name": "g_centroid_xErr",
+        "datatype": "float",
+        "unit": "pix",
+        "description": "1-sigma uncertainty on x position. Measured on g-band."
+      },
+      {
+        "name": "g_centroid_y",
+        "datatype": "double",
+        "unit": "pix",
+        "description": "Centroid from SDSS Centroid algorithm. Measured on g-band."
+      },
+      {
+        "name": "g_centroid_yErr",
+        "datatype": "float",
+        "unit": "pix",
+        "description": "1-sigma uncertainty on y position. Measured on g-band."
+      },
+      {
+        "name": "g_cModel_flag",
+        "datatype": "boolean",
+        "description": "Flag set if the final cmodel fit (or any previous fit) failed. Forced on g-band."
+      },
+      {
+        "name": "g_cModel_flag_apCorr",
+        "datatype": "boolean",
+        "description": "Set if unable to aperture correct modelfit_CModel. Forced on g-band."
+      },
+      {
+        "name": "g_cModelFlux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux from the final cmodel fit. Forced on g-band."
+      },
+      {
+        "name": "g_cModelFlux_inner",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux within the fit region, with no extrapolation. Forced on g-band."
+      },
+      {
+        "name": "g_cModelFluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty from the final cmodel fit. Forced on g-band."
+      },
+      {
+        "name": "g_decl",
+        "datatype": "double",
+        "unit": "deg",
+        "ucd": "pos.eq.dec",
+        "description": "Position in Declination. Measured on g-band."
+      },
+      {
+        "name": "g_extendedness",
+        "datatype": "double",
+        "description": "Set to 1 for extended sources, 0 for point sources. Measured on g-band."
+      },
+      {
+        "name": "g_extendedness_flag",
+        "datatype": "boolean",
+        "description": "Set to 1 for any fatal failure. Measured on g-band."
+      },
+      {
+        "name": "g_free_cModelFlux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux from the final cmodel fit. Measured on g-band."
+      },
+      {
+        "name": "g_free_cModelFlux_flag",
+        "datatype": "boolean",
+        "description": "Flag set if the final cmodel fit (or any previous fit) failed. Measured on g-band."
+      },
+      {
+        "name": "g_free_cModelFlux_inner",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux within the fit region, with no extrapolation. Measured on g-band."
+      },
+      {
+        "name": "g_free_cModelFluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty from the final cmodel fit. Measured on g-band."
+      },
+      {
+        "name": "g_free_psfFlux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux derived from linear least-squares fit of PSF model. Measured on g-band."
+      },
+      {
+        "name": "g_free_psfFlux_flag",
+        "datatype": "boolean",
+        "description": "General Failure Flag. Measured on g-band."
+      },
+      {
+        "name": "g_free_psfFluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty derived from linear least-squares fit of PSF model. Measured on g-band."
+      },
+      {
+        "name": "g_fwhm",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "HSM moments. Measured on g-band."
+      },
+      {
+        "name": "g_gaap0p5Flux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "GaaP flux with 0.5 aperture after multiplying the seeing by 1.15. Forced on g-band."
+      },
+      {
+        "name": "g_gaap0p5Flux_flag_bigPsf",
+        "datatype": "boolean",
+        "description": "The Gaussianized PSF is bigger than the aperture. Forced on g-band."
+      },
+      {
+        "name": "g_gaap0p5FluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "GaaP flux uncertainty with 0.5 aperture after multiplying the seeing by 1.15. Forced on g-band."
+      },
+      {
+        "name": "g_gaap0p7Flux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "GaaP flux with 0.7 aperture after multiplying the seeing by 1.15. Forced on g-band."
+      },
+      {
+        "name": "g_gaap0p7Flux_flag_bigPsf",
+        "datatype": "boolean",
+        "description": "The Gaussianized PSF is bigger than the aperture. Forced on g-band."
+      },
+      {
+        "name": "g_gaap0p7FluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "GaaP flux uncertainty with 0.7 aperture after multiplying the seeing by 1.15. Forced on g-band."
+      },
+      {
+        "name": "g_gaap1p0Flux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "GaaP flux with 1.0 aperture after multiplying the seeing by 1.15. Forced on g-band."
+      },
+      {
+        "name": "g_gaap1p0Flux_flag_bigPsf",
+        "datatype": "boolean",
+        "description": "The Gaussianized PSF is bigger than the aperture. Forced on g-band."
+      },
+      {
+        "name": "g_gaap1p0FluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "GaaP flux uncertainty with 1.0 aperture after multiplying the seeing by 1.15. Forced on g-band."
+      },
+      {
+        "name": "g_gaap1p5Flux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "GaaP flux with 1.5 aperture after multiplying the seeing by 1.15. Forced on g-band."
+      },
+      {
+        "name": "g_gaap1p5Flux_flag_bigPsf",
+        "datatype": "boolean",
+        "description": "The Gaussianized PSF is bigger than the aperture. Forced on g-band."
+      },
+      {
+        "name": "g_gaap1p5FluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "GaaP flux uncertainty with 1.5 aperture after multiplying the seeing by 1.15. Forced on g-band."
+      },
+      {
+        "name": "g_gaap2p5Flux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "GaaP flux with 2.5 aperture after multiplying the seeing by 1.15. Forced on g-band."
+      },
+      {
+        "name": "g_gaap2p5Flux_flag_bigPsf",
+        "datatype": "boolean",
+        "description": "The Gaussianized PSF is bigger than the aperture. Forced on g-band."
+      },
+      {
+        "name": "g_gaap2p5FluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "GaaP flux uncertainty with 2.5 aperture after multiplying the seeing by 1.15. Forced on g-band."
+      },
+      {
+        "name": "g_gaap3p0Flux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "GaaP flux with 3.0 aperture after multiplying the seeing by 1.15. Forced on g-band."
+      },
+      {
+        "name": "g_gaap3p0Flux_flag_bigPsf",
+        "datatype": "boolean",
+        "description": "The Gaussianized PSF is bigger than the aperture. Forced on g-band."
+      },
+      {
+        "name": "g_gaap3p0FluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "GaaP flux uncertainty with 3.0 aperture after multiplying the seeing by 1.15. Forced on g-band."
+      },
+      {
+        "name": "g_gaapFlux_flag",
+        "datatype": "boolean",
+        "description": "Set for any fatal failure. Forced on g-band."
+      },
+      {
+        "name": "g_gaapFlux_flag_edge",
+        "datatype": "boolean",
+        "description": "Source is too close to the edge. Forced on g-band."
+      },
+      {
+        "name": "g_gaapFlux_flag_gaussianization",
+        "datatype": "boolean",
+        "description": "PSF Gaussianization failed when trying to scale by this factor. Forced on g-band."
+      },
+      {
+        "name": "g_gaapOptimalFlux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "GaaP flux with optimal aperture after multiplying the seeing by 1.15. Forced on g-band."
+      },
+      {
+        "name": "g_gaapOptimalFlux_flag_bigPsf",
+        "datatype": "boolean",
+        "description": "The Gaussianized PSF is bigger than the aperture. Forced on g-band."
+      },
+      {
+        "name": "g_gaapOptimalFluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "GaaP flux uncertainty with optimal aperture after multiplying the seeing by 1.15. Forced on g-band."
+      },
+      {
+        "name": "g_gaapPsfFlux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "GaaP flux with PSF aperture after multiplying the seeing by 1.15. Forced on g-band."
+      },
+      {
+        "name": "g_gaapPsfFluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "GaaP flux uncertainty with PSF aperture after multiplying the seeing by 1.15. Forced on g-band."
+      },
+      {
+        "name": "g_hsmShapeRegauss_e1",
+        "datatype": "double",
+        "description": "PSF-corrected shear using Hirata & Seljak (2003) regaussianization. Measured on g-band."
+      },
+      {
+        "name": "g_hsmShapeRegauss_e2",
+        "datatype": "double",
+        "description": "PSF-corrected shear using Hirata & Seljak (2003) regaussianization. Measured on g-band."
+      },
+      {
+        "name": "g_hsmShapeRegauss_flag",
+        "datatype": "boolean",
+        "description": "General failure flag, set if anything went wrong. Measured on g-band."
+      },
+      {
+        "name": "g_hsmShapeRegauss_sigma",
+        "datatype": "double",
+        "description": "PSF-corrected shear using Hirata & Seljak (2003) regaussianization. Measured on g-band."
+      },
+      {
+        "name": "g_i_flag",
+        "datatype": "boolean",
+        "description": "General failure flag, set if anything went wrong. Measured on g-band."
+      },
+      {
+        "name": "g_iDebiasedPSF_flag",
+        "datatype": "boolean",
+        "description": "General failure flag, set if anything went wrong. Measured on g-band."
+      },
+      {
+        "name": "g_inputCount",
+        "datatype": "int",
+        "description": "Number of images contributing at center, not including any clipping. Forced on g-band."
+      },
+      {
+        "name": "g_inputCount_flag",
+        "datatype": "boolean",
+        "description": "Set for any fatal failure. Forced on g-band."
+      },
+      {
+        "name": "g_inputCount_flag_noInputs",
+        "datatype": "boolean",
+        "description": "No coadd inputs available. Forced on g-band."
+      },
+      {
+        "name": "g_iPSF_flag",
+        "datatype": "boolean",
+        "description": "General failure flag, set if anything went wrong. Measured on g-band."
+      },
+      {
+        "name": "g_iRound_flag",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "HSM moments. Measured on g-band."
+      },
+      {
+        "name": "g_ixx",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "HSM moments. Measured on g-band."
+      },
+      {
+        "name": "g_ixxDebiasedPSF",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "HSM moments. Measured on g-band."
+      },
+      {
+        "name": "g_ixxPSF",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "HSM moments. Measured on g-band."
+      },
+      {
+        "name": "g_ixxRound",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "HSM moments. Measured on g-band."
+      },
+      {
+        "name": "g_ixy",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "HSM moments. Measured on g-band."
+      },
+      {
+        "name": "g_ixyDebiasedPSF",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "HSM moments. Measured on g-band."
+      },
+      {
+        "name": "g_ixyPSF",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "HSM moments. Measured on g-band."
+      },
+      {
+        "name": "g_ixyRound",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "HSM moments. Measured on g-band."
+      },
+      {
+        "name": "g_iyy",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "HSM moments. Measured on g-band."
+      },
+      {
+        "name": "g_iyyDebiasedPSF",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "HSM moments. Measured on g-band."
+      },
+      {
+        "name": "g_iyyPSF",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "HSM moments. Measured on g-band."
+      },
+      {
+        "name": "g_iyyRound",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "HSM moments. Measured on g-band."
+      },
+      {
+        "name": "g_kronFlux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux from Kron Flux algorithm. Measured on g-band."
+      },
+      {
+        "name": "g_kronFlux_flag",
+        "datatype": "boolean",
+        "description": "General failure flag, set if anything went wrong. Measured on g-band."
+      },
+      {
+        "name": "g_kronFlux_flag_bad_radius",
+        "datatype": "boolean",
+        "description": "Bad Kron radius. Measured on g-band."
+      },
+      {
+        "name": "g_kronFlux_flag_bad_shape",
+        "datatype": "boolean",
+        "description": "Shape for measuring Kron radius is bad; used PSF shape. Measured on g-band."
+      },
+      {
+        "name": "g_kronFlux_flag_bad_shape_no_psf",
+        "datatype": "boolean",
+        "description": "Bad shape and no PSF. Measured on g-band."
+      },
+      {
+        "name": "g_kronFlux_flag_edge",
+        "datatype": "boolean",
+        "description": "Bad measurement due to image edge. Measured on g-band."
+      },
+      {
+        "name": "g_kronFlux_flag_no_fallback_radius",
+        "datatype": "boolean",
+        "description": "No minimum radius and no PSF provided. Measured on g-band."
+      },
+      {
+        "name": "g_kronFlux_flag_no_minimum_radius",
+        "datatype": "boolean",
+        "description": "Minimum radius could not be enforced, no minimum value or PSF. Measured on g-band."
+      },
+      {
+        "name": "g_kronFlux_flag_small_radius",
+        "datatype": "boolean",
+        "description": "Measured Kron radius was smaller than that of the PSF. Measured on g-band."
+      },
+      {
+        "name": "g_kronFlux_flag_used_minimum_radius",
+        "datatype": "boolean",
+        "description": "Used the minimum radius for the Kron aperture. Measured on g-band."
+      },
+      {
+        "name": "g_kronFlux_flag_used_psf_radius",
+        "datatype": "boolean",
+        "description": "Used the PSF Kron radius for the Kron aperture. Measured on g-band."
+      },
+      {
+        "name": "g_kronFluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty from Kron Flux algorithm. Measured on g-band."
+      },
+      {
+        "name": "g_kronRad",
+        "datatype": "float",
+        "description": "Kron radius (sqrt(a*b)). Measured on g-band."
+      },
+      {
+        "name": "g_pixelFlags_bad",
+        "datatype": "boolean",
+        "description": "Bad pixel in the Source footprint. Measured on g-band."
+      },
+      {
+        "name": "g_pixelFlags_clipped",
+        "datatype": "boolean",
+        "description": "Source footprint includes CLIPPED pixels. Measured on g-band."
+      },
+      {
+        "name": "g_pixelFlags_clippedCenter",
+        "datatype": "boolean",
+        "description": "Source center is close to CLIPPED pixels. Measured on g-band."
+      },
+      {
+        "name": "g_pixelFlags_cr",
+        "datatype": "boolean",
+        "description": "Cosmic ray in the Source footprint. Measured on g-band."
+      },
+      {
+        "name": "g_pixelFlags_crCenter",
+        "datatype": "boolean",
+        "description": "Cosmic ray in the Source center. Measured on g-band."
+      },
+      {
+        "name": "g_pixelFlags_edge",
+        "datatype": "boolean",
+        "description": "Source is outside usable exposure region (masked EDGE or NO_DATA). Measured on g-band."
+      },
+      {
+        "name": "g_pixelFlags_inexact_psf",
+        "datatype": "boolean",
+        "description": "Source footprint includes INEXACT_PSF pixels. Measured on g-band."
+      },
+      {
+        "name": "g_pixelFlags_inexact_psfCenter",
+        "datatype": "boolean",
+        "description": "Source center is close to INEXACT_PSF pixels. Measured on g-band."
+      },
+      {
+        "name": "g_pixelFlags_interpolated",
+        "datatype": "boolean",
+        "description": "Interpolated pixel in the Source footprint. Measured on g-band."
+      },
+      {
+        "name": "g_pixelFlags_interpolatedCenter",
+        "datatype": "boolean",
+        "description": "Interpolated pixel in the Source center. Measured on g-band."
+      },
+      {
+        "name": "g_pixelFlags_offimage",
+        "datatype": "boolean",
+        "description": "Source center is off image. Measured on g-band."
+      },
+      {
+        "name": "g_pixelFlags_saturated",
+        "datatype": "boolean",
+        "description": "Saturated pixel in the Source footprint. Measured on g-band."
+      },
+      {
+        "name": "g_pixelFlags_saturatedCenter",
+        "datatype": "boolean",
+        "description": "Saturated pixel in the Source center. Measured on g-band."
+      },
+      {
+        "name": "g_pixelFlags_sensor_edge",
+        "datatype": "boolean",
+        "description": "Source footprint includes SENSOR_EDGE pixels. Measured on g-band."
+      },
+      {
+        "name": "g_pixelFlags_sensor_edgeCenter",
+        "datatype": "boolean",
+        "description": "Source center is close to SENSOR_EDGE pixels. Measured on g-band."
+      },
+      {
+        "name": "g_pixelFlags_suspect",
+        "datatype": "boolean",
+        "description": "Source's footprint includes suspect pixels. Measured on g-band."
+      },
+      {
+        "name": "g_pixelFlags_suspectCenter",
+        "datatype": "boolean",
+        "description": "Source's center is close to suspect pixels. Measured on g-band."
+      },
+      {
+        "name": "g_psfFlux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux derived from linear least-squares fit of PSF model. Forced on g-band."
+      },
+      {
+        "name": "g_psfFlux_area",
+        "datatype": "float",
+        "unit": "pix",
+        "description": "Effective area of PSF. Forced on g-band."
+      },
+      {
+        "name": "g_psfFlux_flag",
+        "datatype": "boolean",
+        "description": "General Failure Flag. Forced on g-band."
+      },
+      {
+        "name": "g_psfFlux_flag_apCorr",
+        "datatype": "boolean",
+        "description": "Set if unable to aperture correct base_PsfFlux. Forced on g-band."
+      },
+      {
+        "name": "g_psfFlux_flag_edge",
+        "datatype": "boolean",
+        "description": "Object was too close to the edge of the image to use the full PSF model. Forced on g-band."
+      },
+      {
+        "name": "g_psfFlux_flag_noGoodPixels",
+        "datatype": "boolean",
+        "description": "Not enough non-rejected pixels in data to attempt the fit. Forced on g-band."
+      },
+      {
+        "name": "g_psfFluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty derived from linear least-squares fit of PSF model. Forced on g-band."
+      },
+      {
+        "name": "g_ra",
+        "datatype": "double",
+        "unit": "deg",
+        "ucd": "pos.eq.ra",
+        "description": "Position in Right Ascension. Measured on g-band."
+      },
+      {
+        "name": "i_ap03Flux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux within 3.0-pixel aperture. Forced on i-band."
+      },
+      {
+        "name": "i_ap03Flux_flag",
+        "datatype": "boolean",
+        "description": "General Failure Flag. Forced on i-band."
+      },
+      {
+        "name": "i_ap03FluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty within 3.0-pixel aperture. Forced on i-band."
+      },
+      {
+        "name": "i_ap06Flux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux within 6.0-pixel aperture. Forced on i-band."
+      },
+      {
+        "name": "i_ap06Flux_flag",
+        "datatype": "boolean",
+        "description": "General Failure Flag. Forced on i-band."
+      },
+      {
+        "name": "i_ap06FluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty within 6.0-pixel aperture. Forced on i-band."
+      },
+      {
+        "name": "i_ap09Flux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux within 9.0-pixel aperture. Forced on i-band."
+      },
+      {
+        "name": "i_ap09Flux_flag",
+        "datatype": "boolean",
+        "description": "General Failure Flag. Forced on i-band."
+      },
+      {
+        "name": "i_ap09FluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty within 9.0-pixel aperture. Forced on i-band."
+      },
+      {
+        "name": "i_ap12Flux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux within 12.0-pixel aperture. Forced on i-band."
+      },
+      {
+        "name": "i_ap12Flux_flag",
+        "datatype": "boolean",
+        "description": "General Failure Flag. Forced on i-band."
+      },
+      {
+        "name": "i_ap12FluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty within 12.0-pixel aperture. Forced on i-band."
+      },
+      {
+        "name": "i_ap17Flux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux within 17.0-pixel aperture. Forced on i-band."
+      },
+      {
+        "name": "i_ap17Flux_flag",
+        "datatype": "boolean",
+        "description": "General Failure Flag. Forced on i-band."
+      },
+      {
+        "name": "i_ap17FluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty within 17.0-pixel aperture. Forced on i-band."
+      },
+      {
+        "name": "i_ap25Flux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux within 25.0-pixel aperture. Forced on i-band."
+      },
+      {
+        "name": "i_ap25Flux_flag",
+        "datatype": "boolean",
+        "description": "General Failure Flag. Forced on i-band."
+      },
+      {
+        "name": "i_ap25FluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty within 25.0-pixel aperture. Forced on i-band."
+      },
+      {
+        "name": "i_ap35Flux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux within 35.0-pixel aperture. Forced on i-band."
+      },
+      {
+        "name": "i_ap35Flux_flag",
+        "datatype": "boolean",
+        "description": "General Failure Flag. Forced on i-band."
+      },
+      {
+        "name": "i_ap35FluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty within 35.0-pixel aperture. Forced on i-band."
+      },
+      {
+        "name": "i_ap50Flux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux within 50.0-pixel aperture. Forced on i-band."
+      },
+      {
+        "name": "i_ap50Flux_flag",
+        "datatype": "boolean",
+        "description": "General Failure Flag. Forced on i-band."
+      },
+      {
+        "name": "i_ap50FluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty within 50.0-pixel aperture. Forced on i-band."
+      },
+      {
+        "name": "i_ap70Flux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux within 70.0-pixel aperture. Forced on i-band."
+      },
+      {
+        "name": "i_ap70Flux_flag",
+        "datatype": "boolean",
+        "description": "General Failure Flag. Forced on i-band."
+      },
+      {
+        "name": "i_ap70FluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty within 70.0-pixel aperture. Forced on i-band."
+      },
+      {
+        "name": "i_apFlux_flag",
+        "datatype": "boolean",
+        "description": "General Failure Flag. Measured on i-band."
+      },
+      {
+        "name": "i_apFlux_flag_apertureTruncated",
+        "datatype": "boolean",
+        "description": "Aperture did not fit within measurement image. Measured on i-band."
+      },
+      {
+        "name": "i_apFlux_flag_sincCoeffsTruncated",
+        "datatype": "boolean",
+        "description": "Full sinc coefficient image did not fit within measurement image. Measured on i-band."
+      },
+      {
+        "name": "i_bdChi2",
+        "datatype": "double",
+        "description": "-ln(likelihood) (chi^2) in cmodel fit. Measured on i-band."
+      },
+      {
+        "name": "i_bdE1",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "FracDev-weighted average of exp.ellipse and dev.ellipse. Measured on i-band."
+      },
+      {
+        "name": "i_bdE2",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "FracDev-weighted average of exp.ellipse and dev.ellipse. Measured on i-band."
+      },
+      {
+        "name": "i_bdFluxB",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux from the de Vaucouleurs fit. Measured on i-band."
+      },
+      {
+        "name": "i_bdFluxBErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty from the de Vaucouleurs fit. Measured on i-band."
+      },
+      {
+        "name": "i_bdFluxD",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux from the exponential fit. Measured on i-band."
+      },
+      {
+        "name": "i_bdFluxDErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty from the exponential fit. Measured on i-band."
+      },
+      {
+        "name": "i_bdReB",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "Half-light ellipse of the de Vaucouleurs fit. Measured on i-band."
+      },
+      {
+        "name": "i_bdReD",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "Half-light ellipse of the exponential fit. Measured on i-band."
+      },
+      {
+        "name": "i_blendedness",
+        "datatype": "double",
+        "description": "Measure of how much the flux is affected by neighbors, (1 - child_flux/parent_flux). Operates on the absolute value of the pixels to try to obtain a de-noised value. See section 4.9.11 of Bosch et al. 2018, PASJ, 70, S5 for details. Measured on i-band."
+      },
+      {
+        "name": "i_blendedness_flag",
+        "datatype": "boolean",
+        "description": "General Failure Flag. Measured on i-band."
+      },
+      {
+        "name": "i_calib_astrometry_used",
+        "datatype": "boolean",
+        "description": "Propagated from sources. Measured on i-band."
+      },
+      {
+        "name": "i_calib_photometry_reserved",
+        "datatype": "boolean",
+        "description": "Propagated from sources. Measured on i-band."
+      },
+      {
+        "name": "i_calib_photometry_used",
+        "datatype": "boolean",
+        "description": "Propagated from sources. Measured on i-band."
+      },
+      {
+        "name": "i_calib_psf_candidate",
+        "datatype": "boolean",
+        "description": "Propagated from sources. Measured on i-band."
+      },
+      {
+        "name": "i_calib_psf_reserved",
+        "datatype": "boolean",
+        "description": "Propagated from sources. Measured on i-band."
+      },
+      {
+        "name": "i_calib_psf_used",
+        "datatype": "boolean",
+        "description": "Propagated from sources. Measured on i-band."
+      },
+      {
+        "name": "i_calibFlux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux within 12.0-pixel aperture. Measured on i-band."
+      },
+      {
+        "name": "i_calibFlux_flag",
+        "datatype": "boolean",
+        "description": "General Failure Flag. Measured on i-band."
+      },
+      {
+        "name": "i_calibFlux_flag_apertureTruncated",
+        "datatype": "boolean",
+        "description": "Aperture did not fit within measurement image. Measured on i-band."
+      },
+      {
+        "name": "i_calibFlux_flag_sincCoeffsTruncated",
+        "datatype": "boolean",
+        "description": "Full sinc coefficient image did not fit within measurement image. Measured on i-band."
+      },
+      {
+        "name": "i_calibFluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty within 12.0-pixel aperture. Measured on i-band."
+      },
+      {
+        "name": "i_centroid_flag",
+        "datatype": "boolean",
+        "description": "General Failure Flag. Measured on i-band."
+      },
+      {
+        "name": "i_centroid_x",
+        "datatype": "double",
+        "unit": "pix",
+        "description": "Centroid from SDSS Centroid algorithm. Measured on i-band."
+      },
+      {
+        "name": "i_centroid_xErr",
+        "datatype": "float",
+        "unit": "pix",
+        "description": "1-sigma uncertainty on x position. Measured on i-band."
+      },
+      {
+        "name": "i_centroid_y",
+        "datatype": "double",
+        "unit": "pix",
+        "description": "Centroid from SDSS Centroid algorithm. Measured on i-band."
+      },
+      {
+        "name": "i_centroid_yErr",
+        "datatype": "float",
+        "unit": "pix",
+        "description": "1-sigma uncertainty on y position. Measured on i-band."
+      },
+      {
+        "name": "i_cModel_flag",
+        "datatype": "boolean",
+        "description": "Flag set if the final cmodel fit (or any previous fit) failed. Forced on i-band."
+      },
+      {
+        "name": "i_cModel_flag_apCorr",
+        "datatype": "boolean",
+        "description": "Set if unable to aperture correct modelfit_CModel. Forced on i-band."
+      },
+      {
+        "name": "i_cModelFlux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux from the final cmodel fit. Forced on i-band."
+      },
+      {
+        "name": "i_cModelFlux_inner",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux within the fit region, with no extrapolation. Forced on i-band."
+      },
+      {
+        "name": "i_cModelFluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty from the final cmodel fit. Forced on i-band."
+      },
+      {
+        "name": "i_decl",
+        "datatype": "double",
+        "unit": "deg",
+        "ucd": "pos.eq.dec",
+        "description": "Position in Declination. Measured on i-band."
+      },
+      {
+        "name": "i_extendedness",
+        "datatype": "double",
+        "description": "Set to 1 for extended sources, 0 for point sources. Measured on i-band."
+      },
+      {
+        "name": "i_extendedness_flag",
+        "datatype": "boolean",
+        "description": "Set to 1 for any fatal failure. Measured on i-band."
+      },
+      {
+        "name": "i_free_cModelFlux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux from the final cmodel fit. Measured on i-band."
+      },
+      {
+        "name": "i_free_cModelFlux_flag",
+        "datatype": "boolean",
+        "description": "Flag set if the final cmodel fit (or any previous fit) failed. Measured on i-band."
+      },
+      {
+        "name": "i_free_cModelFlux_inner",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux within the fit region, with no extrapolation. Measured on i-band."
+      },
+      {
+        "name": "i_free_cModelFluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty from the final cmodel fit. Measured on i-band."
+      },
+      {
+        "name": "i_free_psfFlux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux derived from linear least-squares fit of PSF model. Measured on i-band."
+      },
+      {
+        "name": "i_free_psfFlux_flag",
+        "datatype": "boolean",
+        "description": "General Failure Flag. Measured on i-band."
+      },
+      {
+        "name": "i_free_psfFluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty derived from linear least-squares fit of PSF model. Measured on i-band."
+      },
+      {
+        "name": "i_fwhm",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "HSM moments. Measured on i-band."
+      },
+      {
+        "name": "i_gaap0p5Flux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "GaaP flux with 0.5 aperture after multiplying the seeing by 1.15. Forced on i-band."
+      },
+      {
+        "name": "i_gaap0p5Flux_flag_bigPsf",
+        "datatype": "boolean",
+        "description": "The Gaussianized PSF is bigger than the aperture. Forced on i-band."
+      },
+      {
+        "name": "i_gaap0p5FluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "GaaP flux uncertainty with 0.5 aperture after multiplying the seeing by 1.15. Forced on i-band."
+      },
+      {
+        "name": "i_gaap0p7Flux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "GaaP flux with 0.7 aperture after multiplying the seeing by 1.15. Forced on i-band."
+      },
+      {
+        "name": "i_gaap0p7Flux_flag_bigPsf",
+        "datatype": "boolean",
+        "description": "The Gaussianized PSF is bigger than the aperture. Forced on i-band."
+      },
+      {
+        "name": "i_gaap0p7FluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "GaaP flux uncertainty with 0.7 aperture after multiplying the seeing by 1.15. Forced on i-band."
+      },
+      {
+        "name": "i_gaap1p0Flux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "GaaP flux with 1.0 aperture after multiplying the seeing by 1.15. Forced on i-band."
+      },
+      {
+        "name": "i_gaap1p0Flux_flag_bigPsf",
+        "datatype": "boolean",
+        "description": "The Gaussianized PSF is bigger than the aperture. Forced on i-band."
+      },
+      {
+        "name": "i_gaap1p0FluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "GaaP flux uncertainty with 1.0 aperture after multiplying the seeing by 1.15. Forced on i-band."
+      },
+      {
+        "name": "i_gaap1p5Flux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "GaaP flux with 1.5 aperture after multiplying the seeing by 1.15. Forced on i-band."
+      },
+      {
+        "name": "i_gaap1p5Flux_flag_bigPsf",
+        "datatype": "boolean",
+        "description": "The Gaussianized PSF is bigger than the aperture. Forced on i-band."
+      },
+      {
+        "name": "i_gaap1p5FluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "GaaP flux uncertainty with 1.5 aperture after multiplying the seeing by 1.15. Forced on i-band."
+      },
+      {
+        "name": "i_gaap2p5Flux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "GaaP flux with 2.5 aperture after multiplying the seeing by 1.15. Forced on i-band."
+      },
+      {
+        "name": "i_gaap2p5Flux_flag_bigPsf",
+        "datatype": "boolean",
+        "description": "The Gaussianized PSF is bigger than the aperture. Forced on i-band."
+      },
+      {
+        "name": "i_gaap2p5FluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "GaaP flux uncertainty with 2.5 aperture after multiplying the seeing by 1.15. Forced on i-band."
+      },
+      {
+        "name": "i_gaap3p0Flux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "GaaP flux with 3.0 aperture after multiplying the seeing by 1.15. Forced on i-band."
+      },
+      {
+        "name": "i_gaap3p0Flux_flag_bigPsf",
+        "datatype": "boolean",
+        "description": "The Gaussianized PSF is bigger than the aperture. Forced on i-band."
+      },
+      {
+        "name": "i_gaap3p0FluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "GaaP flux uncertainty with 3.0 aperture after multiplying the seeing by 1.15. Forced on i-band."
+      },
+      {
+        "name": "i_gaapFlux_flag",
+        "datatype": "boolean",
+        "description": "Set for any fatal failure. Forced on i-band."
+      },
+      {
+        "name": "i_gaapFlux_flag_edge",
+        "datatype": "boolean",
+        "description": "Source is too close to the edge. Forced on i-band."
+      },
+      {
+        "name": "i_gaapFlux_flag_gaussianization",
+        "datatype": "boolean",
+        "description": "PSF Gaussianization failed when trying to scale by this factor. Forced on i-band."
+      },
+      {
+        "name": "i_gaapOptimalFlux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "GaaP flux with optimal aperture after multiplying the seeing by 1.15. Forced on i-band."
+      },
+      {
+        "name": "i_gaapOptimalFlux_flag_bigPsf",
+        "datatype": "boolean",
+        "description": "The Gaussianized PSF is bigger than the aperture. Forced on i-band."
+      },
+      {
+        "name": "i_gaapOptimalFluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "GaaP flux uncertainty with optimal aperture after multiplying the seeing by 1.15. Forced on i-band."
+      },
+      {
+        "name": "i_gaapPsfFlux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "GaaP flux with PSF aperture after multiplying the seeing by 1.15. Forced on i-band."
+      },
+      {
+        "name": "i_gaapPsfFluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "GaaP flux uncertainty with PSF aperture after multiplying the seeing by 1.15. Forced on i-band."
+      },
+      {
+        "name": "i_hsmShapeRegauss_e1",
+        "datatype": "double",
+        "description": "PSF-corrected shear using Hirata & Seljak (2003) regaussianization. Measured on i-band."
+      },
+      {
+        "name": "i_hsmShapeRegauss_e2",
+        "datatype": "double",
+        "description": "PSF-corrected shear using Hirata & Seljak (2003) regaussianization. Measured on i-band."
+      },
+      {
+        "name": "i_hsmShapeRegauss_flag",
+        "datatype": "boolean",
+        "description": "General failure flag, set if anything went wrong. Measured on i-band."
+      },
+      {
+        "name": "i_hsmShapeRegauss_sigma",
+        "datatype": "double",
+        "description": "PSF-corrected shear using Hirata & Seljak (2003) regaussianization. Measured on i-band."
+      },
+      {
+        "name": "i_i_flag",
+        "datatype": "boolean",
+        "description": "General failure flag, set if anything went wrong. Measured on i-band."
+      },
+      {
+        "name": "i_iDebiasedPSF_flag",
+        "datatype": "boolean",
+        "description": "General failure flag, set if anything went wrong. Measured on i-band."
+      },
+      {
+        "name": "i_inputCount",
+        "datatype": "int",
+        "description": "Number of images contributing at center, not including any clipping. Forced on i-band."
+      },
+      {
+        "name": "i_inputCount_flag",
+        "datatype": "boolean",
+        "description": "Set for any fatal failure. Forced on i-band."
+      },
+      {
+        "name": "i_inputCount_flag_noInputs",
+        "datatype": "boolean",
+        "description": "No coadd inputs available. Forced on i-band."
+      },
+      {
+        "name": "i_iPSF_flag",
+        "datatype": "boolean",
+        "description": "General failure flag, set if anything went wrong. Measured on i-band."
+      },
+      {
+        "name": "i_iRound_flag",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "HSM moments. Measured on i-band."
+      },
+      {
+        "name": "i_ixx",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "HSM moments. Measured on i-band."
+      },
+      {
+        "name": "i_ixxDebiasedPSF",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "HSM moments. Measured on i-band."
+      },
+      {
+        "name": "i_ixxPSF",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "HSM moments. Measured on i-band."
+      },
+      {
+        "name": "i_ixxRound",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "HSM moments. Measured on i-band."
+      },
+      {
+        "name": "i_ixy",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "HSM moments. Measured on i-band."
+      },
+      {
+        "name": "i_ixyDebiasedPSF",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "HSM moments. Measured on i-band."
+      },
+      {
+        "name": "i_ixyPSF",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "HSM moments. Measured on i-band."
+      },
+      {
+        "name": "i_ixyRound",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "HSM moments. Measured on i-band."
+      },
+      {
+        "name": "i_iyy",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "HSM moments. Measured on i-band."
+      },
+      {
+        "name": "i_iyyDebiasedPSF",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "HSM moments. Measured on i-band."
+      },
+      {
+        "name": "i_iyyPSF",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "HSM moments. Measured on i-band."
+      },
+      {
+        "name": "i_iyyRound",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "HSM moments. Measured on i-band."
+      },
+      {
+        "name": "i_kronFlux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux from Kron Flux algorithm. Measured on i-band."
+      },
+      {
+        "name": "i_kronFlux_flag",
+        "datatype": "boolean",
+        "description": "General failure flag, set if anything went wrong. Measured on i-band."
+      },
+      {
+        "name": "i_kronFlux_flag_bad_radius",
+        "datatype": "boolean",
+        "description": "Bad Kron radius. Measured on i-band."
+      },
+      {
+        "name": "i_kronFlux_flag_bad_shape",
+        "datatype": "boolean",
+        "description": "Shape for measuring Kron radius is bad; used PSF shape. Measured on i-band."
+      },
+      {
+        "name": "i_kronFlux_flag_bad_shape_no_psf",
+        "datatype": "boolean",
+        "description": "Bad shape and no PSF. Measured on i-band."
+      },
+      {
+        "name": "i_kronFlux_flag_edge",
+        "datatype": "boolean",
+        "description": "Bad measurement due to image edge. Measured on i-band."
+      },
+      {
+        "name": "i_kronFlux_flag_no_fallback_radius",
+        "datatype": "boolean",
+        "description": "No minimum radius and no PSF provided. Measured on i-band."
+      },
+      {
+        "name": "i_kronFlux_flag_no_minimum_radius",
+        "datatype": "boolean",
+        "description": "Minimum radius could not be enforced, no minimum value or PSF. Measured on i-band."
+      },
+      {
+        "name": "i_kronFlux_flag_small_radius",
+        "datatype": "boolean",
+        "description": "Measured Kron radius was smaller than that of the PSF. Measured on i-band."
+      },
+      {
+        "name": "i_kronFlux_flag_used_minimum_radius",
+        "datatype": "boolean",
+        "description": "Used the minimum radius for the Kron aperture. Measured on i-band."
+      },
+      {
+        "name": "i_kronFlux_flag_used_psf_radius",
+        "datatype": "boolean",
+        "description": "Used the PSF Kron radius for the Kron aperture. Measured on i-band."
+      },
+      {
+        "name": "i_kronFluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty from Kron Flux algorithm. Measured on i-band."
+      },
+      {
+        "name": "i_kronRad",
+        "datatype": "float",
+        "description": "Kron radius (sqrt(a*b)). Measured on i-band."
+      },
+      {
+        "name": "i_pixelFlags_bad",
+        "datatype": "boolean",
+        "description": "Bad pixel in the Source footprint. Measured on i-band."
+      },
+      {
+        "name": "i_pixelFlags_clipped",
+        "datatype": "boolean",
+        "description": "Source footprint includes CLIPPED pixels. Measured on i-band."
+      },
+      {
+        "name": "i_pixelFlags_clippedCenter",
+        "datatype": "boolean",
+        "description": "Source center is close to CLIPPED pixels. Measured on i-band."
+      },
+      {
+        "name": "i_pixelFlags_cr",
+        "datatype": "boolean",
+        "description": "Cosmic ray in the Source footprint. Measured on i-band."
+      },
+      {
+        "name": "i_pixelFlags_crCenter",
+        "datatype": "boolean",
+        "description": "Cosmic ray in the Source center. Measured on i-band."
+      },
+      {
+        "name": "i_pixelFlags_edge",
+        "datatype": "boolean",
+        "description": "Source is outside usable exposure region (masked EDGE or NO_DATA). Measured on i-band."
+      },
+      {
+        "name": "i_pixelFlags_inexact_psf",
+        "datatype": "boolean",
+        "description": "Source footprint includes INEXACT_PSF pixels. Measured on i-band."
+      },
+      {
+        "name": "i_pixelFlags_inexact_psfCenter",
+        "datatype": "boolean",
+        "description": "Source center is close to INEXACT_PSF pixels. Measured on i-band."
+      },
+      {
+        "name": "i_pixelFlags_interpolated",
+        "datatype": "boolean",
+        "description": "Interpolated pixel in the Source footprint. Measured on i-band."
+      },
+      {
+        "name": "i_pixelFlags_interpolatedCenter",
+        "datatype": "boolean",
+        "description": "Interpolated pixel in the Source center. Measured on i-band."
+      },
+      {
+        "name": "i_pixelFlags_offimage",
+        "datatype": "boolean",
+        "description": "Source center is off image. Measured on i-band."
+      },
+      {
+        "name": "i_pixelFlags_saturated",
+        "datatype": "boolean",
+        "description": "Saturated pixel in the Source footprint. Measured on i-band."
+      },
+      {
+        "name": "i_pixelFlags_saturatedCenter",
+        "datatype": "boolean",
+        "description": "Saturated pixel in the Source center. Measured on i-band."
+      },
+      {
+        "name": "i_pixelFlags_sensor_edge",
+        "datatype": "boolean",
+        "description": "Source footprint includes SENSOR_EDGE pixels. Measured on i-band."
+      },
+      {
+        "name": "i_pixelFlags_sensor_edgeCenter",
+        "datatype": "boolean",
+        "description": "Source center is close to SENSOR_EDGE pixels. Measured on i-band."
+      },
+      {
+        "name": "i_pixelFlags_suspect",
+        "datatype": "boolean",
+        "description": "Source's footprint includes suspect pixels. Measured on i-band."
+      },
+      {
+        "name": "i_pixelFlags_suspectCenter",
+        "datatype": "boolean",
+        "description": "Source's center is close to suspect pixels. Measured on i-band."
+      },
+      {
+        "name": "i_psfFlux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux derived from linear least-squares fit of PSF model. Forced on i-band."
+      },
+      {
+        "name": "i_psfFlux_area",
+        "datatype": "float",
+        "unit": "pix",
+        "description": "Effective area of PSF. Forced on i-band."
+      },
+      {
+        "name": "i_psfFlux_flag",
+        "datatype": "boolean",
+        "description": "General Failure Flag. Forced on i-band."
+      },
+      {
+        "name": "i_psfFlux_flag_apCorr",
+        "datatype": "boolean",
+        "description": "Set if unable to aperture correct base_PsfFlux. Forced on i-band."
+      },
+      {
+        "name": "i_psfFlux_flag_edge",
+        "datatype": "boolean",
+        "description": "Object was too close to the edge of the image to use the full PSF model. Forced on i-band."
+      },
+      {
+        "name": "i_psfFlux_flag_noGoodPixels",
+        "datatype": "boolean",
+        "description": "Not enough non-rejected pixels in data to attempt the fit. Forced on i-band."
+      },
+      {
+        "name": "i_psfFluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty derived from linear least-squares fit of PSF model. Forced on i-band."
+      },
+      {
+        "name": "i_ra",
+        "datatype": "double",
+        "unit": "deg",
+        "ucd": "pos.eq.ra",
+        "description": "Position in Right Ascension. Measured on i-band."
+      },
+      {
+        "name": "merge_peak_sky",
+        "datatype": "boolean",
+        "description": "Peak detected in filter sky"
+      },
+      {
+        "name": "objectId",
+        "datatype": "long",
+        "ucd": "meta.id;src;meta.main",
+        "description": "Unique id. Unique ObjectID"
+      },
+      {
+        "name": "parentObjectId",
+        "datatype": "long",
+        "ucd": "meta.id.parent",
+        "description": "Unique ID of parent source. Reference band."
+      },
+      {
+        "name": "patch",
+        "datatype": "long",
+        "ucd": "meta.id.part;obs.field",
+        "description": "Skymap patch ID"
+      },
+      {
+        "name": "r_ap03Flux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux within 3.0-pixel aperture. Forced on r-band."
+      },
+      {
+        "name": "r_ap03Flux_flag",
+        "datatype": "boolean",
+        "description": "General Failure Flag. Forced on r-band."
+      },
+      {
+        "name": "r_ap03FluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty within 3.0-pixel aperture. Forced on r-band."
+      },
+      {
+        "name": "r_ap06Flux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux within 6.0-pixel aperture. Forced on r-band."
+      },
+      {
+        "name": "r_ap06Flux_flag",
+        "datatype": "boolean",
+        "description": "General Failure Flag. Forced on r-band."
+      },
+      {
+        "name": "r_ap06FluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty within 6.0-pixel aperture. Forced on r-band."
+      },
+      {
+        "name": "r_ap09Flux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux within 9.0-pixel aperture. Forced on r-band."
+      },
+      {
+        "name": "r_ap09Flux_flag",
+        "datatype": "boolean",
+        "description": "General Failure Flag. Forced on r-band."
+      },
+      {
+        "name": "r_ap09FluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty within 9.0-pixel aperture. Forced on r-band."
+      },
+      {
+        "name": "r_ap12Flux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux within 12.0-pixel aperture. Forced on r-band."
+      },
+      {
+        "name": "r_ap12Flux_flag",
+        "datatype": "boolean",
+        "description": "General Failure Flag. Forced on r-band."
+      },
+      {
+        "name": "r_ap12FluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty within 12.0-pixel aperture. Forced on r-band."
+      },
+      {
+        "name": "r_ap17Flux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux within 17.0-pixel aperture. Forced on r-band."
+      },
+      {
+        "name": "r_ap17Flux_flag",
+        "datatype": "boolean",
+        "description": "General Failure Flag. Forced on r-band."
+      },
+      {
+        "name": "r_ap17FluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty within 17.0-pixel aperture. Forced on r-band."
+      },
+      {
+        "name": "r_ap25Flux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux within 25.0-pixel aperture. Forced on r-band."
+      },
+      {
+        "name": "r_ap25Flux_flag",
+        "datatype": "boolean",
+        "description": "General Failure Flag. Forced on r-band."
+      },
+      {
+        "name": "r_ap25FluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty within 25.0-pixel aperture. Forced on r-band."
+      },
+      {
+        "name": "r_ap35Flux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux within 35.0-pixel aperture. Forced on r-band."
+      },
+      {
+        "name": "r_ap35Flux_flag",
+        "datatype": "boolean",
+        "description": "General Failure Flag. Forced on r-band."
+      },
+      {
+        "name": "r_ap35FluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty within 35.0-pixel aperture. Forced on r-band."
+      },
+      {
+        "name": "r_ap50Flux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux within 50.0-pixel aperture. Forced on r-band."
+      },
+      {
+        "name": "r_ap50Flux_flag",
+        "datatype": "boolean",
+        "description": "General Failure Flag. Forced on r-band."
+      },
+      {
+        "name": "r_ap50FluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty within 50.0-pixel aperture. Forced on r-band."
+      },
+      {
+        "name": "r_ap70Flux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux within 70.0-pixel aperture. Forced on r-band."
+      },
+      {
+        "name": "r_ap70Flux_flag",
+        "datatype": "boolean",
+        "description": "General Failure Flag. Forced on r-band."
+      },
+      {
+        "name": "r_ap70FluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty within 70.0-pixel aperture. Forced on r-band."
+      },
+      {
+        "name": "r_apFlux_flag",
+        "datatype": "boolean",
+        "description": "General Failure Flag. Measured on r-band."
+      },
+      {
+        "name": "r_apFlux_flag_apertureTruncated",
+        "datatype": "boolean",
+        "description": "Aperture did not fit within measurement image. Measured on r-band."
+      },
+      {
+        "name": "r_apFlux_flag_sincCoeffsTruncated",
+        "datatype": "boolean",
+        "description": "Full sinc coefficient image did not fit within measurement image. Measured on r-band."
+      },
+      {
+        "name": "r_bdChi2",
+        "datatype": "double",
+        "description": "-ln(likelihood) (chi^2) in cmodel fit. Measured on r-band."
+      },
+      {
+        "name": "r_bdE1",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "FracDev-weighted average of exp.ellipse and dev.ellipse. Measured on r-band."
+      },
+      {
+        "name": "r_bdE2",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "FracDev-weighted average of exp.ellipse and dev.ellipse. Measured on r-band."
+      },
+      {
+        "name": "r_bdFluxB",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux from the de Vaucouleurs fit. Measured on r-band."
+      },
+      {
+        "name": "r_bdFluxBErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty from the de Vaucouleurs fit. Measured on r-band."
+      },
+      {
+        "name": "r_bdFluxD",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux from the exponential fit. Measured on r-band."
+      },
+      {
+        "name": "r_bdFluxDErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty from the exponential fit. Measured on r-band."
+      },
+      {
+        "name": "r_bdReB",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "Half-light ellipse of the de Vaucouleurs fit. Measured on r-band."
+      },
+      {
+        "name": "r_bdReD",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "Half-light ellipse of the exponential fit. Measured on r-band."
+      },
+      {
+        "name": "r_blendedness",
+        "datatype": "double",
+        "description": "Measure of how much the flux is affected by neighbors, (1 - child_flux/parent_flux). Operates on the absolute value of the pixels to try to obtain a de-noised value. See section 4.9.11 of Bosch et al. 2018, PASJ, 70, S5 for details. Measured on r-band."
+      },
+      {
+        "name": "r_blendedness_flag",
+        "datatype": "boolean",
+        "description": "General Failure Flag. Measured on r-band."
+      },
+      {
+        "name": "r_calib_astrometry_used",
+        "datatype": "boolean",
+        "description": "Propagated from sources. Measured on r-band."
+      },
+      {
+        "name": "r_calib_photometry_reserved",
+        "datatype": "boolean",
+        "description": "Propagated from sources. Measured on r-band."
+      },
+      {
+        "name": "r_calib_photometry_used",
+        "datatype": "boolean",
+        "description": "Propagated from sources. Measured on r-band."
+      },
+      {
+        "name": "r_calib_psf_candidate",
+        "datatype": "boolean",
+        "description": "Propagated from sources. Measured on r-band."
+      },
+      {
+        "name": "r_calib_psf_reserved",
+        "datatype": "boolean",
+        "description": "Propagated from sources. Measured on r-band."
+      },
+      {
+        "name": "r_calib_psf_used",
+        "datatype": "boolean",
+        "description": "Propagated from sources. Measured on r-band."
+      },
+      {
+        "name": "r_calibFlux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux within 12.0-pixel aperture. Measured on r-band."
+      },
+      {
+        "name": "r_calibFlux_flag",
+        "datatype": "boolean",
+        "description": "General Failure Flag. Measured on r-band."
+      },
+      {
+        "name": "r_calibFlux_flag_apertureTruncated",
+        "datatype": "boolean",
+        "description": "Aperture did not fit within measurement image. Measured on r-band."
+      },
+      {
+        "name": "r_calibFlux_flag_sincCoeffsTruncated",
+        "datatype": "boolean",
+        "description": "Full sinc coefficient image did not fit within measurement image. Measured on r-band."
+      },
+      {
+        "name": "r_calibFluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty within 12.0-pixel aperture. Measured on r-band."
+      },
+      {
+        "name": "r_centroid_flag",
+        "datatype": "boolean",
+        "description": "General Failure Flag. Measured on r-band."
+      },
+      {
+        "name": "r_centroid_x",
+        "datatype": "double",
+        "unit": "pix",
+        "description": "Centroid from SDSS Centroid algorithm. Measured on r-band."
+      },
+      {
+        "name": "r_centroid_xErr",
+        "datatype": "float",
+        "unit": "pix",
+        "description": "1-sigma uncertainty on x position. Measured on r-band."
+      },
+      {
+        "name": "r_centroid_y",
+        "datatype": "double",
+        "unit": "pix",
+        "description": "Centroid from SDSS Centroid algorithm. Measured on r-band."
+      },
+      {
+        "name": "r_centroid_yErr",
+        "datatype": "float",
+        "unit": "pix",
+        "description": "1-sigma uncertainty on y position. Measured on r-band."
+      },
+      {
+        "name": "r_cModel_flag",
+        "datatype": "boolean",
+        "description": "Flag set if the final cmodel fit (or any previous fit) failed. Forced on r-band."
+      },
+      {
+        "name": "r_cModel_flag_apCorr",
+        "datatype": "boolean",
+        "description": "Set if unable to aperture correct modelfit_CModel. Forced on r-band."
+      },
+      {
+        "name": "r_cModelFlux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux from the final cmodel fit. Forced on r-band."
+      },
+      {
+        "name": "r_cModelFlux_inner",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux within the fit region, with no extrapolation. Forced on r-band."
+      },
+      {
+        "name": "r_cModelFluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty from the final cmodel fit. Forced on r-band."
+      },
+      {
+        "name": "r_decl",
+        "datatype": "double",
+        "unit": "deg",
+        "ucd": "pos.eq.dec",
+        "description": "Position in Declination. Measured on r-band."
+      },
+      {
+        "name": "r_extendedness",
+        "datatype": "double",
+        "description": "Set to 1 for extended sources, 0 for point sources. Measured on r-band."
+      },
+      {
+        "name": "r_extendedness_flag",
+        "datatype": "boolean",
+        "description": "Set to 1 for any fatal failure. Measured on r-band."
+      },
+      {
+        "name": "r_free_cModelFlux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux from the final cmodel fit. Measured on r-band."
+      },
+      {
+        "name": "r_free_cModelFlux_flag",
+        "datatype": "boolean",
+        "description": "Flag set if the final cmodel fit (or any previous fit) failed. Measured on r-band."
+      },
+      {
+        "name": "r_free_cModelFlux_inner",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux within the fit region, with no extrapolation. Measured on r-band."
+      },
+      {
+        "name": "r_free_cModelFluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty from the final cmodel fit. Measured on r-band."
+      },
+      {
+        "name": "r_free_psfFlux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux derived from linear least-squares fit of PSF model. Measured on r-band."
+      },
+      {
+        "name": "r_free_psfFlux_flag",
+        "datatype": "boolean",
+        "description": "General Failure Flag. Measured on r-band."
+      },
+      {
+        "name": "r_free_psfFluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty derived from linear least-squares fit of PSF model. Measured on r-band."
+      },
+      {
+        "name": "r_fwhm",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "HSM moments. Measured on r-band."
+      },
+      {
+        "name": "r_gaap0p5Flux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "GaaP flux with 0.5 aperture after multiplying the seeing by 1.15. Forced on r-band."
+      },
+      {
+        "name": "r_gaap0p5Flux_flag_bigPsf",
+        "datatype": "boolean",
+        "description": "The Gaussianized PSF is bigger than the aperture. Forced on r-band."
+      },
+      {
+        "name": "r_gaap0p5FluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "GaaP flux uncertainty with 0.5 aperture after multiplying the seeing by 1.15. Forced on r-band."
+      },
+      {
+        "name": "r_gaap0p7Flux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "GaaP flux with 0.7 aperture after multiplying the seeing by 1.15. Forced on r-band."
+      },
+      {
+        "name": "r_gaap0p7Flux_flag_bigPsf",
+        "datatype": "boolean",
+        "description": "The Gaussianized PSF is bigger than the aperture. Forced on r-band."
+      },
+      {
+        "name": "r_gaap0p7FluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "GaaP flux uncertainty with 0.7 aperture after multiplying the seeing by 1.15. Forced on r-band."
+      },
+      {
+        "name": "r_gaap1p0Flux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "GaaP flux with 1.0 aperture after multiplying the seeing by 1.15. Forced on r-band."
+      },
+      {
+        "name": "r_gaap1p0Flux_flag_bigPsf",
+        "datatype": "boolean",
+        "description": "The Gaussianized PSF is bigger than the aperture. Forced on r-band."
+      },
+      {
+        "name": "r_gaap1p0FluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "GaaP flux uncertainty with 1.0 aperture after multiplying the seeing by 1.15. Forced on r-band."
+      },
+      {
+        "name": "r_gaap1p5Flux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "GaaP flux with 1.5 aperture after multiplying the seeing by 1.15. Forced on r-band."
+      },
+      {
+        "name": "r_gaap1p5Flux_flag_bigPsf",
+        "datatype": "boolean",
+        "description": "The Gaussianized PSF is bigger than the aperture. Forced on r-band."
+      },
+      {
+        "name": "r_gaap1p5FluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "GaaP flux uncertainty with 1.5 aperture after multiplying the seeing by 1.15. Forced on r-band."
+      },
+      {
+        "name": "r_gaap2p5Flux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "GaaP flux with 2.5 aperture after multiplying the seeing by 1.15. Forced on r-band."
+      },
+      {
+        "name": "r_gaap2p5Flux_flag_bigPsf",
+        "datatype": "boolean",
+        "description": "The Gaussianized PSF is bigger than the aperture. Forced on r-band."
+      },
+      {
+        "name": "r_gaap2p5FluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "GaaP flux uncertainty with 2.5 aperture after multiplying the seeing by 1.15. Forced on r-band."
+      },
+      {
+        "name": "r_gaap3p0Flux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "GaaP flux with 3.0 aperture after multiplying the seeing by 1.15. Forced on r-band."
+      },
+      {
+        "name": "r_gaap3p0Flux_flag_bigPsf",
+        "datatype": "boolean",
+        "description": "The Gaussianized PSF is bigger than the aperture. Forced on r-band."
+      },
+      {
+        "name": "r_gaap3p0FluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "GaaP flux uncertainty with 3.0 aperture after multiplying the seeing by 1.15. Forced on r-band."
+      },
+      {
+        "name": "r_gaapFlux_flag",
+        "datatype": "boolean",
+        "description": "Set for any fatal failure. Forced on r-band."
+      },
+      {
+        "name": "r_gaapFlux_flag_edge",
+        "datatype": "boolean",
+        "description": "Source is too close to the edge. Forced on r-band."
+      },
+      {
+        "name": "r_gaapFlux_flag_gaussianization",
+        "datatype": "boolean",
+        "description": "PSF Gaussianization failed when trying to scale by this factor. Forced on r-band."
+      },
+      {
+        "name": "r_gaapOptimalFlux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "GaaP flux with optimal aperture after multiplying the seeing by 1.15. Forced on r-band."
+      },
+      {
+        "name": "r_gaapOptimalFlux_flag_bigPsf",
+        "datatype": "boolean",
+        "description": "The Gaussianized PSF is bigger than the aperture. Forced on r-band."
+      },
+      {
+        "name": "r_gaapOptimalFluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "GaaP flux uncertainty with optimal aperture after multiplying the seeing by 1.15. Forced on r-band."
+      },
+      {
+        "name": "r_gaapPsfFlux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "GaaP flux with PSF aperture after multiplying the seeing by 1.15. Forced on r-band."
+      },
+      {
+        "name": "r_gaapPsfFluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "GaaP flux uncertainty with PSF aperture after multiplying the seeing by 1.15. Forced on r-band."
+      },
+      {
+        "name": "r_hsmShapeRegauss_e1",
+        "datatype": "double",
+        "description": "PSF-corrected shear using Hirata & Seljak (2003) regaussianization. Measured on r-band."
+      },
+      {
+        "name": "r_hsmShapeRegauss_e2",
+        "datatype": "double",
+        "description": "PSF-corrected shear using Hirata & Seljak (2003) regaussianization. Measured on r-band."
+      },
+      {
+        "name": "r_hsmShapeRegauss_flag",
+        "datatype": "boolean",
+        "description": "General failure flag, set if anything went wrong. Measured on r-band."
+      },
+      {
+        "name": "r_hsmShapeRegauss_sigma",
+        "datatype": "double",
+        "description": "PSF-corrected shear using Hirata & Seljak (2003) regaussianization. Measured on r-band."
+      },
+      {
+        "name": "r_i_flag",
+        "datatype": "boolean",
+        "description": "General failure flag, set if anything went wrong. Measured on r-band."
+      },
+      {
+        "name": "r_iDebiasedPSF_flag",
+        "datatype": "boolean",
+        "description": "General failure flag, set if anything went wrong. Measured on r-band."
+      },
+      {
+        "name": "r_inputCount",
+        "datatype": "int",
+        "description": "Number of images contributing at center, not including any clipping. Forced on r-band."
+      },
+      {
+        "name": "r_inputCount_flag",
+        "datatype": "boolean",
+        "description": "Set for any fatal failure. Forced on r-band."
+      },
+      {
+        "name": "r_inputCount_flag_noInputs",
+        "datatype": "boolean",
+        "description": "No coadd inputs available. Forced on r-band."
+      },
+      {
+        "name": "r_iPSF_flag",
+        "datatype": "boolean",
+        "description": "General failure flag, set if anything went wrong. Measured on r-band."
+      },
+      {
+        "name": "r_iRound_flag",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "HSM moments. Measured on r-band."
+      },
+      {
+        "name": "r_ixx",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "HSM moments. Measured on r-band."
+      },
+      {
+        "name": "r_ixxDebiasedPSF",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "HSM moments. Measured on r-band."
+      },
+      {
+        "name": "r_ixxPSF",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "HSM moments. Measured on r-band."
+      },
+      {
+        "name": "r_ixxRound",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "HSM moments. Measured on r-band."
+      },
+      {
+        "name": "r_ixy",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "HSM moments. Measured on r-band."
+      },
+      {
+        "name": "r_ixyDebiasedPSF",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "HSM moments. Measured on r-band."
+      },
+      {
+        "name": "r_ixyPSF",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "HSM moments. Measured on r-band."
+      },
+      {
+        "name": "r_ixyRound",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "HSM moments. Measured on r-band."
+      },
+      {
+        "name": "r_iyy",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "HSM moments. Measured on r-band."
+      },
+      {
+        "name": "r_iyyDebiasedPSF",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "HSM moments. Measured on r-band."
+      },
+      {
+        "name": "r_iyyPSF",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "HSM moments. Measured on r-band."
+      },
+      {
+        "name": "r_iyyRound",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "HSM moments. Measured on r-band."
+      },
+      {
+        "name": "r_kronFlux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux from Kron Flux algorithm. Measured on r-band."
+      },
+      {
+        "name": "r_kronFlux_flag",
+        "datatype": "boolean",
+        "description": "General failure flag, set if anything went wrong. Measured on r-band."
+      },
+      {
+        "name": "r_kronFlux_flag_bad_radius",
+        "datatype": "boolean",
+        "description": "Bad Kron radius. Measured on r-band."
+      },
+      {
+        "name": "r_kronFlux_flag_bad_shape",
+        "datatype": "boolean",
+        "description": "Shape for measuring Kron radius is bad; used PSF shape. Measured on r-band."
+      },
+      {
+        "name": "r_kronFlux_flag_bad_shape_no_psf",
+        "datatype": "boolean",
+        "description": "Bad shape and no PSF. Measured on r-band."
+      },
+      {
+        "name": "r_kronFlux_flag_edge",
+        "datatype": "boolean",
+        "description": "Bad measurement due to image edge. Measured on r-band."
+      },
+      {
+        "name": "r_kronFlux_flag_no_fallback_radius",
+        "datatype": "boolean",
+        "description": "No minimum radius and no PSF provided. Measured on r-band."
+      },
+      {
+        "name": "r_kronFlux_flag_no_minimum_radius",
+        "datatype": "boolean",
+        "description": "Minimum radius could not be enforced, no minimum value or PSF. Measured on r-band."
+      },
+      {
+        "name": "r_kronFlux_flag_small_radius",
+        "datatype": "boolean",
+        "description": "Measured Kron radius was smaller than that of the PSF. Measured on r-band."
+      },
+      {
+        "name": "r_kronFlux_flag_used_minimum_radius",
+        "datatype": "boolean",
+        "description": "Used the minimum radius for the Kron aperture. Measured on r-band."
+      },
+      {
+        "name": "r_kronFlux_flag_used_psf_radius",
+        "datatype": "boolean",
+        "description": "Used the PSF Kron radius for the Kron aperture. Measured on r-band."
+      },
+      {
+        "name": "r_kronFluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty from Kron Flux algorithm. Measured on r-band."
+      },
+      {
+        "name": "r_kronRad",
+        "datatype": "float",
+        "description": "Kron radius (sqrt(a*b)). Measured on r-band."
+      },
+      {
+        "name": "r_pixelFlags_bad",
+        "datatype": "boolean",
+        "description": "Bad pixel in the Source footprint. Measured on r-band."
+      },
+      {
+        "name": "r_pixelFlags_clipped",
+        "datatype": "boolean",
+        "description": "Source footprint includes CLIPPED pixels. Measured on r-band."
+      },
+      {
+        "name": "r_pixelFlags_clippedCenter",
+        "datatype": "boolean",
+        "description": "Source center is close to CLIPPED pixels. Measured on r-band."
+      },
+      {
+        "name": "r_pixelFlags_cr",
+        "datatype": "boolean",
+        "description": "Cosmic ray in the Source footprint. Measured on r-band."
+      },
+      {
+        "name": "r_pixelFlags_crCenter",
+        "datatype": "boolean",
+        "description": "Cosmic ray in the Source center. Measured on r-band."
+      },
+      {
+        "name": "r_pixelFlags_edge",
+        "datatype": "boolean",
+        "description": "Source is outside usable exposure region (masked EDGE or NO_DATA). Measured on r-band."
+      },
+      {
+        "name": "r_pixelFlags_inexact_psf",
+        "datatype": "boolean",
+        "description": "Source footprint includes INEXACT_PSF pixels. Measured on r-band."
+      },
+      {
+        "name": "r_pixelFlags_inexact_psfCenter",
+        "datatype": "boolean",
+        "description": "Source center is close to INEXACT_PSF pixels. Measured on r-band."
+      },
+      {
+        "name": "r_pixelFlags_interpolated",
+        "datatype": "boolean",
+        "description": "Interpolated pixel in the Source footprint. Measured on r-band."
+      },
+      {
+        "name": "r_pixelFlags_interpolatedCenter",
+        "datatype": "boolean",
+        "description": "Interpolated pixel in the Source center. Measured on r-band."
+      },
+      {
+        "name": "r_pixelFlags_offimage",
+        "datatype": "boolean",
+        "description": "Source center is off image. Measured on r-band."
+      },
+      {
+        "name": "r_pixelFlags_saturated",
+        "datatype": "boolean",
+        "description": "Saturated pixel in the Source footprint. Measured on r-band."
+      },
+      {
+        "name": "r_pixelFlags_saturatedCenter",
+        "datatype": "boolean",
+        "description": "Saturated pixel in the Source center. Measured on r-band."
+      },
+      {
+        "name": "r_pixelFlags_sensor_edge",
+        "datatype": "boolean",
+        "description": "Source footprint includes SENSOR_EDGE pixels. Measured on r-band."
+      },
+      {
+        "name": "r_pixelFlags_sensor_edgeCenter",
+        "datatype": "boolean",
+        "description": "Source center is close to SENSOR_EDGE pixels. Measured on r-band."
+      },
+      {
+        "name": "r_pixelFlags_suspect",
+        "datatype": "boolean",
+        "description": "Source's footprint includes suspect pixels. Measured on r-band."
+      },
+      {
+        "name": "r_pixelFlags_suspectCenter",
+        "datatype": "boolean",
+        "description": "Source's center is close to suspect pixels. Measured on r-band."
+      },
+      {
+        "name": "r_psfFlux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux derived from linear least-squares fit of PSF model. Forced on r-band."
+      },
+      {
+        "name": "r_psfFlux_area",
+        "datatype": "float",
+        "unit": "pix",
+        "description": "Effective area of PSF. Forced on r-band."
+      },
+      {
+        "name": "r_psfFlux_flag",
+        "datatype": "boolean",
+        "description": "General Failure Flag. Forced on r-band."
+      },
+      {
+        "name": "r_psfFlux_flag_apCorr",
+        "datatype": "boolean",
+        "description": "Set if unable to aperture correct base_PsfFlux. Forced on r-band."
+      },
+      {
+        "name": "r_psfFlux_flag_edge",
+        "datatype": "boolean",
+        "description": "Object was too close to the edge of the image to use the full PSF model. Forced on r-band."
+      },
+      {
+        "name": "r_psfFlux_flag_noGoodPixels",
+        "datatype": "boolean",
+        "description": "Not enough non-rejected pixels in data to attempt the fit. Forced on r-band."
+      },
+      {
+        "name": "r_psfFluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty derived from linear least-squares fit of PSF model. Forced on r-band."
+      },
+      {
+        "name": "r_ra",
+        "datatype": "double",
+        "unit": "deg",
+        "ucd": "pos.eq.ra",
+        "description": "Position in Right Ascension. Measured on r-band."
+      },
+      {
+        "name": "refBand",
+        "datatype": "char",
+        "ucd": "meta.id;instr.filter;meta.main",
+        "description": "Reference band - parameters measured on coadds of this band were used for multi-band forced photometry",
+        "arraysize": "*"
+      },
+      {
+        "name": "refExtendedness",
+        "datatype": "double",
+        "description": "Set to 1 for extended sources, 0 for point sources. Reference band."
+      },
+      {
+        "name": "refFwhm",
+        "datatype": "double",
+        "description": "Estimated FWHM on the reference band at source center assuming a Gaussian profile"
+      },
+      {
+        "name": "shape_flag",
+        "datatype": "boolean",
+        "description": "General failure flag, set if anything went wrong. Reference band."
+      },
+      {
+        "name": "shape_xx",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "Hirata-Seljak-Mandelbaum (HSM) moments. Reference band."
+      },
+      {
+        "name": "shape_xy",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "HSM moments. Reference band."
+      },
+      {
+        "name": "shape_yy",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "HSM moments. Reference band."
+      },
+      {
+        "name": "sky_object",
+        "datatype": "boolean",
+        "description": "No source was detected here. This object exists to characterize properties of the sky background"
+      },
+      {
+        "name": "skymap",
+        "datatype": "char",
+        "description": "Name of skymap used for coadd projection",
+        "arraysize": "12"
+      },
+      {
+        "name": "tract",
+        "datatype": "long",
+        "ucd": "meta.id;obs.field",
+        "description": "Skymap tract ID"
+      },
+      {
+        "name": "u_ap03Flux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux within 3.0-pixel aperture. Forced on u-band."
+      },
+      {
+        "name": "u_ap03Flux_flag",
+        "datatype": "boolean",
+        "description": "General Failure Flag. Forced on u-band."
+      },
+      {
+        "name": "u_ap03FluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty within 3.0-pixel aperture. Forced on u-band."
+      },
+      {
+        "name": "u_ap06Flux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux within 6.0-pixel aperture. Forced on u-band."
+      },
+      {
+        "name": "u_ap06Flux_flag",
+        "datatype": "boolean",
+        "description": "General Failure Flag. Forced on u-band."
+      },
+      {
+        "name": "u_ap06FluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty within 6.0-pixel aperture. Forced on u-band."
+      },
+      {
+        "name": "u_ap09Flux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux within 9.0-pixel aperture. Forced on u-band."
+      },
+      {
+        "name": "u_ap09Flux_flag",
+        "datatype": "boolean",
+        "description": "General Failure Flag. Forced on u-band."
+      },
+      {
+        "name": "u_ap09FluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty within 9.0-pixel aperture. Forced on u-band."
+      },
+      {
+        "name": "u_ap12Flux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux within 12.0-pixel aperture. Forced on u-band."
+      },
+      {
+        "name": "u_ap12Flux_flag",
+        "datatype": "boolean",
+        "description": "General Failure Flag. Forced on u-band."
+      },
+      {
+        "name": "u_ap12FluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty within 12.0-pixel aperture. Forced on u-band."
+      },
+      {
+        "name": "u_ap17Flux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux within 17.0-pixel aperture. Forced on u-band."
+      },
+      {
+        "name": "u_ap17Flux_flag",
+        "datatype": "boolean",
+        "description": "General Failure Flag. Forced on u-band."
+      },
+      {
+        "name": "u_ap17FluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty within 17.0-pixel aperture. Forced on u-band."
+      },
+      {
+        "name": "u_ap25Flux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux within 25.0-pixel aperture. Forced on u-band."
+      },
+      {
+        "name": "u_ap25Flux_flag",
+        "datatype": "boolean",
+        "description": "General Failure Flag. Forced on u-band."
+      },
+      {
+        "name": "u_ap25FluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty within 25.0-pixel aperture. Forced on u-band."
+      },
+      {
+        "name": "u_ap35Flux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux within 35.0-pixel aperture. Forced on u-band."
+      },
+      {
+        "name": "u_ap35Flux_flag",
+        "datatype": "boolean",
+        "description": "General Failure Flag. Forced on u-band."
+      },
+      {
+        "name": "u_ap35FluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty within 35.0-pixel aperture. Forced on u-band."
+      },
+      {
+        "name": "u_ap50Flux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux within 50.0-pixel aperture. Forced on u-band."
+      },
+      {
+        "name": "u_ap50Flux_flag",
+        "datatype": "boolean",
+        "description": "General Failure Flag. Forced on u-band."
+      },
+      {
+        "name": "u_ap50FluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty within 50.0-pixel aperture. Forced on u-band."
+      },
+      {
+        "name": "u_ap70Flux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux within 70.0-pixel aperture. Forced on u-band."
+      },
+      {
+        "name": "u_ap70Flux_flag",
+        "datatype": "boolean",
+        "description": "General Failure Flag. Forced on u-band."
+      },
+      {
+        "name": "u_ap70FluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty within 70.0-pixel aperture. Forced on u-band."
+      },
+      {
+        "name": "u_apFlux_flag",
+        "datatype": "boolean",
+        "description": "General Failure Flag. Measured on u-band."
+      },
+      {
+        "name": "u_apFlux_flag_apertureTruncated",
+        "datatype": "boolean",
+        "description": "Aperture did not fit within measurement image. Measured on u-band."
+      },
+      {
+        "name": "u_apFlux_flag_sincCoeffsTruncated",
+        "datatype": "boolean",
+        "description": "Full sinc coefficient image did not fit within measurement image. Measured on u-band."
+      },
+      {
+        "name": "u_bdChi2",
+        "datatype": "double",
+        "description": "-ln(likelihood) (chi^2) in cmodel fit. Measured on u-band."
+      },
+      {
+        "name": "u_bdE1",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "FracDev-weighted average of exp.ellipse and dev.ellipse. Measured on u-band."
+      },
+      {
+        "name": "u_bdE2",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "FracDev-weighted average of exp.ellipse and dev.ellipse. Measured on u-band."
+      },
+      {
+        "name": "u_bdFluxB",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux from the de Vaucouleurs fit. Measured on u-band."
+      },
+      {
+        "name": "u_bdFluxBErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty from the de Vaucouleurs fit. Measured on u-band."
+      },
+      {
+        "name": "u_bdFluxD",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux from the exponential fit. Measured on u-band."
+      },
+      {
+        "name": "u_bdFluxDErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty from the exponential fit. Measured on u-band."
+      },
+      {
+        "name": "u_bdReB",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "Half-light ellipse of the de Vaucouleurs fit. Measured on u-band."
+      },
+      {
+        "name": "u_bdReD",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "Half-light ellipse of the exponential fit. Measured on u-band."
+      },
+      {
+        "name": "u_blendedness",
+        "datatype": "double",
+        "description": "Measure of how much the flux is affected by neighbors, (1 - child_flux/parent_flux). Operates on the absolute value of the pixels to try to obtain a de-noised value. See section 4.9.11 of Bosch et al. 2018, PASJ, 70, S5 for details. Measured on u-band."
+      },
+      {
+        "name": "u_blendedness_flag",
+        "datatype": "boolean",
+        "description": "General Failure Flag. Measured on u-band."
+      },
+      {
+        "name": "u_calib_astrometry_used",
+        "datatype": "boolean",
+        "description": "Propagated from sources. Measured on u-band."
+      },
+      {
+        "name": "u_calib_photometry_reserved",
+        "datatype": "boolean",
+        "description": "Propagated from sources. Measured on u-band."
+      },
+      {
+        "name": "u_calib_photometry_used",
+        "datatype": "boolean",
+        "description": "Propagated from sources. Measured on u-band."
+      },
+      {
+        "name": "u_calib_psf_candidate",
+        "datatype": "boolean",
+        "description": "Propagated from sources. Measured on u-band."
+      },
+      {
+        "name": "u_calib_psf_reserved",
+        "datatype": "boolean",
+        "description": "Propagated from sources. Measured on u-band."
+      },
+      {
+        "name": "u_calib_psf_used",
+        "datatype": "boolean",
+        "description": "Propagated from sources. Measured on u-band."
+      },
+      {
+        "name": "u_calibFlux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux within 12.0-pixel aperture. Measured on u-band."
+      },
+      {
+        "name": "u_calibFlux_flag",
+        "datatype": "boolean",
+        "description": "General Failure Flag. Measured on u-band."
+      },
+      {
+        "name": "u_calibFlux_flag_apertureTruncated",
+        "datatype": "boolean",
+        "description": "Aperture did not fit within measurement image. Measured on u-band."
+      },
+      {
+        "name": "u_calibFlux_flag_sincCoeffsTruncated",
+        "datatype": "boolean",
+        "description": "Full sinc coefficient image did not fit within measurement image. Measured on u-band."
+      },
+      {
+        "name": "u_calibFluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty within 12.0-pixel aperture. Measured on u-band."
+      },
+      {
+        "name": "u_centroid_flag",
+        "datatype": "boolean",
+        "description": "General Failure Flag. Measured on u-band."
+      },
+      {
+        "name": "u_centroid_x",
+        "datatype": "double",
+        "unit": "pix",
+        "description": "Centroid from SDSS Centroid algorithm. Measured on u-band."
+      },
+      {
+        "name": "u_centroid_xErr",
+        "datatype": "float",
+        "unit": "pix",
+        "description": "1-sigma uncertainty on x position. Measured on u-band."
+      },
+      {
+        "name": "u_centroid_y",
+        "datatype": "double",
+        "unit": "pix",
+        "description": "Centroid from SDSS Centroid algorithm. Measured on u-band."
+      },
+      {
+        "name": "u_centroid_yErr",
+        "datatype": "float",
+        "unit": "pix",
+        "description": "1-sigma uncertainty on y position. Measured on u-band."
+      },
+      {
+        "name": "u_cModel_flag",
+        "datatype": "boolean",
+        "description": "Flag set if the final cmodel fit (or any previous fit) failed. Forced on u-band."
+      },
+      {
+        "name": "u_cModel_flag_apCorr",
+        "datatype": "boolean",
+        "description": "Set if unable to aperture correct modelfit_CModel. Forced on u-band."
+      },
+      {
+        "name": "u_cModelFlux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux from the final cmodel fit. Forced on u-band."
+      },
+      {
+        "name": "u_cModelFlux_inner",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux within the fit region, with no extrapolation. Forced on u-band."
+      },
+      {
+        "name": "u_cModelFluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty from the final cmodel fit. Forced on u-band."
+      },
+      {
+        "name": "u_decl",
+        "datatype": "double",
+        "unit": "deg",
+        "ucd": "pos.eq.dec",
+        "description": "Position in Declination. Measured on u-band."
+      },
+      {
+        "name": "u_extendedness",
+        "datatype": "double",
+        "description": "Set to 1 for extended sources, 0 for point sources. Measured on u-band."
+      },
+      {
+        "name": "u_extendedness_flag",
+        "datatype": "boolean",
+        "description": "Set to 1 for any fatal failure. Measured on u-band."
+      },
+      {
+        "name": "u_free_cModelFlux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux from the final cmodel fit. Measured on u-band."
+      },
+      {
+        "name": "u_free_cModelFlux_flag",
+        "datatype": "boolean",
+        "description": "Flag set if the final cmodel fit (or any previous fit) failed. Measured on u-band."
+      },
+      {
+        "name": "u_free_cModelFlux_inner",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux within the fit region, with no extrapolation. Measured on u-band."
+      },
+      {
+        "name": "u_free_cModelFluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty from the final cmodel fit. Measured on u-band."
+      },
+      {
+        "name": "u_free_psfFlux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux derived from linear least-squares fit of PSF model. Measured on u-band."
+      },
+      {
+        "name": "u_free_psfFlux_flag",
+        "datatype": "boolean",
+        "description": "General Failure Flag. Measured on u-band."
+      },
+      {
+        "name": "u_free_psfFluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty derived from linear least-squares fit of PSF model. Measured on u-band."
+      },
+      {
+        "name": "u_fwhm",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "HSM moments. Measured on u-band."
+      },
+      {
+        "name": "u_gaap0p5Flux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "GaaP flux with 0.5 aperture after multiplying the seeing by 1.15. Forced on u-band."
+      },
+      {
+        "name": "u_gaap0p5Flux_flag_bigPsf",
+        "datatype": "boolean",
+        "description": "The Gaussianized PSF is bigger than the aperture. Forced on u-band."
+      },
+      {
+        "name": "u_gaap0p5FluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "GaaP flux uncertainty with 0.5 aperture after multiplying the seeing by 1.15. Forced on u-band."
+      },
+      {
+        "name": "u_gaap0p7Flux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "GaaP flux with 0.7 aperture after multiplying the seeing by 1.15. Forced on u-band."
+      },
+      {
+        "name": "u_gaap0p7Flux_flag_bigPsf",
+        "datatype": "boolean",
+        "description": "The Gaussianized PSF is bigger than the aperture. Forced on u-band."
+      },
+      {
+        "name": "u_gaap0p7FluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "GaaP flux uncertainty with 0.7 aperture after multiplying the seeing by 1.15. Forced on u-band."
+      },
+      {
+        "name": "u_gaap1p0Flux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "GaaP flux with 1.0 aperture after multiplying the seeing by 1.15. Forced on u-band."
+      },
+      {
+        "name": "u_gaap1p0Flux_flag_bigPsf",
+        "datatype": "boolean",
+        "description": "The Gaussianized PSF is bigger than the aperture. Forced on u-band."
+      },
+      {
+        "name": "u_gaap1p0FluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "GaaP flux uncertainty with 1.0 aperture after multiplying the seeing by 1.15. Forced on u-band."
+      },
+      {
+        "name": "u_gaap1p5Flux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "GaaP flux with 1.5 aperture after multiplying the seeing by 1.15. Forced on u-band."
+      },
+      {
+        "name": "u_gaap1p5Flux_flag_bigPsf",
+        "datatype": "boolean",
+        "description": "The Gaussianized PSF is bigger than the aperture. Forced on u-band."
+      },
+      {
+        "name": "u_gaap1p5FluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "GaaP flux uncertainty with 1.5 aperture after multiplying the seeing by 1.15. Forced on u-band."
+      },
+      {
+        "name": "u_gaap2p5Flux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "GaaP flux with 2.5 aperture after multiplying the seeing by 1.15. Forced on u-band."
+      },
+      {
+        "name": "u_gaap2p5Flux_flag_bigPsf",
+        "datatype": "boolean",
+        "description": "The Gaussianized PSF is bigger than the aperture. Forced on u-band."
+      },
+      {
+        "name": "u_gaap2p5FluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "GaaP flux uncertainty with 2.5 aperture after multiplying the seeing by 1.15. Forced on u-band."
+      },
+      {
+        "name": "u_gaap3p0Flux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "GaaP flux with 3.0 aperture after multiplying the seeing by 1.15. Forced on u-band."
+      },
+      {
+        "name": "u_gaap3p0Flux_flag_bigPsf",
+        "datatype": "boolean",
+        "description": "The Gaussianized PSF is bigger than the aperture. Forced on u-band."
+      },
+      {
+        "name": "u_gaap3p0FluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "GaaP flux uncertainty with 3.0 aperture after multiplying the seeing by 1.15. Forced on u-band."
+      },
+      {
+        "name": "u_gaapFlux_flag",
+        "datatype": "boolean",
+        "description": "Set for any fatal failure. Forced on u-band."
+      },
+      {
+        "name": "u_gaapFlux_flag_edge",
+        "datatype": "boolean",
+        "description": "Source is too close to the edge. Forced on u-band."
+      },
+      {
+        "name": "u_gaapFlux_flag_gaussianization",
+        "datatype": "boolean",
+        "description": "PSF Gaussianization failed when trying to scale by this factor. Forced on u-band."
+      },
+      {
+        "name": "u_gaapOptimalFlux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "GaaP flux with optimal aperture after multiplying the seeing by 1.15. Forced on u-band."
+      },
+      {
+        "name": "u_gaapOptimalFlux_flag_bigPsf",
+        "datatype": "boolean",
+        "description": "The Gaussianized PSF is bigger than the aperture. Forced on u-band."
+      },
+      {
+        "name": "u_gaapOptimalFluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "GaaP flux uncertainty with optimal aperture after multiplying the seeing by 1.15. Forced on u-band."
+      },
+      {
+        "name": "u_gaapPsfFlux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "GaaP flux with PSF aperture after multiplying the seeing by 1.15. Forced on u-band."
+      },
+      {
+        "name": "u_gaapPsfFluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "GaaP flux uncertainty with PSF aperture after multiplying the seeing by 1.15. Forced on u-band."
+      },
+      {
+        "name": "u_hsmShapeRegauss_e1",
+        "datatype": "double",
+        "description": "PSF-corrected shear using Hirata & Seljak (2003) regaussianization. Measured on u-band."
+      },
+      {
+        "name": "u_hsmShapeRegauss_e2",
+        "datatype": "double",
+        "description": "PSF-corrected shear using Hirata & Seljak (2003) regaussianization. Measured on u-band."
+      },
+      {
+        "name": "u_hsmShapeRegauss_flag",
+        "datatype": "boolean",
+        "description": "General failure flag, set if anything went wrong. Measured on u-band."
+      },
+      {
+        "name": "u_hsmShapeRegauss_sigma",
+        "datatype": "double",
+        "description": "PSF-corrected shear using Hirata & Seljak (2003) regaussianization. Measured on u-band."
+      },
+      {
+        "name": "u_i_flag",
+        "datatype": "boolean",
+        "description": "General failure flag, set if anything went wrong. Measured on u-band."
+      },
+      {
+        "name": "u_iDebiasedPSF_flag",
+        "datatype": "boolean",
+        "description": "General failure flag, set if anything went wrong. Measured on u-band."
+      },
+      {
+        "name": "u_inputCount",
+        "datatype": "int",
+        "description": "Number of images contributing at center, not including any clipping. Forced on u-band."
+      },
+      {
+        "name": "u_inputCount_flag",
+        "datatype": "boolean",
+        "description": "Set for any fatal failure. Forced on u-band."
+      },
+      {
+        "name": "u_inputCount_flag_noInputs",
+        "datatype": "boolean",
+        "description": "No coadd inputs available. Forced on u-band."
+      },
+      {
+        "name": "u_iPSF_flag",
+        "datatype": "boolean",
+        "description": "General failure flag, set if anything went wrong. Measured on u-band."
+      },
+      {
+        "name": "u_iRound_flag",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "HSM moments. Measured on u-band."
+      },
+      {
+        "name": "u_ixx",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "HSM moments. Measured on u-band."
+      },
+      {
+        "name": "u_ixxDebiasedPSF",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "HSM moments. Measured on u-band."
+      },
+      {
+        "name": "u_ixxPSF",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "HSM moments. Measured on u-band."
+      },
+      {
+        "name": "u_ixxRound",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "HSM moments. Measured on u-band."
+      },
+      {
+        "name": "u_ixy",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "HSM moments. Measured on u-band."
+      },
+      {
+        "name": "u_ixyDebiasedPSF",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "HSM moments. Measured on u-band."
+      },
+      {
+        "name": "u_ixyPSF",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "HSM moments. Measured on u-band."
+      },
+      {
+        "name": "u_ixyRound",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "HSM moments. Measured on u-band."
+      },
+      {
+        "name": "u_iyy",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "HSM moments. Measured on u-band."
+      },
+      {
+        "name": "u_iyyDebiasedPSF",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "HSM moments. Measured on u-band."
+      },
+      {
+        "name": "u_iyyPSF",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "HSM moments. Measured on u-band."
+      },
+      {
+        "name": "u_iyyRound",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "HSM moments. Measured on u-band."
+      },
+      {
+        "name": "u_kronFlux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux from Kron Flux algorithm. Measured on u-band."
+      },
+      {
+        "name": "u_kronFlux_flag",
+        "datatype": "boolean",
+        "description": "General failure flag, set if anything went wrong. Measured on u-band."
+      },
+      {
+        "name": "u_kronFlux_flag_bad_radius",
+        "datatype": "boolean",
+        "description": "Bad Kron radius. Measured on u-band."
+      },
+      {
+        "name": "u_kronFlux_flag_bad_shape",
+        "datatype": "boolean",
+        "description": "Shape for measuring Kron radius is bad; used PSF shape. Measured on u-band."
+      },
+      {
+        "name": "u_kronFlux_flag_bad_shape_no_psf",
+        "datatype": "boolean",
+        "description": "Bad shape and no PSF. Measured on u-band."
+      },
+      {
+        "name": "u_kronFlux_flag_edge",
+        "datatype": "boolean",
+        "description": "Bad measurement due to image edge. Measured on u-band."
+      },
+      {
+        "name": "u_kronFlux_flag_no_fallback_radius",
+        "datatype": "boolean",
+        "description": "No minimum radius and no PSF provided. Measured on u-band."
+      },
+      {
+        "name": "u_kronFlux_flag_no_minimum_radius",
+        "datatype": "boolean",
+        "description": "Minimum radius could not be enforced, no minimum value or PSF. Measured on u-band."
+      },
+      {
+        "name": "u_kronFlux_flag_small_radius",
+        "datatype": "boolean",
+        "description": "Measured Kron radius was smaller than that of the PSF. Measured on u-band."
+      },
+      {
+        "name": "u_kronFlux_flag_used_minimum_radius",
+        "datatype": "boolean",
+        "description": "Used the minimum radius for the Kron aperture. Measured on u-band."
+      },
+      {
+        "name": "u_kronFlux_flag_used_psf_radius",
+        "datatype": "boolean",
+        "description": "Used the PSF Kron radius for the Kron aperture. Measured on u-band."
+      },
+      {
+        "name": "u_kronFluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty from Kron Flux algorithm. Measured on u-band."
+      },
+      {
+        "name": "u_kronRad",
+        "datatype": "float",
+        "description": "Kron radius (sqrt(a*b)). Measured on u-band."
+      },
+      {
+        "name": "u_pixelFlags_bad",
+        "datatype": "boolean",
+        "description": "Bad pixel in the Source footprint. Measured on u-band."
+      },
+      {
+        "name": "u_pixelFlags_clipped",
+        "datatype": "boolean",
+        "description": "Source footprint includes CLIPPED pixels. Measured on u-band."
+      },
+      {
+        "name": "u_pixelFlags_clippedCenter",
+        "datatype": "boolean",
+        "description": "Source center is close to CLIPPED pixels. Measured on u-band."
+      },
+      {
+        "name": "u_pixelFlags_cr",
+        "datatype": "boolean",
+        "description": "Cosmic ray in the Source footprint. Measured on u-band."
+      },
+      {
+        "name": "u_pixelFlags_crCenter",
+        "datatype": "boolean",
+        "description": "Cosmic ray in the Source center. Measured on u-band."
+      },
+      {
+        "name": "u_pixelFlags_edge",
+        "datatype": "boolean",
+        "description": "Source is outside usable exposure region (masked EDGE or NO_DATA). Measured on u-band."
+      },
+      {
+        "name": "u_pixelFlags_inexact_psf",
+        "datatype": "boolean",
+        "description": "Source footprint includes INEXACT_PSF pixels. Measured on u-band."
+      },
+      {
+        "name": "u_pixelFlags_inexact_psfCenter",
+        "datatype": "boolean",
+        "description": "Source center is close to INEXACT_PSF pixels. Measured on u-band."
+      },
+      {
+        "name": "u_pixelFlags_interpolated",
+        "datatype": "boolean",
+        "description": "Interpolated pixel in the Source footprint. Measured on u-band."
+      },
+      {
+        "name": "u_pixelFlags_interpolatedCenter",
+        "datatype": "boolean",
+        "description": "Interpolated pixel in the Source center. Measured on u-band."
+      },
+      {
+        "name": "u_pixelFlags_offimage",
+        "datatype": "boolean",
+        "description": "Source center is off image. Measured on u-band."
+      },
+      {
+        "name": "u_pixelFlags_saturated",
+        "datatype": "boolean",
+        "description": "Saturated pixel in the Source footprint. Measured on u-band."
+      },
+      {
+        "name": "u_pixelFlags_saturatedCenter",
+        "datatype": "boolean",
+        "description": "Saturated pixel in the Source center. Measured on u-band."
+      },
+      {
+        "name": "u_pixelFlags_sensor_edge",
+        "datatype": "boolean",
+        "description": "Source footprint includes SENSOR_EDGE pixels. Measured on u-band."
+      },
+      {
+        "name": "u_pixelFlags_sensor_edgeCenter",
+        "datatype": "boolean",
+        "description": "Source center is close to SENSOR_EDGE pixels. Measured on u-band."
+      },
+      {
+        "name": "u_pixelFlags_suspect",
+        "datatype": "boolean",
+        "description": "Source's footprint includes suspect pixels. Measured on u-band."
+      },
+      {
+        "name": "u_pixelFlags_suspectCenter",
+        "datatype": "boolean",
+        "description": "Source's center is close to suspect pixels. Measured on u-band."
+      },
+      {
+        "name": "u_psfFlux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux derived from linear least-squares fit of PSF model. Forced on u-band."
+      },
+      {
+        "name": "u_psfFlux_area",
+        "datatype": "float",
+        "unit": "pix",
+        "description": "Effective area of PSF. Forced on u-band."
+      },
+      {
+        "name": "u_psfFlux_flag",
+        "datatype": "boolean",
+        "description": "General Failure Flag. Forced on u-band."
+      },
+      {
+        "name": "u_psfFlux_flag_apCorr",
+        "datatype": "boolean",
+        "description": "Set if unable to aperture correct base_PsfFlux. Forced on u-band."
+      },
+      {
+        "name": "u_psfFlux_flag_edge",
+        "datatype": "boolean",
+        "description": "Object was too close to the edge of the image to use the full PSF model. Forced on u-band."
+      },
+      {
+        "name": "u_psfFlux_flag_noGoodPixels",
+        "datatype": "boolean",
+        "description": "Not enough non-rejected pixels in data to attempt the fit. Forced on u-band."
+      },
+      {
+        "name": "u_psfFluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty derived from linear least-squares fit of PSF model. Forced on u-band."
+      },
+      {
+        "name": "u_ra",
+        "datatype": "double",
+        "unit": "deg",
+        "ucd": "pos.eq.ra",
+        "description": "Position in Right Ascension. Measured on u-band."
+      },
+      {
+        "name": "x",
+        "datatype": "double",
+        "unit": "pix",
+        "description": "Centroid from SDSS Centroid algorithm. Reference band."
+      },
+      {
+        "name": "xErr",
+        "datatype": "float",
+        "unit": "pix",
+        "description": "1-sigma uncertainty on x position. Reference band."
+      },
+      {
+        "name": "xy_flag",
+        "datatype": "boolean",
+        "description": "General Failure Flag. Reference band."
+      },
+      {
+        "name": "y",
+        "datatype": "double",
+        "unit": "pix",
+        "description": "Centroid from SDSS Centroid algorithm. Reference band."
+      },
+      {
+        "name": "y_ap03Flux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux within 3.0-pixel aperture. Forced on y-band."
+      },
+      {
+        "name": "y_ap03Flux_flag",
+        "datatype": "boolean",
+        "description": "General Failure Flag. Forced on y-band."
+      },
+      {
+        "name": "y_ap03FluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty within 3.0-pixel aperture. Forced on y-band."
+      },
+      {
+        "name": "y_ap06Flux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux within 6.0-pixel aperture. Forced on y-band."
+      },
+      {
+        "name": "y_ap06Flux_flag",
+        "datatype": "boolean",
+        "description": "General Failure Flag. Forced on y-band."
+      },
+      {
+        "name": "y_ap06FluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty within 6.0-pixel aperture. Forced on y-band."
+      },
+      {
+        "name": "y_ap09Flux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux within 9.0-pixel aperture. Forced on y-band."
+      },
+      {
+        "name": "y_ap09Flux_flag",
+        "datatype": "boolean",
+        "description": "General Failure Flag. Forced on y-band."
+      },
+      {
+        "name": "y_ap09FluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty within 9.0-pixel aperture. Forced on y-band."
+      },
+      {
+        "name": "y_ap12Flux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux within 12.0-pixel aperture. Forced on y-band."
+      },
+      {
+        "name": "y_ap12Flux_flag",
+        "datatype": "boolean",
+        "description": "General Failure Flag. Forced on y-band."
+      },
+      {
+        "name": "y_ap12FluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty within 12.0-pixel aperture. Forced on y-band."
+      },
+      {
+        "name": "y_ap17Flux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux within 17.0-pixel aperture. Forced on y-band."
+      },
+      {
+        "name": "y_ap17Flux_flag",
+        "datatype": "boolean",
+        "description": "General Failure Flag. Forced on y-band."
+      },
+      {
+        "name": "y_ap17FluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty within 17.0-pixel aperture. Forced on y-band."
+      },
+      {
+        "name": "y_ap25Flux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux within 25.0-pixel aperture. Forced on y-band."
+      },
+      {
+        "name": "y_ap25Flux_flag",
+        "datatype": "boolean",
+        "description": "General Failure Flag. Forced on y-band."
+      },
+      {
+        "name": "y_ap25FluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty within 25.0-pixel aperture. Forced on y-band."
+      },
+      {
+        "name": "y_ap35Flux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux within 35.0-pixel aperture. Forced on y-band."
+      },
+      {
+        "name": "y_ap35Flux_flag",
+        "datatype": "boolean",
+        "description": "General Failure Flag. Forced on y-band."
+      },
+      {
+        "name": "y_ap35FluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty within 35.0-pixel aperture. Forced on y-band."
+      },
+      {
+        "name": "y_ap50Flux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux within 50.0-pixel aperture. Forced on y-band."
+      },
+      {
+        "name": "y_ap50Flux_flag",
+        "datatype": "boolean",
+        "description": "General Failure Flag. Forced on y-band."
+      },
+      {
+        "name": "y_ap50FluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty within 50.0-pixel aperture. Forced on y-band."
+      },
+      {
+        "name": "y_ap70Flux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux within 70.0-pixel aperture. Forced on y-band."
+      },
+      {
+        "name": "y_ap70Flux_flag",
+        "datatype": "boolean",
+        "description": "General Failure Flag. Forced on y-band."
+      },
+      {
+        "name": "y_ap70FluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty within 70.0-pixel aperture. Forced on y-band."
+      },
+      {
+        "name": "y_apFlux_flag",
+        "datatype": "boolean",
+        "description": "General Failure Flag. Measured on y-band."
+      },
+      {
+        "name": "y_apFlux_flag_apertureTruncated",
+        "datatype": "boolean",
+        "description": "Aperture did not fit within measurement image. Measured on y-band."
+      },
+      {
+        "name": "y_apFlux_flag_sincCoeffsTruncated",
+        "datatype": "boolean",
+        "description": "Full sinc coefficient image did not fit within measurement image. Measured on y-band."
+      },
+      {
+        "name": "y_bdChi2",
+        "datatype": "double",
+        "description": "-ln(likelihood) (chi^2) in cmodel fit. Measured on y-band."
+      },
+      {
+        "name": "y_bdE1",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "FracDev-weighted average of exp.ellipse and dev.ellipse. Measured on y-band."
+      },
+      {
+        "name": "y_bdE2",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "FracDev-weighted average of exp.ellipse and dev.ellipse. Measured on y-band."
+      },
+      {
+        "name": "y_bdFluxB",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux from the de Vaucouleurs fit. Measured on y-band."
+      },
+      {
+        "name": "y_bdFluxBErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty from the de Vaucouleurs fit. Measured on y-band."
+      },
+      {
+        "name": "y_bdFluxD",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux from the exponential fit. Measured on y-band."
+      },
+      {
+        "name": "y_bdFluxDErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty from the exponential fit. Measured on y-band."
+      },
+      {
+        "name": "y_bdReB",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "Half-light ellipse of the de Vaucouleurs fit. Measured on y-band."
+      },
+      {
+        "name": "y_bdReD",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "Half-light ellipse of the exponential fit. Measured on y-band."
+      },
+      {
+        "name": "y_blendedness",
+        "datatype": "double",
+        "description": "Measure of how much the flux is affected by neighbors, (1 - child_flux/parent_flux). Operates on the absolute value of the pixels to try to obtain a de-noised value. See section 4.9.11 of Bosch et al. 2018, PASJ, 70, S5 for details. Measured on y-band."
+      },
+      {
+        "name": "y_blendedness_flag",
+        "datatype": "boolean",
+        "description": "General Failure Flag. Measured on y-band."
+      },
+      {
+        "name": "y_calib_astrometry_used",
+        "datatype": "boolean",
+        "description": "Propagated from sources. Measured on y-band."
+      },
+      {
+        "name": "y_calib_photometry_reserved",
+        "datatype": "boolean",
+        "description": "Propagated from sources. Measured on y-band."
+      },
+      {
+        "name": "y_calib_photometry_used",
+        "datatype": "boolean",
+        "description": "Propagated from sources. Measured on y-band."
+      },
+      {
+        "name": "y_calib_psf_candidate",
+        "datatype": "boolean",
+        "description": "Propagated from sources. Measured on y-band."
+      },
+      {
+        "name": "y_calib_psf_reserved",
+        "datatype": "boolean",
+        "description": "Propagated from sources. Measured on y-band."
+      },
+      {
+        "name": "y_calib_psf_used",
+        "datatype": "boolean",
+        "description": "Propagated from sources. Measured on y-band."
+      },
+      {
+        "name": "y_calibFlux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux within 12.0-pixel aperture. Measured on y-band."
+      },
+      {
+        "name": "y_calibFlux_flag",
+        "datatype": "boolean",
+        "description": "General Failure Flag. Measured on y-band."
+      },
+      {
+        "name": "y_calibFlux_flag_apertureTruncated",
+        "datatype": "boolean",
+        "description": "Aperture did not fit within measurement image. Measured on y-band."
+      },
+      {
+        "name": "y_calibFlux_flag_sincCoeffsTruncated",
+        "datatype": "boolean",
+        "description": "Full sinc coefficient image did not fit within measurement image. Measured on y-band."
+      },
+      {
+        "name": "y_calibFluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty within 12.0-pixel aperture. Measured on y-band."
+      },
+      {
+        "name": "y_centroid_flag",
+        "datatype": "boolean",
+        "description": "General Failure Flag. Measured on y-band."
+      },
+      {
+        "name": "y_centroid_x",
+        "datatype": "double",
+        "unit": "pix",
+        "description": "Centroid from SDSS Centroid algorithm. Measured on y-band."
+      },
+      {
+        "name": "y_centroid_xErr",
+        "datatype": "float",
+        "unit": "pix",
+        "description": "1-sigma uncertainty on x position. Measured on y-band."
+      },
+      {
+        "name": "y_centroid_y",
+        "datatype": "double",
+        "unit": "pix",
+        "description": "Centroid from SDSS Centroid algorithm. Measured on y-band."
+      },
+      {
+        "name": "y_centroid_yErr",
+        "datatype": "float",
+        "unit": "pix",
+        "description": "1-sigma uncertainty on y position. Measured on y-band."
+      },
+      {
+        "name": "y_cModel_flag",
+        "datatype": "boolean",
+        "description": "Flag set if the final cmodel fit (or any previous fit) failed. Forced on y-band."
+      },
+      {
+        "name": "y_cModel_flag_apCorr",
+        "datatype": "boolean",
+        "description": "Set if unable to aperture correct modelfit_CModel. Forced on y-band."
+      },
+      {
+        "name": "y_cModelFlux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux from the final cmodel fit. Forced on y-band."
+      },
+      {
+        "name": "y_cModelFlux_inner",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux within the fit region, with no extrapolation. Forced on y-band."
+      },
+      {
+        "name": "y_cModelFluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty from the final cmodel fit. Forced on y-band."
+      },
+      {
+        "name": "y_decl",
+        "datatype": "double",
+        "unit": "deg",
+        "ucd": "pos.eq.dec",
+        "description": "Position in Declination. Measured on y-band."
+      },
+      {
+        "name": "y_extendedness",
+        "datatype": "double",
+        "description": "Set to 1 for extended sources, 0 for point sources. Measured on y-band."
+      },
+      {
+        "name": "y_extendedness_flag",
+        "datatype": "boolean",
+        "description": "Set to 1 for any fatal failure. Measured on y-band."
+      },
+      {
+        "name": "y_free_cModelFlux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux from the final cmodel fit. Measured on y-band."
+      },
+      {
+        "name": "y_free_cModelFlux_flag",
+        "datatype": "boolean",
+        "description": "Flag set if the final cmodel fit (or any previous fit) failed. Measured on y-band."
+      },
+      {
+        "name": "y_free_cModelFlux_inner",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux within the fit region, with no extrapolation. Measured on y-band."
+      },
+      {
+        "name": "y_free_cModelFluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty from the final cmodel fit. Measured on y-band."
+      },
+      {
+        "name": "y_free_psfFlux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux derived from linear least-squares fit of PSF model. Measured on y-band."
+      },
+      {
+        "name": "y_free_psfFlux_flag",
+        "datatype": "boolean",
+        "description": "General Failure Flag. Measured on y-band."
+      },
+      {
+        "name": "y_free_psfFluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty derived from linear least-squares fit of PSF model. Measured on y-band."
+      },
+      {
+        "name": "y_fwhm",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "HSM moments. Measured on y-band."
+      },
+      {
+        "name": "y_gaap0p5Flux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "GaaP flux with 0.5 aperture after multiplying the seeing by 1.15. Forced on y-band."
+      },
+      {
+        "name": "y_gaap0p5Flux_flag_bigPsf",
+        "datatype": "boolean",
+        "description": "The Gaussianized PSF is bigger than the aperture. Forced on y-band."
+      },
+      {
+        "name": "y_gaap0p5FluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "GaaP flux uncertainty with 0.5 aperture after multiplying the seeing by 1.15. Forced on y-band."
+      },
+      {
+        "name": "y_gaap0p7Flux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "GaaP flux with 0.7 aperture after multiplying the seeing by 1.15. Forced on y-band."
+      },
+      {
+        "name": "y_gaap0p7Flux_flag_bigPsf",
+        "datatype": "boolean",
+        "description": "The Gaussianized PSF is bigger than the aperture. Forced on y-band."
+      },
+      {
+        "name": "y_gaap0p7FluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "GaaP flux uncertainty with 0.7 aperture after multiplying the seeing by 1.15. Forced on y-band."
+      },
+      {
+        "name": "y_gaap1p0Flux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "GaaP flux with 1.0 aperture after multiplying the seeing by 1.15. Forced on y-band."
+      },
+      {
+        "name": "y_gaap1p0Flux_flag_bigPsf",
+        "datatype": "boolean",
+        "description": "The Gaussianized PSF is bigger than the aperture. Forced on y-band."
+      },
+      {
+        "name": "y_gaap1p0FluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "GaaP flux uncertainty with 1.0 aperture after multiplying the seeing by 1.15. Forced on y-band."
+      },
+      {
+        "name": "y_gaap1p5Flux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "GaaP flux with 1.5 aperture after multiplying the seeing by 1.15. Forced on y-band."
+      },
+      {
+        "name": "y_gaap1p5Flux_flag_bigPsf",
+        "datatype": "boolean",
+        "description": "The Gaussianized PSF is bigger than the aperture. Forced on y-band."
+      },
+      {
+        "name": "y_gaap1p5FluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "GaaP flux uncertainty with 1.5 aperture after multiplying the seeing by 1.15. Forced on y-band."
+      },
+      {
+        "name": "y_gaap2p5Flux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "GaaP flux with 2.5 aperture after multiplying the seeing by 1.15. Forced on y-band."
+      },
+      {
+        "name": "y_gaap2p5Flux_flag_bigPsf",
+        "datatype": "boolean",
+        "description": "The Gaussianized PSF is bigger than the aperture. Forced on y-band."
+      },
+      {
+        "name": "y_gaap2p5FluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "GaaP flux uncertainty with 2.5 aperture after multiplying the seeing by 1.15. Forced on y-band."
+      },
+      {
+        "name": "y_gaap3p0Flux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "GaaP flux with 3.0 aperture after multiplying the seeing by 1.15. Forced on y-band."
+      },
+      {
+        "name": "y_gaap3p0Flux_flag_bigPsf",
+        "datatype": "boolean",
+        "description": "The Gaussianized PSF is bigger than the aperture. Forced on y-band."
+      },
+      {
+        "name": "y_gaap3p0FluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "GaaP flux uncertainty with 3.0 aperture after multiplying the seeing by 1.15. Forced on y-band."
+      },
+      {
+        "name": "y_gaapFlux_flag",
+        "datatype": "boolean",
+        "description": "Set for any fatal failure. Forced on y-band."
+      },
+      {
+        "name": "y_gaapFlux_flag_edge",
+        "datatype": "boolean",
+        "description": "Source is too close to the edge. Forced on y-band."
+      },
+      {
+        "name": "y_gaapFlux_flag_gaussianization",
+        "datatype": "boolean",
+        "description": "PSF Gaussianization failed when trying to scale by this factor. Forced on y-band."
+      },
+      {
+        "name": "y_gaapOptimalFlux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "GaaP flux with optimal aperture after multiplying the seeing by 1.15. Forced on y-band."
+      },
+      {
+        "name": "y_gaapOptimalFlux_flag_bigPsf",
+        "datatype": "boolean",
+        "description": "The Gaussianized PSF is bigger than the aperture. Forced on y-band."
+      },
+      {
+        "name": "y_gaapOptimalFluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "GaaP flux uncertainty with optimal aperture after multiplying the seeing by 1.15. Forced on y-band."
+      },
+      {
+        "name": "y_gaapPsfFlux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "GaaP flux with PSF aperture after multiplying the seeing by 1.15. Forced on y-band."
+      },
+      {
+        "name": "y_gaapPsfFluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "GaaP flux uncertainty with PSF aperture after multiplying the seeing by 1.15. Forced on y-band."
+      },
+      {
+        "name": "y_hsmShapeRegauss_e1",
+        "datatype": "double",
+        "description": "PSF-corrected shear using Hirata & Seljak (2003) regaussianization. Measured on y-band."
+      },
+      {
+        "name": "y_hsmShapeRegauss_e2",
+        "datatype": "double",
+        "description": "PSF-corrected shear using Hirata & Seljak (2003) regaussianization. Measured on y-band."
+      },
+      {
+        "name": "y_hsmShapeRegauss_flag",
+        "datatype": "boolean",
+        "description": "General failure flag, set if anything went wrong. Measured on y-band."
+      },
+      {
+        "name": "y_hsmShapeRegauss_sigma",
+        "datatype": "double",
+        "description": "PSF-corrected shear using Hirata & Seljak (2003) regaussianization. Measured on y-band."
+      },
+      {
+        "name": "y_i_flag",
+        "datatype": "boolean",
+        "description": "General failure flag, set if anything went wrong. Measured on y-band."
+      },
+      {
+        "name": "y_iDebiasedPSF_flag",
+        "datatype": "boolean",
+        "description": "General failure flag, set if anything went wrong. Measured on y-band."
+      },
+      {
+        "name": "y_inputCount",
+        "datatype": "int",
+        "description": "Number of images contributing at center, not including any clipping. Forced on y-band."
+      },
+      {
+        "name": "y_inputCount_flag",
+        "datatype": "boolean",
+        "description": "Set for any fatal failure. Forced on y-band."
+      },
+      {
+        "name": "y_inputCount_flag_noInputs",
+        "datatype": "boolean",
+        "description": "No coadd inputs available. Forced on y-band."
+      },
+      {
+        "name": "y_iPSF_flag",
+        "datatype": "boolean",
+        "description": "General failure flag, set if anything went wrong. Measured on y-band."
+      },
+      {
+        "name": "y_iRound_flag",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "HSM moments. Measured on y-band."
+      },
+      {
+        "name": "y_ixx",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "HSM moments. Measured on y-band."
+      },
+      {
+        "name": "y_ixxDebiasedPSF",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "HSM moments. Measured on y-band."
+      },
+      {
+        "name": "y_ixxPSF",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "HSM moments. Measured on y-band."
+      },
+      {
+        "name": "y_ixxRound",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "HSM moments. Measured on y-band."
+      },
+      {
+        "name": "y_ixy",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "HSM moments. Measured on y-band."
+      },
+      {
+        "name": "y_ixyDebiasedPSF",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "HSM moments. Measured on y-band."
+      },
+      {
+        "name": "y_ixyPSF",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "HSM moments. Measured on y-band."
+      },
+      {
+        "name": "y_ixyRound",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "HSM moments. Measured on y-band."
+      },
+      {
+        "name": "y_iyy",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "HSM moments. Measured on y-band."
+      },
+      {
+        "name": "y_iyyDebiasedPSF",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "HSM moments. Measured on y-band."
+      },
+      {
+        "name": "y_iyyPSF",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "HSM moments. Measured on y-band."
+      },
+      {
+        "name": "y_iyyRound",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "HSM moments. Measured on y-band."
+      },
+      {
+        "name": "y_kronFlux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux from Kron Flux algorithm. Measured on y-band."
+      },
+      {
+        "name": "y_kronFlux_flag",
+        "datatype": "boolean",
+        "description": "General failure flag, set if anything went wrong. Measured on y-band."
+      },
+      {
+        "name": "y_kronFlux_flag_bad_radius",
+        "datatype": "boolean",
+        "description": "Bad Kron radius. Measured on y-band."
+      },
+      {
+        "name": "y_kronFlux_flag_bad_shape",
+        "datatype": "boolean",
+        "description": "Shape for measuring Kron radius is bad; used PSF shape. Measured on y-band."
+      },
+      {
+        "name": "y_kronFlux_flag_bad_shape_no_psf",
+        "datatype": "boolean",
+        "description": "Bad shape and no PSF. Measured on y-band."
+      },
+      {
+        "name": "y_kronFlux_flag_edge",
+        "datatype": "boolean",
+        "description": "Bad measurement due to image edge. Measured on y-band."
+      },
+      {
+        "name": "y_kronFlux_flag_no_fallback_radius",
+        "datatype": "boolean",
+        "description": "No minimum radius and no PSF provided. Measured on y-band."
+      },
+      {
+        "name": "y_kronFlux_flag_no_minimum_radius",
+        "datatype": "boolean",
+        "description": "Minimum radius could not be enforced, no minimum value or PSF. Measured on y-band."
+      },
+      {
+        "name": "y_kronFlux_flag_small_radius",
+        "datatype": "boolean",
+        "description": "Measured Kron radius was smaller than that of the PSF. Measured on y-band."
+      },
+      {
+        "name": "y_kronFlux_flag_used_minimum_radius",
+        "datatype": "boolean",
+        "description": "Used the minimum radius for the Kron aperture. Measured on y-band."
+      },
+      {
+        "name": "y_kronFlux_flag_used_psf_radius",
+        "datatype": "boolean",
+        "description": "Used the PSF Kron radius for the Kron aperture. Measured on y-band."
+      },
+      {
+        "name": "y_kronFluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty from Kron Flux algorithm. Measured on y-band."
+      },
+      {
+        "name": "y_kronRad",
+        "datatype": "float",
+        "description": "Kron radius (sqrt(a*b)). Measured on y-band."
+      },
+      {
+        "name": "y_pixelFlags_bad",
+        "datatype": "boolean",
+        "description": "Bad pixel in the Source footprint. Measured on y-band."
+      },
+      {
+        "name": "y_pixelFlags_clipped",
+        "datatype": "boolean",
+        "description": "Source footprint includes CLIPPED pixels. Measured on y-band."
+      },
+      {
+        "name": "y_pixelFlags_clippedCenter",
+        "datatype": "boolean",
+        "description": "Source center is close to CLIPPED pixels. Measured on y-band."
+      },
+      {
+        "name": "y_pixelFlags_cr",
+        "datatype": "boolean",
+        "description": "Cosmic ray in the Source footprint. Measured on y-band."
+      },
+      {
+        "name": "y_pixelFlags_crCenter",
+        "datatype": "boolean",
+        "description": "Cosmic ray in the Source center. Measured on y-band."
+      },
+      {
+        "name": "y_pixelFlags_edge",
+        "datatype": "boolean",
+        "description": "Source is outside usable exposure region (masked EDGE or NO_DATA). Measured on y-band."
+      },
+      {
+        "name": "y_pixelFlags_inexact_psf",
+        "datatype": "boolean",
+        "description": "Source footprint includes INEXACT_PSF pixels. Measured on y-band."
+      },
+      {
+        "name": "y_pixelFlags_inexact_psfCenter",
+        "datatype": "boolean",
+        "description": "Source center is close to INEXACT_PSF pixels. Measured on y-band."
+      },
+      {
+        "name": "y_pixelFlags_interpolated",
+        "datatype": "boolean",
+        "description": "Interpolated pixel in the Source footprint. Measured on y-band."
+      },
+      {
+        "name": "y_pixelFlags_interpolatedCenter",
+        "datatype": "boolean",
+        "description": "Interpolated pixel in the Source center. Measured on y-band."
+      },
+      {
+        "name": "y_pixelFlags_offimage",
+        "datatype": "boolean",
+        "description": "Source center is off image. Measured on y-band."
+      },
+      {
+        "name": "y_pixelFlags_saturated",
+        "datatype": "boolean",
+        "description": "Saturated pixel in the Source footprint. Measured on y-band."
+      },
+      {
+        "name": "y_pixelFlags_saturatedCenter",
+        "datatype": "boolean",
+        "description": "Saturated pixel in the Source center. Measured on y-band."
+      },
+      {
+        "name": "y_pixelFlags_sensor_edge",
+        "datatype": "boolean",
+        "description": "Source footprint includes SENSOR_EDGE pixels. Measured on y-band."
+      },
+      {
+        "name": "y_pixelFlags_sensor_edgeCenter",
+        "datatype": "boolean",
+        "description": "Source center is close to SENSOR_EDGE pixels. Measured on y-band."
+      },
+      {
+        "name": "y_pixelFlags_suspect",
+        "datatype": "boolean",
+        "description": "Source's footprint includes suspect pixels. Measured on y-band."
+      },
+      {
+        "name": "y_pixelFlags_suspectCenter",
+        "datatype": "boolean",
+        "description": "Source's center is close to suspect pixels. Measured on y-band."
+      },
+      {
+        "name": "y_psfFlux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux derived from linear least-squares fit of PSF model. Forced on y-band."
+      },
+      {
+        "name": "y_psfFlux_area",
+        "datatype": "float",
+        "unit": "pix",
+        "description": "Effective area of PSF. Forced on y-band."
+      },
+      {
+        "name": "y_psfFlux_flag",
+        "datatype": "boolean",
+        "description": "General Failure Flag. Forced on y-band."
+      },
+      {
+        "name": "y_psfFlux_flag_apCorr",
+        "datatype": "boolean",
+        "description": "Set if unable to aperture correct base_PsfFlux. Forced on y-band."
+      },
+      {
+        "name": "y_psfFlux_flag_edge",
+        "datatype": "boolean",
+        "description": "Object was too close to the edge of the image to use the full PSF model. Forced on y-band."
+      },
+      {
+        "name": "y_psfFlux_flag_noGoodPixels",
+        "datatype": "boolean",
+        "description": "Not enough non-rejected pixels in data to attempt the fit. Forced on y-band."
+      },
+      {
+        "name": "y_psfFluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty derived from linear least-squares fit of PSF model. Forced on y-band."
+      },
+      {
+        "name": "y_ra",
+        "datatype": "double",
+        "unit": "deg",
+        "ucd": "pos.eq.ra",
+        "description": "Position in Right Ascension. Measured on y-band."
+      },
+      {
+        "name": "yErr",
+        "datatype": "float",
+        "unit": "pix",
+        "description": "1-sigma uncertainty on y position. Reference band."
+      },
+      {
+        "name": "z_ap03Flux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux within 3.0-pixel aperture. Forced on z-band."
+      },
+      {
+        "name": "z_ap03Flux_flag",
+        "datatype": "boolean",
+        "description": "General Failure Flag. Forced on z-band."
+      },
+      {
+        "name": "z_ap03FluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty within 3.0-pixel aperture. Forced on z-band."
+      },
+      {
+        "name": "z_ap06Flux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux within 6.0-pixel aperture. Forced on z-band."
+      },
+      {
+        "name": "z_ap06Flux_flag",
+        "datatype": "boolean",
+        "description": "General Failure Flag. Forced on z-band."
+      },
+      {
+        "name": "z_ap06FluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty within 6.0-pixel aperture. Forced on z-band."
+      },
+      {
+        "name": "z_ap09Flux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux within 9.0-pixel aperture. Forced on z-band."
+      },
+      {
+        "name": "z_ap09Flux_flag",
+        "datatype": "boolean",
+        "description": "General Failure Flag. Forced on z-band."
+      },
+      {
+        "name": "z_ap09FluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty within 9.0-pixel aperture. Forced on z-band."
+      },
+      {
+        "name": "z_ap12Flux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux within 12.0-pixel aperture. Forced on z-band."
+      },
+      {
+        "name": "z_ap12Flux_flag",
+        "datatype": "boolean",
+        "description": "General Failure Flag. Forced on z-band."
+      },
+      {
+        "name": "z_ap12FluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty within 12.0-pixel aperture. Forced on z-band."
+      },
+      {
+        "name": "z_ap17Flux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux within 17.0-pixel aperture. Forced on z-band."
+      },
+      {
+        "name": "z_ap17Flux_flag",
+        "datatype": "boolean",
+        "description": "General Failure Flag. Forced on z-band."
+      },
+      {
+        "name": "z_ap17FluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty within 17.0-pixel aperture. Forced on z-band."
+      },
+      {
+        "name": "z_ap25Flux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux within 25.0-pixel aperture. Forced on z-band."
+      },
+      {
+        "name": "z_ap25Flux_flag",
+        "datatype": "boolean",
+        "description": "General Failure Flag. Forced on z-band."
+      },
+      {
+        "name": "z_ap25FluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty within 25.0-pixel aperture. Forced on z-band."
+      },
+      {
+        "name": "z_ap35Flux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux within 35.0-pixel aperture. Forced on z-band."
+      },
+      {
+        "name": "z_ap35Flux_flag",
+        "datatype": "boolean",
+        "description": "General Failure Flag. Forced on z-band."
+      },
+      {
+        "name": "z_ap35FluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty within 35.0-pixel aperture. Forced on z-band."
+      },
+      {
+        "name": "z_ap50Flux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux within 50.0-pixel aperture. Forced on z-band."
+      },
+      {
+        "name": "z_ap50Flux_flag",
+        "datatype": "boolean",
+        "description": "General Failure Flag. Forced on z-band."
+      },
+      {
+        "name": "z_ap50FluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty within 50.0-pixel aperture. Forced on z-band."
+      },
+      {
+        "name": "z_ap70Flux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux within 70.0-pixel aperture. Forced on z-band."
+      },
+      {
+        "name": "z_ap70Flux_flag",
+        "datatype": "boolean",
+        "description": "General Failure Flag. Forced on z-band."
+      },
+      {
+        "name": "z_ap70FluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty within 70.0-pixel aperture. Forced on z-band."
+      },
+      {
+        "name": "z_apFlux_flag",
+        "datatype": "boolean",
+        "description": "General Failure Flag. Measured on z-band."
+      },
+      {
+        "name": "z_apFlux_flag_apertureTruncated",
+        "datatype": "boolean",
+        "description": "Aperture did not fit within measurement image. Measured on z-band."
+      },
+      {
+        "name": "z_apFlux_flag_sincCoeffsTruncated",
+        "datatype": "boolean",
+        "description": "Full sinc coefficient image did not fit within measurement image. Measured on z-band."
+      },
+      {
+        "name": "z_bdChi2",
+        "datatype": "double",
+        "description": "-ln(likelihood) (chi^2) in cmodel fit. Measured on z-band."
+      },
+      {
+        "name": "z_bdE1",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "FracDev-weighted average of exp.ellipse and dev.ellipse. Measured on z-band."
+      },
+      {
+        "name": "z_bdE2",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "FracDev-weighted average of exp.ellipse and dev.ellipse. Measured on z-band."
+      },
+      {
+        "name": "z_bdFluxB",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux from the de Vaucouleurs fit. Measured on z-band."
+      },
+      {
+        "name": "z_bdFluxBErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty from the de Vaucouleurs fit. Measured on z-band."
+      },
+      {
+        "name": "z_bdFluxD",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux from the exponential fit. Measured on z-band."
+      },
+      {
+        "name": "z_bdFluxDErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty from the exponential fit. Measured on z-band."
+      },
+      {
+        "name": "z_bdReB",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "Half-light ellipse of the de Vaucouleurs fit. Measured on z-band."
+      },
+      {
+        "name": "z_bdReD",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "Half-light ellipse of the exponential fit. Measured on z-band."
+      },
+      {
+        "name": "z_blendedness",
+        "datatype": "double",
+        "description": "Measure of how much the flux is affected by neighbors, (1 - child_flux/parent_flux). Operates on the absolute value of the pixels to try to obtain a de-noised value. See section 4.9.11 of Bosch et al. 2018, PASJ, 70, S5 for details. Measured on z-band."
+      },
+      {
+        "name": "z_blendedness_flag",
+        "datatype": "boolean",
+        "description": "General Failure Flag. Measured on z-band."
+      },
+      {
+        "name": "z_calib_astrometry_used",
+        "datatype": "boolean",
+        "description": "Propagated from sources. Measured on z-band."
+      },
+      {
+        "name": "z_calib_photometry_reserved",
+        "datatype": "boolean",
+        "description": "Propagated from sources. Measured on z-band."
+      },
+      {
+        "name": "z_calib_photometry_used",
+        "datatype": "boolean",
+        "description": "Propagated from sources. Measured on z-band."
+      },
+      {
+        "name": "z_calib_psf_candidate",
+        "datatype": "boolean",
+        "description": "Propagated from sources. Measured on z-band."
+      },
+      {
+        "name": "z_calib_psf_reserved",
+        "datatype": "boolean",
+        "description": "Propagated from sources. Measured on z-band."
+      },
+      {
+        "name": "z_calib_psf_used",
+        "datatype": "boolean",
+        "description": "Propagated from sources. Measured on z-band."
+      },
+      {
+        "name": "z_calibFlux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux within 12.0-pixel aperture. Measured on z-band."
+      },
+      {
+        "name": "z_calibFlux_flag",
+        "datatype": "boolean",
+        "description": "General Failure Flag. Measured on z-band."
+      },
+      {
+        "name": "z_calibFlux_flag_apertureTruncated",
+        "datatype": "boolean",
+        "description": "Aperture did not fit within measurement image. Measured on z-band."
+      },
+      {
+        "name": "z_calibFlux_flag_sincCoeffsTruncated",
+        "datatype": "boolean",
+        "description": "Full sinc coefficient image did not fit within measurement image. Measured on z-band."
+      },
+      {
+        "name": "z_calibFluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty within 12.0-pixel aperture. Measured on z-band."
+      },
+      {
+        "name": "z_centroid_flag",
+        "datatype": "boolean",
+        "description": "General Failure Flag. Measured on z-band."
+      },
+      {
+        "name": "z_centroid_x",
+        "datatype": "double",
+        "unit": "pix",
+        "description": "Centroid from SDSS Centroid algorithm. Measured on z-band."
+      },
+      {
+        "name": "z_centroid_xErr",
+        "datatype": "float",
+        "unit": "pix",
+        "description": "1-sigma uncertainty on x position. Measured on z-band."
+      },
+      {
+        "name": "z_centroid_y",
+        "datatype": "double",
+        "unit": "pix",
+        "description": "Centroid from SDSS Centroid algorithm. Measured on z-band."
+      },
+      {
+        "name": "z_centroid_yErr",
+        "datatype": "float",
+        "unit": "pix",
+        "description": "1-sigma uncertainty on y position. Measured on z-band."
+      },
+      {
+        "name": "z_cModel_flag",
+        "datatype": "boolean",
+        "description": "Flag set if the final cmodel fit (or any previous fit) failed. Forced on z-band."
+      },
+      {
+        "name": "z_cModel_flag_apCorr",
+        "datatype": "boolean",
+        "description": "Set if unable to aperture correct modelfit_CModel. Forced on z-band."
+      },
+      {
+        "name": "z_cModelFlux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux from the final cmodel fit. Forced on z-band."
+      },
+      {
+        "name": "z_cModelFlux_inner",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux within the fit region, with no extrapolation. Forced on z-band."
+      },
+      {
+        "name": "z_cModelFluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty from the final cmodel fit. Forced on z-band."
+      },
+      {
+        "name": "z_decl",
+        "datatype": "double",
+        "unit": "deg",
+        "ucd": "pos.eq.dec",
+        "description": "Position in Declination. Measured on z-band."
+      },
+      {
+        "name": "z_extendedness",
+        "datatype": "double",
+        "description": "Set to 1 for extended sources, 0 for point sources. Measured on z-band."
+      },
+      {
+        "name": "z_extendedness_flag",
+        "datatype": "boolean",
+        "description": "Set to 1 for any fatal failure. Measured on z-band."
+      },
+      {
+        "name": "z_free_cModelFlux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux from the final cmodel fit. Measured on z-band."
+      },
+      {
+        "name": "z_free_cModelFlux_flag",
+        "datatype": "boolean",
+        "description": "Flag set if the final cmodel fit (or any previous fit) failed. Measured on z-band."
+      },
+      {
+        "name": "z_free_cModelFlux_inner",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux within the fit region, with no extrapolation. Measured on z-band."
+      },
+      {
+        "name": "z_free_cModelFluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty from the final cmodel fit. Measured on z-band."
+      },
+      {
+        "name": "z_free_psfFlux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux derived from linear least-squares fit of PSF model. Measured on z-band."
+      },
+      {
+        "name": "z_free_psfFlux_flag",
+        "datatype": "boolean",
+        "description": "General Failure Flag. Measured on z-band."
+      },
+      {
+        "name": "z_free_psfFluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty derived from linear least-squares fit of PSF model. Measured on z-band."
+      },
+      {
+        "name": "z_fwhm",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "HSM moments. Measured on z-band."
+      },
+      {
+        "name": "z_gaap0p5Flux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "GaaP flux with 0.5 aperture after multiplying the seeing by 1.15. Forced on z-band."
+      },
+      {
+        "name": "z_gaap0p5Flux_flag_bigPsf",
+        "datatype": "boolean",
+        "description": "The Gaussianized PSF is bigger than the aperture. Forced on z-band."
+      },
+      {
+        "name": "z_gaap0p5FluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "GaaP flux uncertainty with 0.5 aperture after multiplying the seeing by 1.15. Forced on z-band."
+      },
+      {
+        "name": "z_gaap0p7Flux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "GaaP flux with 0.7 aperture after multiplying the seeing by 1.15. Forced on z-band."
+      },
+      {
+        "name": "z_gaap0p7Flux_flag_bigPsf",
+        "datatype": "boolean",
+        "description": "The Gaussianized PSF is bigger than the aperture. Forced on z-band."
+      },
+      {
+        "name": "z_gaap0p7FluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "GaaP flux uncertainty with 0.7 aperture after multiplying the seeing by 1.15. Forced on z-band."
+      },
+      {
+        "name": "z_gaap1p0Flux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "GaaP flux with 1.0 aperture after multiplying the seeing by 1.15. Forced on z-band."
+      },
+      {
+        "name": "z_gaap1p0Flux_flag_bigPsf",
+        "datatype": "boolean",
+        "description": "The Gaussianized PSF is bigger than the aperture. Forced on z-band."
+      },
+      {
+        "name": "z_gaap1p0FluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "GaaP flux uncertainty with 1.0 aperture after multiplying the seeing by 1.15. Forced on z-band."
+      },
+      {
+        "name": "z_gaap1p5Flux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "GaaP flux with 1.5 aperture after multiplying the seeing by 1.15. Forced on z-band."
+      },
+      {
+        "name": "z_gaap1p5Flux_flag_bigPsf",
+        "datatype": "boolean",
+        "description": "The Gaussianized PSF is bigger than the aperture. Forced on z-band."
+      },
+      {
+        "name": "z_gaap1p5FluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "GaaP flux uncertainty with 1.5 aperture after multiplying the seeing by 1.15. Forced on z-band."
+      },
+      {
+        "name": "z_gaap2p5Flux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "GaaP flux with 2.5 aperture after multiplying the seeing by 1.15. Forced on z-band."
+      },
+      {
+        "name": "z_gaap2p5Flux_flag_bigPsf",
+        "datatype": "boolean",
+        "description": "The Gaussianized PSF is bigger than the aperture. Forced on z-band."
+      },
+      {
+        "name": "z_gaap2p5FluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "GaaP flux uncertainty with 2.5 aperture after multiplying the seeing by 1.15. Forced on z-band."
+      },
+      {
+        "name": "z_gaap3p0Flux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "GaaP flux with 3.0 aperture after multiplying the seeing by 1.15. Forced on z-band."
+      },
+      {
+        "name": "z_gaap3p0Flux_flag_bigPsf",
+        "datatype": "boolean",
+        "description": "The Gaussianized PSF is bigger than the aperture. Forced on z-band."
+      },
+      {
+        "name": "z_gaap3p0FluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "GaaP flux uncertainty with 3.0 aperture after multiplying the seeing by 1.15. Forced on z-band."
+      },
+      {
+        "name": "z_gaapFlux_flag",
+        "datatype": "boolean",
+        "description": "Set for any fatal failure. Forced on z-band."
+      },
+      {
+        "name": "z_gaapFlux_flag_edge",
+        "datatype": "boolean",
+        "description": "Source is too close to the edge. Forced on z-band."
+      },
+      {
+        "name": "z_gaapFlux_flag_gaussianization",
+        "datatype": "boolean",
+        "description": "PSF Gaussianization failed when trying to scale by this factor. Forced on z-band."
+      },
+      {
+        "name": "z_gaapOptimalFlux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "GaaP flux with optimal aperture after multiplying the seeing by 1.15. Forced on z-band."
+      },
+      {
+        "name": "z_gaapOptimalFlux_flag_bigPsf",
+        "datatype": "boolean",
+        "description": "The Gaussianized PSF is bigger than the aperture. Forced on z-band."
+      },
+      {
+        "name": "z_gaapOptimalFluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "GaaP flux uncertainty with optimal aperture after multiplying the seeing by 1.15. Forced on z-band."
+      },
+      {
+        "name": "z_gaapPsfFlux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "GaaP flux with PSF aperture after multiplying the seeing by 1.15. Forced on z-band."
+      },
+      {
+        "name": "z_gaapPsfFluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "GaaP flux uncertainty with PSF aperture after multiplying the seeing by 1.15. Forced on z-band."
+      },
+      {
+        "name": "z_hsmShapeRegauss_e1",
+        "datatype": "double",
+        "description": "PSF-corrected shear using Hirata & Seljak (2003) regaussianization. Measured on z-band."
+      },
+      {
+        "name": "z_hsmShapeRegauss_e2",
+        "datatype": "double",
+        "description": "PSF-corrected shear using Hirata & Seljak (2003) regaussianization. Measured on z-band."
+      },
+      {
+        "name": "z_hsmShapeRegauss_flag",
+        "datatype": "boolean",
+        "description": "General failure flag, set if anything went wrong. Measured on z-band."
+      },
+      {
+        "name": "z_hsmShapeRegauss_sigma",
+        "datatype": "double",
+        "description": "PSF-corrected shear using Hirata & Seljak (2003) regaussianization. Measured on z-band."
+      },
+      {
+        "name": "z_i_flag",
+        "datatype": "boolean",
+        "description": "General failure flag, set if anything went wrong. Measured on z-band."
+      },
+      {
+        "name": "z_iDebiasedPSF_flag",
+        "datatype": "boolean",
+        "description": "General failure flag, set if anything went wrong. Measured on z-band."
+      },
+      {
+        "name": "z_inputCount",
+        "datatype": "int",
+        "description": "Number of images contributing at center, not including any clipping. Forced on z-band."
+      },
+      {
+        "name": "z_inputCount_flag",
+        "datatype": "boolean",
+        "description": "Set for any fatal failure. Forced on z-band."
+      },
+      {
+        "name": "z_inputCount_flag_noInputs",
+        "datatype": "boolean",
+        "description": "No coadd inputs available. Forced on z-band."
+      },
+      {
+        "name": "z_iPSF_flag",
+        "datatype": "boolean",
+        "description": "General failure flag, set if anything went wrong. Measured on z-band."
+      },
+      {
+        "name": "z_iRound_flag",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "HSM moments. Measured on z-band."
+      },
+      {
+        "name": "z_ixx",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "HSM moments. Measured on z-band."
+      },
+      {
+        "name": "z_ixxDebiasedPSF",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "HSM moments. Measured on z-band."
+      },
+      {
+        "name": "z_ixxPSF",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "HSM moments. Measured on z-band."
+      },
+      {
+        "name": "z_ixxRound",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "HSM moments. Measured on z-band."
+      },
+      {
+        "name": "z_ixy",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "HSM moments. Measured on z-band."
+      },
+      {
+        "name": "z_ixyDebiasedPSF",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "HSM moments. Measured on z-band."
+      },
+      {
+        "name": "z_ixyPSF",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "HSM moments. Measured on z-band."
+      },
+      {
+        "name": "z_ixyRound",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "HSM moments. Measured on z-band."
+      },
+      {
+        "name": "z_iyy",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "HSM moments. Measured on z-band."
+      },
+      {
+        "name": "z_iyyDebiasedPSF",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "HSM moments. Measured on z-band."
+      },
+      {
+        "name": "z_iyyPSF",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "HSM moments. Measured on z-band."
+      },
+      {
+        "name": "z_iyyRound",
+        "datatype": "double",
+        "unit": "pix2",
+        "description": "HSM moments. Measured on z-band."
+      },
+      {
+        "name": "z_kronFlux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux from Kron Flux algorithm. Measured on z-band."
+      },
+      {
+        "name": "z_kronFlux_flag",
+        "datatype": "boolean",
+        "description": "General failure flag, set if anything went wrong. Measured on z-band."
+      },
+      {
+        "name": "z_kronFlux_flag_bad_radius",
+        "datatype": "boolean",
+        "description": "Bad Kron radius. Measured on z-band."
+      },
+      {
+        "name": "z_kronFlux_flag_bad_shape",
+        "datatype": "boolean",
+        "description": "Shape for measuring Kron radius is bad; used PSF shape. Measured on z-band."
+      },
+      {
+        "name": "z_kronFlux_flag_bad_shape_no_psf",
+        "datatype": "boolean",
+        "description": "Bad shape and no PSF. Measured on z-band."
+      },
+      {
+        "name": "z_kronFlux_flag_edge",
+        "datatype": "boolean",
+        "description": "Bad measurement due to image edge. Measured on z-band."
+      },
+      {
+        "name": "z_kronFlux_flag_no_fallback_radius",
+        "datatype": "boolean",
+        "description": "No minimum radius and no PSF provided. Measured on z-band."
+      },
+      {
+        "name": "z_kronFlux_flag_no_minimum_radius",
+        "datatype": "boolean",
+        "description": "Minimum radius could not be enforced, no minimum value or PSF. Measured on z-band."
+      },
+      {
+        "name": "z_kronFlux_flag_small_radius",
+        "datatype": "boolean",
+        "description": "Measured Kron radius was smaller than that of the PSF. Measured on z-band."
+      },
+      {
+        "name": "z_kronFlux_flag_used_minimum_radius",
+        "datatype": "boolean",
+        "description": "Used the minimum radius for the Kron aperture. Measured on z-band."
+      },
+      {
+        "name": "z_kronFlux_flag_used_psf_radius",
+        "datatype": "boolean",
+        "description": "Used the PSF Kron radius for the Kron aperture. Measured on z-band."
+      },
+      {
+        "name": "z_kronFluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty from Kron Flux algorithm. Measured on z-band."
+      },
+      {
+        "name": "z_kronRad",
+        "datatype": "float",
+        "description": "Kron radius (sqrt(a*b)). Measured on z-band."
+      },
+      {
+        "name": "z_pixelFlags_bad",
+        "datatype": "boolean",
+        "description": "Bad pixel in the Source footprint. Measured on z-band."
+      },
+      {
+        "name": "z_pixelFlags_clipped",
+        "datatype": "boolean",
+        "description": "Source footprint includes CLIPPED pixels. Measured on z-band."
+      },
+      {
+        "name": "z_pixelFlags_clippedCenter",
+        "datatype": "boolean",
+        "description": "Source center is close to CLIPPED pixels. Measured on z-band."
+      },
+      {
+        "name": "z_pixelFlags_cr",
+        "datatype": "boolean",
+        "description": "Cosmic ray in the Source footprint. Measured on z-band."
+      },
+      {
+        "name": "z_pixelFlags_crCenter",
+        "datatype": "boolean",
+        "description": "Cosmic ray in the Source center. Measured on z-band."
+      },
+      {
+        "name": "z_pixelFlags_edge",
+        "datatype": "boolean",
+        "description": "Source is outside usable exposure region (masked EDGE or NO_DATA). Measured on z-band."
+      },
+      {
+        "name": "z_pixelFlags_inexact_psf",
+        "datatype": "boolean",
+        "description": "Source footprint includes INEXACT_PSF pixels. Measured on z-band."
+      },
+      {
+        "name": "z_pixelFlags_inexact_psfCenter",
+        "datatype": "boolean",
+        "description": "Source center is close to INEXACT_PSF pixels. Measured on z-band."
+      },
+      {
+        "name": "z_pixelFlags_interpolated",
+        "datatype": "boolean",
+        "description": "Interpolated pixel in the Source footprint. Measured on z-band."
+      },
+      {
+        "name": "z_pixelFlags_interpolatedCenter",
+        "datatype": "boolean",
+        "description": "Interpolated pixel in the Source center. Measured on z-band."
+      },
+      {
+        "name": "z_pixelFlags_offimage",
+        "datatype": "boolean",
+        "description": "Source center is off image. Measured on z-band."
+      },
+      {
+        "name": "z_pixelFlags_saturated",
+        "datatype": "boolean",
+        "description": "Saturated pixel in the Source footprint. Measured on z-band."
+      },
+      {
+        "name": "z_pixelFlags_saturatedCenter",
+        "datatype": "boolean",
+        "description": "Saturated pixel in the Source center. Measured on z-band."
+      },
+      {
+        "name": "z_pixelFlags_sensor_edge",
+        "datatype": "boolean",
+        "description": "Source footprint includes SENSOR_EDGE pixels. Measured on z-band."
+      },
+      {
+        "name": "z_pixelFlags_sensor_edgeCenter",
+        "datatype": "boolean",
+        "description": "Source center is close to SENSOR_EDGE pixels. Measured on z-band."
+      },
+      {
+        "name": "z_pixelFlags_suspect",
+        "datatype": "boolean",
+        "description": "Source's footprint includes suspect pixels. Measured on z-band."
+      },
+      {
+        "name": "z_pixelFlags_suspectCenter",
+        "datatype": "boolean",
+        "description": "Source's center is close to suspect pixels. Measured on z-band."
+      },
+      {
+        "name": "z_psfFlux",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux derived from linear least-squares fit of PSF model. Forced on z-band."
+      },
+      {
+        "name": "z_psfFlux_area",
+        "datatype": "float",
+        "unit": "pix",
+        "description": "Effective area of PSF. Forced on z-band."
+      },
+      {
+        "name": "z_psfFlux_flag",
+        "datatype": "boolean",
+        "description": "General Failure Flag. Forced on z-band."
+      },
+      {
+        "name": "z_psfFlux_flag_apCorr",
+        "datatype": "boolean",
+        "description": "Set if unable to aperture correct base_PsfFlux. Forced on z-band."
+      },
+      {
+        "name": "z_psfFlux_flag_edge",
+        "datatype": "boolean",
+        "description": "Object was too close to the edge of the image to use the full PSF model. Forced on z-band."
+      },
+      {
+        "name": "z_psfFlux_flag_noGoodPixels",
+        "datatype": "boolean",
+        "description": "Not enough non-rejected pixels in data to attempt the fit. Forced on z-band."
+      },
+      {
+        "name": "z_psfFluxErr",
+        "datatype": "double",
+        "unit": "nJy",
+        "description": "Flux uncertainty derived from linear least-squares fit of PSF model. Forced on z-band."
+      },
+      {
+        "name": "z_ra",
+        "datatype": "double",
+        "unit": "deg",
+        "ucd": "pos.eq.ra",
+        "description": "Position in Right Ascension. Measured on z-band."
+      }
+    ],
+    "baseUrl": "https://data-dev.lsst.cloud/api/tap"
+  },
+  "timeout": 300
+}
