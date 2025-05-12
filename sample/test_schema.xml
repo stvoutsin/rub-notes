@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VOTABLE xmlns="http://www.ivoa.net/xml/VOTable/v1.3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.4">
+  <RESOURCE type="results">
+    <INFO name="QUERY_STATUS" value="OK" />
+    <INFO name="QUERY_TIMESTAMP" value="2025-05-12T20:54:55.677" />
+    <INFO name="QUERY" value="SELECT TOP 1 * FROM tap_schema.schemas" />
+    <TABLE>
+      <FIELD name="test_schema_name" datatype="char" arraysize="64*" ID="col_0">
+        <DESCRIPTION>schema name for reference to tap_schema.schemas</DESCRIPTION>
+      </FIELD>
+      <DATA>
+        <TABLEDATA>
+          <TR>
+            <TD>dp02_test_dc2_catalogs</TD>
+          </TR>
+        </TABLEDATA>
+      </DATA>
+    </TABLE>
+    <INFO name="placeholder" value="ignore" />
+  </RESOURCE>
+</VOTABLE>
