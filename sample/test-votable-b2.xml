@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VOTABLE xmlns="http://www.ivoa.net/xml/VOTable/v1.3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.4">
+  <RESOURCE type="results">
+    <TABLE>
+      <FIELD name="test" datatype="int" ID="col_0" unit="pixel">
+        <DESCRIPTION></DESCRIPTION>
+      </FIELD>
+      <DATA>
+      <BINARY2>
+        <STREAM encoding='base64'>
+AAAAAK4=
+        </STREAM>
+      </BINARY2>
+    </DATA>
+</TABLE>
+  </RESOURCE>
+</VOTABLE>
