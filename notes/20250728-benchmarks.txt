@@ -1,0 +1,43 @@
+## u/stvoutsin/binary2-cython vs main branch performance comparison
+
+| Test | Row Count | Cython | Main | Improvement |
+|------|-----------|--------|------|-------------|
+| BooleanFields.time_booleans_binary | 200k | 1.40s | 1.66s | **15.7%** |
+| BooleanFields.time_booleans_binary | 800k | 5.71s | 6.75s | **15.4%** |
+| BooleanFields.time_booleans_binary | 1M | 7.52s | 8.38s | **10.3%** |
+| BooleanFields.time_booleans_binary2 | 200k | 1.94s | 2.43s | **20.2%** |
+| BooleanFields.time_booleans_binary2 | 800k | 7.94s | 9.37s | **15.3%** |
+| BooleanFields.time_booleans_binary2 | 1M | 10.00s | 11.70s | **14.5%** |
+| LongStrings.time_long_strings_binary | 200k | 1.26s | 1.93s | **34.7%** |
+| LongStrings.time_long_strings_binary | 800k | 5.08s | 7.72s | **34.2%** |
+| LongStrings.time_long_strings_binary | 1M | 6.47s | 9.67s | **33.1%** |
+| LongStrings.time_long_strings_binary2 | 200k | 1.75s | 2.49s | **29.7%** |
+| LongStrings.time_long_strings_binary2 | 800k | 7.25s | 10.10s | **28.2%** |
+| LongStrings.time_long_strings_binary2 | 1M | 9.03s | 13.00s | **30.5%** |
+| Mixed.time_mixed_binary | 200k | 2.01s | 3.53s | **43.1%** |
+| Mixed.time_mixed_binary | 800k | 8.52s | 14.30s | **40.4%** |
+| Mixed.time_mixed_binary | 1M | 10.80s | 18.40s | **41.3%** |
+| Mixed.time_mixed_binary2 | 200k | 2.60s | 4.69s | **44.6%** |
+| Mixed.time_mixed_binary2 | 800k | 11.50s | 18.50s | **37.8%** |
+| Mixed.time_mixed_binary2 | 1M | 14.00s | 22.60s | **38.1%** |
+| Numeric.time_numeric_binary | 200k | 1.27s | 2.98s | **57.4%** |
+| Numeric.time_numeric_binary | 800k | 5.26s | 11.80s | **55.4%** |
+| Numeric.time_numeric_binary | 1M | 6.86s | 14.80s | **53.6%** |
+| Numeric.time_numeric_binary2 | 200k | 1.80s | 3.49s | **48.4%** |
+| Numeric.time_numeric_binary2 | 800k | 7.43s | 14.20s | **47.7%** |
+| Numeric.time_numeric_binary2 | 1M | 9.45s | 18.00s | **47.5%** |
+| ShortStrings.time_short_strings_binary | 200k | 1.53s | 2.29s | **33.2%** |
+| ShortStrings.time_short_strings_binary | 800k | 6.59s | 9.17s | **28.1%** |
+| ShortStrings.time_short_strings_binary | 1M | 8.56s | 11.30s | **24.2%** |
+| ShortStrings.time_short_strings_binary2 | 200k | 2.07s | 3.05s | **32.1%** |
+| ShortStrings.time_short_strings_binary2 | 800k | 8.77s | 12.10s | **27.5%** |
+| ShortStrings.time_short_strings_binary2 | 1M | 11.20s | 14.60s | **23.3%** |
+| SmallOverhead.time_small_binary | 200k | 5.3ms | 9.4ms | **43.1%** |
+| SmallOverhead.time_small_binary | 800k | 5.5ms | 9.2ms | **40.0%** |
+| SmallOverhead.time_small_binary | 1M | 5.5ms | 9.0ms | **38.8%** |
+| SmallOverhead.time_small_binary2 | 200k | 7.8ms | 11.4ms | **31.5%** |
+| SmallOverhead.time_small_binary2 | 800k | 8.1ms | 11.5ms | **29.2%** |
+| SmallOverhead.time_small_binary2 | 1M | 7.8ms | 11.5ms | **32.1%** |
+| StringIntensive.time_string_intensive_binary2 | 200k | 2.80s | 3.71s | **24.5%** |
+| StringIntensive.time_string_intensive_binary2 | 800k | 12.50s | 14.10s | **11.3%** |
+| StringIntensive.time_string_intensive_binary2 | 1M | 16.20s | 18.20s | **11.0%** |
