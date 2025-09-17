@@ -1,0 +1,17 @@
+Pyarrow's parquet writer needs to accumulate metadata for every column throughout the writing process, which becomes a problem with 1k columns (dp02).
+
+Unlike other row-based formats like the binary2 VOTable encoder, parquet requires a consolidated footer with statistics, schema information and other metadata (nulls) and also stores things like compressed string dictionaries for the columns. This footer is written at the end after all rows are processed, so pyarrow has to retain this metadata in memory throughout the process.
+
+The current solution after trying out different batch sizes is able to handle 50k rows * 1k columns but memory spikes to almost 300Mb which is already close to the requested limit.
+
+There is this:
+https://estuary.dev/blog/memory-efficient-streaming-parquet/
+
+But I don't think a 2-pass approach would help us, because we still need to consolidate all scratch files into a single VOParquet file so we have the same metadata accumulation issue. It would definitely work great if we could have multiple output files which is indeed what parquet enables, the problem is the VOParquet specification which I think requires a single complete file with the embedded metadata included. Even if the spec allowed for results to be split into separate files, I'm not sure how well that would work with either tools or the TAP service spec. It might but I don't think everything would work smoothly out of the box.
+
+There is an issue that was raised with the pyarrow folks here:
+https://issues.apache.org/jira/browse/ARROW-10052 
+but the response is basically that this is indeed expected and is due to the design of the Parquet format, and they indeed recommend writing out the result to multiple files.
+
+I have looked at alternatives to pyarrow but I have not found any that claim to be able to stream out results without buffering into memory. In theory I would expect others to have encountered this issue and come up with a better solution (perhaps writing metadata to disk?) but have not found anything yet.
+
