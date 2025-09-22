@@ -143,15 +143,15 @@ I've tested compatibility with VO Tools by loading results from these queries in
 ## Links
 
 
-https://stackoverflow.com/questions/64791558/create-parquet-files-from-stream-in-python-in-memory-efficient-manner
-https://stackoverflow.com/questions/53016802/memory-leak-from-pyarrow
-https://stackoverflow.com/questions/63891231/pyarrow-incrementally-using-parquetwriter-without-keeping-entire-dataset-in-mem
-https://issues.apache.org/jira/browse/ARROW-10052
-https://github.com/apache/arrow/issues/2624
-https://stackoverflow.com/questions/68819790/read-write-parquet-files-without-reading-into-memory-using-python
-https://github.com/apache/arrow/issues/44472
-https://stackoverflow.com/questions/65885183/pyarrow-parquet-write-table-memory-usage
-https://arrow.apache.org/docs/python/memory.html
-https://stackoverflow.com/questions/79694182/memory-not-released-after-each-request-despite-cleanup-attempts
-https://stackoverflow.com/questions/56472727/difference-between-apache-parquet-and-arrow
-https://jorisvandenbossche.github.io/arrow-docs-preview/html-option-1/cpp/parquet.html
+- https://stackoverflow.com/questions/64791558/create-parquet-files-from-stream-in-python-in-memory-efficient-manner
+- https://stackoverflow.com/questions/53016802/memory-leak-from-pyarrow
+- https://stackoverflow.com/questions/63891231/pyarrow-incrementally-using-parquetwriter-without-keeping-entire-dataset-in-mem
+- https://issues.apache.org/jira/browse/ARROW-10052
+- https://github.com/apache/arrow/issues/2624
+- https://stackoverflow.com/questions/68819790/read-write-parquet-files-without-reading-into-memory-using-python
+- https://github.com/apache/arrow/issues/44472
+- https://stackoverflow.com/questions/65885183/pyarrow-parquet-write-table-memory-usage
+- https://arrow.apache.org/docs/python/memory.html
+- https://stackoverflow.com/questions/79694182/memory-not-released-after-each-request-despite-cleanup-attempts
+- https://stackoverflow.com/questions/56472727/difference-between-apache-parquet-and-arrow
+- https://jorisvandenbossche.github.io/arrow-docs-preview/html-option-1/cpp/parquet.html
