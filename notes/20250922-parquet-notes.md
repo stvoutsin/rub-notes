@@ -133,6 +133,7 @@ Regarding result size apart from the short query (10) we see close to a 40% redu
 
 Memory usage on the other hand is much worse in the case of the VOParquet encoder, which in the case of the binary2 VOTable is steady due to the streaming serialization.
 
+I've also noticed that the current implementation seems to leak about 60-70Mb per query, which I'm currently trying to track down.
 
 ### Testing with TopCat
 
