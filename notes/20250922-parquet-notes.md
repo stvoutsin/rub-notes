@@ -146,6 +146,10 @@ I've tested compatibility with VO Tools by loading results from these queries in
 
 I've also noticed that in the current implementation and on a fresh deploy, upon running the 200k query the memory usage settles to around +30 to +50 MB from the baseline it was before running the query. This could be an indication of something not being properly cleaned up, though I haven't been able to track this down. However if I repeat these large-result-set queries the baseline does seem to settle at the same point after the spikes during processing.
 
+This seems to be expected behaviour in pyarrow:
+https://issues.apache.org/jira/browse/ARROW-11007
+> Hello, thank you for writing up this analysis.  Pyarrow uses jemalloc, a custom memory allocator which does its best to hold onto memory allocated from the OS (since this can be an expensive operation).
+
 
 ## Links
 
