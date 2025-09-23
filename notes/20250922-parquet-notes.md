@@ -155,6 +155,7 @@ https://issues.apache.org/jira/browse/ARROW-10052
 
 > I'm not sure there's anything surprising. Running this thing a bit (in debug mode!), I see that RSS usage grows by 500-1000 bytes for each column chunk (that is, each column in a row group).
 > This seems to be simply the Parquet file metadata accumulating before it can be written at the end (when the ParquetWriter is closed). format::FileMetadata has a vector of format::RowGroup (one per row group). format::RowGroup has a vector of format::Column (one per column). Each format::Column holds non-trivial information: file name, column metadata (itself potentially large).
+
 > So, basically you should write only large row groups to Parquet files. Writing 100 rows at a time makes the Parquet format completely inadequate. Replace that with at least 10000 or 100000 rows, IMHO.
 > And, regardless of the row group size, if you grow a Parquet file by keeping the ParquetWriter in memory, memory usage will also grow a bit because of this accumulating file metadata. I see no way around that, other than avoiding this appending pattern. 
 
