@@ -138,7 +138,8 @@ However this has not been run enough times to rule out external factors and othe
 Regarding result size apart from the short query (10) we see close to a 40% reduction in output size.
 
 Memory usage on the other hand is much worse in the case of the VOParquet encoder, which in the case of the binary2 VOTable is steady due to the streaming serialization.
- 	
+
+Update: Worth noting that I also tested with a larger batch size of 5k rows, and while the memory did spike up to 450MB, it completed faster with a runtime of 180 seconds.  
 
 ### Testing with TopCat
 
