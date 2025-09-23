@@ -170,6 +170,7 @@ https://issues.apache.org/jira/browse/ARROW-10052
 
 - https://stackoverflow.com/questions/64791558/create-parquet-files-from-stream-in-python-in-memory-efficient-manner
 - https://stackoverflow.com/questions/53016802/memory-leak-from-pyarrow
+- https://issues.apache.org/jira/browse/ARROW-11007
 - https://stackoverflow.com/questions/63891231/pyarrow-incrementally-using-parquetwriter-without-keeping-entire-dataset-in-mem
 - https://issues.apache.org/jira/browse/ARROW-10052
 - https://github.com/apache/arrow/issues/2624
