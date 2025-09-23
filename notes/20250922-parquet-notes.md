@@ -11,7 +11,7 @@ Requirements:
 
 ## Challenges
 
-- Parquet is a column-oriented format which present a challenge during writing compared to row-oriented formats like VOTable or CSV in that metadata, statistics, indeces need to be collected in memory during writing and these are used to write the parquet footer which includes such information and allows clients to easily navigate columns/row-groups when reading.
+- Parquet is a column-oriented format which present a challenge during writing compared to row-oriented formats like VOTable or CSV in that metadata, statistics, indices need to be collected in memory during writing and these are used to write the parquet footer which includes such information and allows clients to easily navigate columns/row-groups when reading.
 
 The VOTable encoder processes data in a memory-efficient row-by-row manner, where each row is processed and yielded to the http client.
 
