@@ -84,7 +84,7 @@ I observed about a 15-25% memory-to-output ratio.
 Breakdown of tested queries:
 Note (Memory increase is Memory before - Memory immediately after query is complete)
 
-
+```
 SELECT TOP 10 * FROM dp02_dc2_catalogs.Object
 
 Result Size: 700 KB
@@ -93,8 +93,9 @@ Memory Increase: 10 MB
 Job execution runtime: 10 seconds
 
 For comparison the VOTable (binary2) version ran in 10 seconds and resulted in a file of size 250KB
+```
 
-
+```
 SELECT TOP 10000 * FROM dp02_dc2_catalogs.Object
 Result Size: 35 MB
 Peak Memory: 176 MB
@@ -102,8 +103,9 @@ Memory Increase: 8 MB
 Job execution runtime: 25 seconds
 
 For comparison the VOTable (binary2) version ran in 25 seconds and resulted in a file of size 60MB
+```
 
-
+```
 SELECT TOP 100000 * FROM dp02_dc2_catalogs.Object
 Result Size: 360 MB 
 Peak Memory: 295 MB
@@ -111,8 +113,9 @@ Memory Increase: 120 MB
 Job execution runtime: 185 seconds
 
 For comparison the VOTable (binary2) version ran in 194 seconds and resulted in a file of size 600MB
+```
 
-
+```
 SELECT TOP 200000 * FROM dp02_dc2_catalogs.Object
 Result Size: 722 MB 
 Peak Memory: 346 MB
@@ -120,7 +123,7 @@ Memory Increase: 180 MB
 Job execution runtime: 247 seconds
 
 For comparison the VOTable (binary2) version ran in 374 seconds and resulted in a file of size 1.2 GB
-
+```
 
 Selecting >= 300k rows results in a QServ error (with both Parquet and binary2 VOTable):
 
