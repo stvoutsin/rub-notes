@@ -142,7 +142,7 @@ Memory usage on the other hand is much worse in the case of the VOParquet encode
 I've tested compatibility with VO Tools by loading results from these queries into TopCast, then exporting the data from TopCat as a VOTable, then finally doing the same with our normal binary2 encoded VOTables and comparing the output from the two. This showed consistent metadata (columns types) and data between the two.
 
 
-## Current problems 
+## Memory usage and problems with streaming Parquet
 
 I've also noticed that in the current implementation and on a fresh deploy, upon running the 200k query the memory usage settles to around +30 to +50 MB from the baseline it was before running the query. This could be an indication of something not being properly cleaned up, though I haven't been able to track this down. However if I repeat these large-result-set queries the baseline does seem to settle at the same point after the spikes during processing.
 
