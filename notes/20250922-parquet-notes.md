@@ -1,7 +1,8 @@
-## VOParquet in qserv-kafka
+# VOParquet in qserv-kafka
 
 
 Feature:
+
 Support generating VOParquet output https://www.ivoa.net/documents/Notes/VOParquet/ from the qserv-kafka bridge.
 Requirements:
 - End-to-end performance close to what we have with the binary2 VOTable encoder
