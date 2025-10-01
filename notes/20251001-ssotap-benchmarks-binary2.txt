@@ -1,0 +1,35 @@
+# Query Performance Analysis
+
+Query: SELECT TOP 2000000 * FROM dp03_catalogs_10yr.SSObject
+
+--- 
+
+### Execution #1: TABLEDATA Format
+
+Memory spike: 500 MB
+Result size: 2.9 GB
+
+Query execution: 5m 4.98s (completed at 2025-10-01 05:52:31)
+Parsing time: 4m 8.48s (completed at 2025-10-01 05:56:40)
+
+Total time: ~9m 13s
+
+--- 
+
+### Execution #2: BINARY Format
+
+Memory spike: 500 MB
+Result size: 617 MB
+Query execution: 3m 8.61s (completed at 2025-10-01 07:21:31)
+Parsing time: 5m 39.25s (completed at 2025-10-01 07:27:10)
+Total time: ~8m 48s
+
+---
+
+### Key Observations
+
+Binary format reduced result size by 79% (2.9 GB -> 617 MB)
+Binary format reduced query execution time by 38% (5m 5s -> 3m 9s)
+Binary format increased parsing time by 37% (4m 8s → 5m 39s)
+Binary format peak memory usage was similar
+
