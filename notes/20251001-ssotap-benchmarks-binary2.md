@@ -73,9 +73,9 @@ Query: SELECT TOP 2000000 * FROM dp03_catalogs_10yr.SSObject
 
 ## Key Observations
 
-- Binary format reduced result size by 79% (2.9 GB → 617 MB)
-- Binary format reduced query execution time by 27% on average (4m 45s → 3m 29s)
-- Binary format increased parsing time by 35% on average (4m 12s → 5m 41s)
+- Binary format reduced result size by 79% (2.9 GB -> 617 MB)
+- Binary format reduced query execution time by 27% on average (4m 45s -> 3m 29s)
+- Binary format increased parsing time by 35% on average (4m 12s -> 5m 41s)
 - Total end-to-end time is similar between formats (~9 minutes)
 - TABLEDATA shows more variable query execution times (3m 4s to 5m 39s) compared to BINARY (3m 9s to 3m 51s)
 - Peak memory usage is similar between formats (500 MB)
