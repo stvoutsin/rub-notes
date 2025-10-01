@@ -9,10 +9,10 @@ Query: SELECT TOP 2000000 * FROM dp03_catalogs_10yr.SSObject
 Memory spike: 500 MB
 Result size: 2.9 GB
 
-Query execution: 5m 4.98s (completed at 2025-10-01 05:52:31)
-Parsing time: 4m 8.48s (completed at 2025-10-01 05:56:40)
+Query execution: 3m 4.37s
+Parsing time: 4m 8.48s
 
-Total time: ~9m 13s
+Total time: ~7m 13s
 
 --- 
 
@@ -29,7 +29,6 @@ Total time: ~8m 48s
 ### Key Observations
 
 Binary format reduced result size by 79% (2.9 GB -> 617 MB)
-Binary format reduced query execution time by 38% (5m 5s -> 3m 9s)
+Execution time was similar between the two
 Binary format increased parsing time by 37% (4m 8s → 5m 39s)
-Binary format peak memory usage was similar
-
+Peak memory usage was similar
