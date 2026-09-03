@@ -1,0 +1,26 @@
+qserv-kafka timing tests with VOParquet queries
+
+6.0.0
+------
+SELECT TOP 300000 * FROM dp2.Object
+- Last executed at 2026-09-02 13:37:02 in 6m 41.57s
+
+Second query:
+- Last executed at 2026-09-02 13:56:54 in 14m 44.82s
+
+SELECT TOP 400000 * FROM dp2.Object
+- Last executed at 2026-09-02 14:31:54 in 13m 3.87s
+
+
+
+Candidate Ticket version:
+-------------------------
+
+SELECT TOP 300000 * FROM dp2.Object
+- 6m
+
+Second Query
+- Last executed at 2026-09-02 15:00:05 in 14m 28.70s
+
+SELECT TOP 400000 * FROM dp2.Object
+- Last executed at 2026-09-02 15:12:37 in 9m 4.28s
