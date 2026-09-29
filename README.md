@@ -1,2 +1,2 @@
 # rub-notes
-Notes
+Various Rubin related notes and helper scripts
